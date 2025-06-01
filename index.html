@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شعار سين جيم</title>
+    <title>لعبة سين جيم نسخة نسخة خبزة</title> <link rel="icon" type="image/png" href="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -304,7 +304,10 @@
         const selectionCounter = document.getElementById('selectionCounter');
         const startActualGameBtn = document.getElementById('startActualGameBtn');
 
-        const allCategories = [
+        // Game Data
+        let gameQuestionsData = null; // To store questions from JSON file
+
+        const allCategories = [ // This might be replaced or augmented by data from الأسئلة.json
             { id: 'history', name: 'تاريخ', imageUrl: 'https://placehold.co/150x80/8E44AD/FFFFFF?text=تاريخ' },
             { id: 'geography', name: 'جغرافيا', imageUrl: 'https://placehold.co/150x80/2ECC71/FFFFFF?text=جغرافيا' },
             { id: 'science', name: 'علوم', imageUrl: 'https://placehold.co/150x80/3498DB/FFFFFF?text=علوم' },
@@ -330,16 +333,36 @@
             if (event.target === customAlert) customAlert.classList.remove('active');
         });
 
+        // --- Load Questions from JSON ---
+        async function loadQuestions() {
+            try {
+                const response = await fetch('الأسئلة.json'); // Assumes الأسئلة.json is in the same directory
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                gameQuestionsData = await response.json();
+                console.log("Questions loaded successfully:", gameQuestionsData);
+                showAlert("نجاح", "تم تحميل ملف الأسئلة بنجاح!");
+            } catch (error) {
+                console.error("Error loading questions:", error);
+                showAlert("خطأ في تحميل الأسئلة", `لم نتمكن من تحميل ملف الأسئلة.json. تأكد من وجود الملف وأن تنسيقه صحيح. الخطأ: ${error.message}`);
+                gameQuestionsData = null; // Ensure it's null if loading fails
+            }
+        }
+
         // --- Logo Name Management (Local Session Only) ---
         function updateLogoName(newText) {
-            if (nameDisplay) nameDisplay.textContent = newText;
-            if (nameDisplayGameSetup) nameDisplayGameSetup.textContent = newText;
-            nameModalInput.value = newText; // Keep modal input synced
-            console.log("Logo name updated locally:", newText);
+            const sanitizedText = newText || "خبزة"; // Default if empty
+            if (nameDisplay) nameDisplay.textContent = sanitizedText;
+            if (nameDisplayGameSetup) nameDisplayGameSetup.textContent = sanitizedText;
+            nameModalInput.value = sanitizedText; // Keep modal input synced
+            document.title = `لعبة سين جيم نسخة ${sanitizedText}`; // Update HTML title
+            console.log("Logo name updated locally:", sanitizedText);
+            console.log("Document title updated to:", document.title);
         }
 
         function openEditModal() {
-            nameModalInput.value = nameDisplay.textContent || nameDisplayGameSetup.textContent || "نسخة خبزة";
+            nameModalInput.value = nameDisplay.textContent || nameDisplayGameSetup.textContent || "خبزة";
             editModal.classList.add('active');
             nameModalInput.focus();
         }
@@ -351,8 +374,8 @@
             if (newText) {
                 updateLogoName(newText);
             } else {
-                showAlert("تنبيه", "لا يمكن ترك الاسم فارغًا.");
-                nameModalInput.value = nameDisplay.textContent; // Revert to current
+                showAlert("تنبيه", "لا يمكن ترك الاسم فارغًا. سيتم استخدام الاسم الافتراضي.");
+                updateLogoName("خبزة"); // Revert to a default or current name
             }
             closeEditModal();
         });
@@ -364,7 +387,7 @@
         logoAreaTrigger.addEventListener('dblclick', openEditModal);
         logoAreaTriggerGameSetup.addEventListener('dblclick', openEditModal);
         
-        // Initialize logo name on load
+        // Initialize logo name and title on load
         updateLogoName("نسخة خبزة");
 
 
@@ -392,7 +415,6 @@
             // Initial setup of display headers based on default input values
             handleTeamDataChange();
         }
-        setupTeamInputListeners();
 
 
         // --- Page Navigation ---
@@ -402,6 +424,9 @@
             populateCategories();
             if (nameDisplayGameSetup && nameDisplay) {
                  nameDisplayGameSetup.textContent = nameDisplay.textContent;
+            }
+            if (!gameQuestionsData) { // Attempt to load questions if not already loaded
+                loadQuestions();
             }
         });
 
@@ -447,21 +472,45 @@
 
         // --- Start Actual Game Button ---
         startActualGameBtn.addEventListener('click', () => {
-            if (selectedCategories.length === MAX_CATEGORIES) {
-                const team1Name = team1NameInput.value.trim() || "الفريق الأول";
-                const team2Name = team2NameInput.value.trim() || "الفريق الثاني";
-                showAlert("اللعبة جاهزة!", `الفرق: ${team1Name} و ${team2Name}. الأقسام المختارة: ${selectedCategories.join(', ')}. اضغط موافق للانتقال (قيد الإنشاء).`);
-                console.log("Selected Categories:", selectedCategories);
-                console.log("Team 1:", { name: team1NameInput.value, color: team1ColorInput.value });
-                console.log("Team 2:", { name: team2NameInput.value, color: team2ColorInput.value });
-            } else {
-                showAlert("خطأ", `الرجاء اختيار ${MAX_CATEGORIES} أقسام لبدء اللعبة.`);
+            if (selectedCategories.length !== MAX_CATEGORIES) {
+                 showAlert("خطأ", `الرجاء اختيار ${MAX_CATEGORIES} أقسام لبدء اللعبة.`);
+                 return;
             }
+            if (!gameQuestionsData) {
+                showAlert("خطأ في الأسئلة", "لم يتم تحميل الأسئلة بعد أو حدث خطأ أثناء التحميل. يرجى المحاولة مرة أخرى أو التأكد من ملف الأسئلة.");
+                loadQuestions(); // Try loading again
+                return;
+            }
+
+            const team1Name = team1NameInput.value.trim() || "الفريق الأول";
+            const team2Name = team2NameInput.value.trim() || "الفريق الثاني";
+            
+            // Filter gameQuestionsData to include only selected categories and their questions
+            const questionsForSelectedCategories = gameQuestionsData.filter(category => 
+                selectedCategories.includes(category.categoryId)
+            );
+
+            if (questionsForSelectedCategories.length !== MAX_CATEGORIES) {
+                 console.warn("Mismatch between selected categories and available questions in JSON for those categories.");
+                 // This might happen if a selected category ID is not found in the JSON file.
+            }
+            
+            showAlert("اللعبة جاهزة!", `الفرق: ${team1Name} و ${team2Name}. الأقسام المختارة: ${selectedCategories.join(', ')}. الأسئلة جاهزة. اضغط موافق للانتقال (قيد الإنشاء).`);
+            console.log("Selected Categories IDs:", selectedCategories);
+            console.log("Team 1:", { name: team1NameInput.value, color: team1ColorInput.value });
+            console.log("Team 2:", { name: team2NameInput.value, color: team2ColorInput.value });
+            console.log("All Loaded Questions Data:", gameQuestionsData);
+            console.log("Questions for selected categories:", questionsForSelectedCategories);
+            // Here you would navigate to the actual game page,
+            // passing team info, selected category IDs, and 'questionsForSelectedCategories'.
         });
 
-        // Initial call to set up team headers based on default values
+        // Initial DOM setup and event listeners
         document.addEventListener('DOMContentLoaded', () => {
             setupTeamInputListeners();
+            // Optionally, try to load questions on initial page load if desired,
+            // or wait until "بدء الإعداد" is clicked as it is now.
+            // loadQuestions(); // Uncomment to load questions immediately
         });
 
     </script>
