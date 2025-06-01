@@ -1,7 +1,7 @@
 [
   {
-    "categoryId": "literature",
-    "categoryName": "أدب",
+    "id": "أدب",
+    "name": "أدب",
     "questions": [
       {
         "points": 100,
