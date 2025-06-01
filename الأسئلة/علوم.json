@@ -1,7 +1,7 @@
 [
   {
-    "categoryId": "science",
-    "categoryName": "علوم",
+    "categoryId": "علوم",
+    "categoryName": "علوم طبيعية",
     "questions": [
       {
         "points": 100,
