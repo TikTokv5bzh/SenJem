@@ -1,7 +1,7 @@
 [
   {
-    "categoryId": "عامة",
-    "categoryName": "معلومات عامة",
+    "id": "عامة",
+    "name": "معلومات عامة",
     "questions": [
       {
         "points": 100,
