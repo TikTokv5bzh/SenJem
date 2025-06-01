@@ -1,7 +1,7 @@
 [
   {
-    "categoryId": "religion",
-    "categoryName": "دين",
+    "Id": "دين",
+    "Name": "دين",
     "questions": [
       {
         "points": 100,
