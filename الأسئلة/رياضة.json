@@ -1,7 +1,7 @@
 [
   {
-    "categoryId": "رياضة",
-    "categoryName": "رياضة",
+    "id": "رياضة",
+    "name": "رياضة",
     "questions": [
       {
         "points": 100,
