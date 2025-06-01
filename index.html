@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شعار سين جيم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Alexandria', sans-serif;
+            direction: rtl;
+            background-image: linear-gradient(to bottom, #FF6B6B, #FFA07A, #FFC371);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; /* Allow stacking of pages */
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 1rem; /* Add some padding for smaller screens */
+        }
+        .page-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .main-container, .game-setup-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 1.5rem; /* 24px */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            width: 100%;
+        }
+        .main-container {
+             max-width: 400px;
+        }
+        .game-setup-container {
+            max-width: 700px; /* Wider for setup options */
+             margin-top: 2rem; /* Spacing if both somehow visible, good for transitions */
+        }
+
+        .logo-display-area {
+            background-color: #ffffff; /* Or transparent if container has bg */
+            padding: 1rem;
+            border-radius: 1rem; /* 16px */
+            position: relative;
+            cursor: pointer;
+            margin-bottom: 1rem; /* Space before name or buttons */
+        }
+        .logo-img {
+            width: 220px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem; /* 8px */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .name-wrapper {
+            position: relative;
+            margin-top: -30px;
+            transform: translateX(-10px) rotate(-8deg);
+            z-index: 10;
+        }
+        .editable-name {
+            font-size: 1.4rem;
+            font-weight: 900;
+            background-image: linear-gradient(to right, #FF6B6B, #F2994A);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 3px 8px;
+            cursor: pointer;
+            min-width: auto;
+            display: inline-block;
+            border-radius: 0.3125rem; /* 5px */
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.6);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; opacity: 0; visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.active { opacity: 1; visibility: visible; }
+        .modal-content {
+            background-color: white; padding: 2rem; border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            width: 90%; max-width: 400px; text-align: right;
+        }
+        .modal-content h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: #333; }
+        .modal-content label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #555; }
+        .modal-content input[type="text"] {
+            width: 100%; padding: 0.75rem; border: 1px solid #ccc;
+            border-radius: 0.5rem; margin-bottom: 1.5rem; font-size: 1rem; box-sizing: border-box; direction: rtl;
+        }
+        .modal-buttons { display: flex; justify-content: flex-start; gap: 0.75rem; }
+        .modal-buttons button {
+            padding: 0.6rem 1.2rem; border-radius: 0.5rem; font-weight: 500;
+            cursor: pointer; transition: background-color 0.2s ease; border: none;
+        }
+        .modal-buttons .save-btn { background-color: #28a745; color: white; }
+        .modal-buttons .save-btn:hover { background-color: #218838; }
+        .modal-buttons .cancel-btn { background-color: #6c757d; color: white; }
+        .modal-buttons .cancel-btn:hover { background-color: #5a6268; }
+
+        /* Custom Alert Styles */
+        .custom-alert-overlay {
+            position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.75);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 2000; opacity: 0; visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .custom-alert-overlay.active { opacity: 1; visibility: visible; }
+        .custom-alert-box {
+            background-color: white; padding: 1.5rem; border-radius: 0.75rem;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            width: 90%; max-width: 350px; text-align: center;
+        }
+        .custom-alert-box h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: #333; }
+        .custom-alert-box p { font-size: 1rem; color: #555; margin-bottom: 1.5rem; line-height: 1.6; }
+        .custom-alert-box button {
+            width: 100%; background-color: #FF6B6B; color: white; font-weight: 600;
+            padding: 0.75rem; border-radius: 0.5rem; border: none;
+            cursor: pointer; transition: background-color 0.2s ease;
+        }
+        .custom-alert-box button:hover { background-color: #E55A5A; }
+
+        /* Styles for Game Setup Page */
+        .team-setup-card {
+            background-color: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            text-align: right;
+        }
+        .team-setup-card h3 {
+            font-size: 1.25rem; font-weight: 700; color: #1f2937;
+            margin-bottom: 1rem; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem;
+        }
+        .team-setup-card label {
+            display: block; margin-bottom: 0.5rem; font-weight: 500; color: #4b5563;
+        }
+        .team-setup-card input[type="text"], .team-setup-card input[type="color"] {
+            width: 100%; padding: 0.75rem; border: 1px solid #d1d5db;
+            border-radius: 0.5rem; margin-bottom: 1rem; font-size: 1rem; box-sizing: border-box;
+        }
+         .team-setup-card input[type="color"] {
+            height: 48px; padding: 0.25rem;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1rem; margin-bottom: 1.5rem;
+        }
+        .category-item {
+            background-color: #fff; border: 3px solid transparent; border-radius: 0.75rem;
+            padding: 0.75rem; cursor: pointer; transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: center;
+        }
+        .category-item:hover {
+            transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        .category-item.selected {
+            border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3);
+        }
+        .category-item img {
+            width: 100%; height: 80px; object-fit: cover;
+            border-radius: 0.5rem; margin-bottom: 0.5rem;
+        }
+        .category-item p {
+            font-size: 0.875rem; font-weight: 500; color: #374151; overflow-wrap: break-word;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="initialPageContainer" class="page-container">
+        <div class="main-container">
+            <div id="logoAreaTrigger" class="logo-display-area">
+                <div>
+                    <img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png"
+                         alt="شعار سين جيم"
+                         class="logo-img mx-auto"
+                         onerror="this.onerror=null; this.src='https://placehold.co/220x100/FFC371/FFFFFF?text=Logo+Error';">
+                </div>
+                <div class="name-wrapper">
+                    <div id="nameDisplay" class="editable-name">
+                        نسخة خبزة
+                    </div>
+                </div>
+            </div>
+            <button id="navigateToSetupBtn" class="mt-6 w-full bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg hover:shadow-xl transition duration-150 ease-in-out transform hover:scale-105">
+                بدء الإعداد
+            </button>
+        </div>
+    </div>
+
+    <div id="gameSetupContainer" class="page-container hidden">
+        <div class="game-setup-container">
+            <div id="logoAreaTriggerGameSetup" class="logo-display-area mb-6">
+                <div>
+                    <img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png"
+                         alt="شعار سين جيم"
+                         class="logo-img mx-auto"
+                         onerror="this.onerror=null; this.src='https://placehold.co/220x100/FFC371/FFFFFF?text=Logo+Error';">
+                </div>
+                <div class="name-wrapper">
+                    <div id="nameDisplayGameSetup" class="editable-name">
+                        نسخة خبزة
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">إعدادات الفرق</h2>
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="team-setup-card">
+                    <h3 id="team1DisplayHeader">الفريق الأول</h3>
+                    <label for="team1NameInput">اسم الفريق:</label>
+                    <input type="text" id="team1NameInput" class="w-full" value="الفريق الأول">
+                    <label for="team1ColorInput">لون الفريق:</label>
+                    <input type="color" id="team1ColorInput" value="#E57373" class="w-full">
+                </div>
+                <div class="team-setup-card">
+                    <h3 id="team2DisplayHeader">الفريق الثاني</h3>
+                    <label for="team2NameInput">اسم الفريق:</label>
+                    <input type="text" id="team2NameInput" class="w-full" value="الفريق الثاني">
+                    <label for="team2ColorInput">لون الفريق:</label>
+                    <input type="color" id="team2ColorInput" value="#64B5F6" class="w-full">
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">اختر ٦ أقسام للعبة</h2>
+            <div id="categorySelectionArea" class="category-grid mb-4">
+                </div>
+            <p id="selectionCounter" class="text-center text-gray-600 font-medium mb-6">تم اختيار 0 من 6</p>
+
+            <button id="startActualGameBtn" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg hover:shadow-xl transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                بدء اللعبة
+            </button>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h2>تعديل الاسم</h2>
+            <label for="nameModalInput">الاسم الجديد:</label>
+            <input type="text" id="nameModalInput" placeholder="أدخل الاسم هنا...">
+            <div class="modal-buttons">
+                <button id="saveModalBtn" class="save-btn">حفظ</button>
+                <button id="cancelModalBtn" class="cancel-btn">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert-overlay">
+        <div class="custom-alert-box">
+            <h2 id="customAlertTitle">عنوان الرسالة</h2>
+            <p id="customAlertMessage">نص الرسالة هنا.</p>
+            <button id="customAlertClose">موافق</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const initialPageContainer = document.getElementById('initialPageContainer');
+        const gameSetupContainer = document.getElementById('gameSetupContainer');
+        const navigateToSetupBtn = document.getElementById('navigateToSetupBtn');
+
+        const nameDisplay = document.getElementById('nameDisplay');
+        const nameDisplayGameSetup = document.getElementById('nameDisplayGameSetup');
+        const logoAreaTrigger = document.getElementById('logoAreaTrigger');
+        const logoAreaTriggerGameSetup = document.getElementById('logoAreaTriggerGameSetup');
+
+        const editModal = document.getElementById('editModal');
+        const nameModalInput = document.getElementById('nameModalInput');
+        const saveModalBtn = document.getElementById('saveModalBtn');
+        const cancelModalBtn = document.getElementById('cancelModalBtn');
+
+        const customAlert = document.getElementById('customAlert');
+        const customAlertTitle = document.getElementById('customAlertTitle');
+        const customAlertMessage = document.getElementById('customAlertMessage');
+        const customAlertCloseBtn = document.getElementById('customAlertClose');
+
+        // Game Setup Page Elements
+        const team1NameInput = document.getElementById('team1NameInput');
+        const team1ColorInput = document.getElementById('team1ColorInput');
+        const team1DisplayHeader = document.getElementById('team1DisplayHeader');
+        const team2NameInput = document.getElementById('team2NameInput');
+        const team2ColorInput = document.getElementById('team2ColorInput');
+        const team2DisplayHeader = document.getElementById('team2DisplayHeader');
+        const categorySelectionArea = document.getElementById('categorySelectionArea');
+        const selectionCounter = document.getElementById('selectionCounter');
+        const startActualGameBtn = document.getElementById('startActualGameBtn');
+
+        const allCategories = [
+            { id: 'history', name: 'تاريخ', imageUrl: 'https://placehold.co/150x80/8E44AD/FFFFFF?text=تاريخ' },
+            { id: 'geography', name: 'جغرافيا', imageUrl: 'https://placehold.co/150x80/2ECC71/FFFFFF?text=جغرافيا' },
+            { id: 'science', name: 'علوم', imageUrl: 'https://placehold.co/150x80/3498DB/FFFFFF?text=علوم' },
+            { id: 'sports', name: 'رياضة', imageUrl: 'https://placehold.co/150x80/F39C12/FFFFFF?text=رياضة' },
+            { id: 'literature', name: 'أدب', imageUrl: 'https://placehold.co/150x80/E74C3C/FFFFFF?text=أدب' },
+            { id: 'arts', name: 'فنون', imageUrl: 'https://placehold.co/150x80/1ABC9C/FFFFFF?text=فنون' },
+            { id: 'movies', name: 'أفلام ومسلسلات', imageUrl: 'https://placehold.co/150x80/9B59B6/FFFFFF?text=أفلام' },
+            { id: 'general', name: 'معلومات عامة', imageUrl: 'https://placehold.co/150x80/34495E/FFFFFF?text=عامة' },
+            { id: 'religion', name: 'دين', imageUrl: 'https://placehold.co/150x80/D35400/FFFFFF?text=دين' },
+            { id: 'tech', name: 'تقنية', imageUrl: 'https://placehold.co/150x80/2980B9/FFFFFF?text=تقنية' }
+        ];
+        let selectedCategories = [];
+        const MAX_CATEGORIES = 6;
+
+        // --- Alert Function ---
+        function showAlert(title, message) {
+            customAlertTitle.innerText = title;
+            customAlertMessage.innerText = message;
+            customAlert.classList.add('active');
+        }
+        customAlertCloseBtn.addEventListener('click', () => customAlert.classList.remove('active'));
+        customAlert.addEventListener('click', (event) => {
+            if (event.target === customAlert) customAlert.classList.remove('active');
+        });
+
+        // --- Logo Name Management (Local Session Only) ---
+        function updateLogoName(newText) {
+            if (nameDisplay) nameDisplay.textContent = newText;
+            if (nameDisplayGameSetup) nameDisplayGameSetup.textContent = newText;
+            nameModalInput.value = newText; // Keep modal input synced
+            console.log("Logo name updated locally:", newText);
+        }
+
+        function openEditModal() {
+            nameModalInput.value = nameDisplay.textContent || nameDisplayGameSetup.textContent || "نسخة خبزة";
+            editModal.classList.add('active');
+            nameModalInput.focus();
+        }
+        function closeEditModal() {
+            editModal.classList.remove('active');
+        }
+        saveModalBtn.addEventListener('click', () => {
+            const newText = nameModalInput.value.trim();
+            if (newText) {
+                updateLogoName(newText);
+            } else {
+                showAlert("تنبيه", "لا يمكن ترك الاسم فارغًا.");
+                nameModalInput.value = nameDisplay.textContent; // Revert to current
+            }
+            closeEditModal();
+        });
+        cancelModalBtn.addEventListener('click', closeEditModal);
+        editModal.addEventListener('click', (event) => {
+            if (event.target === editModal) closeEditModal();
+        });
+
+        logoAreaTrigger.addEventListener('dblclick', openEditModal);
+        logoAreaTriggerGameSetup.addEventListener('dblclick', openEditModal);
+        
+        // Initialize logo name on load
+        updateLogoName("نسخة خبزة");
+
+
+        // --- Team Data Management (Local Session Only) ---
+        function setupTeamInputListeners() {
+            const handleTeamDataChange = () => {
+                const team1Name = team1NameInput.value.trim() || "الفريق الأول";
+                const team1Color = team1ColorInput.value;
+                const team2Name = team2NameInput.value.trim() || "الفريق الثاني";
+                const team2Color = team2ColorInput.value;
+
+                team1DisplayHeader.textContent = team1Name;
+                team1DisplayHeader.style.borderBottomColor = team1Color;
+                team2DisplayHeader.textContent = team2Name;
+                team2DisplayHeader.style.borderBottomColor = team2Color;
+
+                console.log("Team data updated locally.");
+            };
+
+            team1NameInput.addEventListener('input', handleTeamDataChange);
+            team1ColorInput.addEventListener('input', handleTeamDataChange);
+            team2NameInput.addEventListener('input', handleTeamDataChange);
+            team2ColorInput.addEventListener('input', handleTeamDataChange);
+
+            // Initial setup of display headers based on default input values
+            handleTeamDataChange();
+        }
+        setupTeamInputListeners();
+
+
+        // --- Page Navigation ---
+        navigateToSetupBtn.addEventListener('click', () => {
+            initialPageContainer.classList.add('hidden');
+            gameSetupContainer.classList.remove('hidden');
+            populateCategories();
+            if (nameDisplayGameSetup && nameDisplay) {
+                 nameDisplayGameSetup.textContent = nameDisplay.textContent;
+            }
+        });
+
+        // --- Category Selection Logic ---
+        function populateCategories() {
+            categorySelectionArea.innerHTML = ''; // Clear previous items
+            allCategories.forEach(cat => {
+                const item = document.createElement('div');
+                item.classList.add('category-item');
+                item.dataset.categoryId = cat.id;
+                item.innerHTML = `
+                    <img src="${cat.imageUrl}" alt="${cat.name}" onerror="this.onerror=null; this.src='https://placehold.co/150x80/CCCCCC/FFFFFF?text=Error';">
+                    <p>${cat.name}</p>
+                `;
+                item.addEventListener('click', () => toggleCategorySelection(item, cat.id));
+                if (selectedCategories.includes(cat.id)) {
+                    item.classList.add('selected');
+                }
+                categorySelectionArea.appendChild(item);
+            });
+            updateSelectionCounter();
+        }
+
+        function toggleCategorySelection(element, categoryId) {
+            if (selectedCategories.includes(categoryId)) {
+                selectedCategories = selectedCategories.filter(id => id !== categoryId);
+                element.classList.remove('selected');
+            } else {
+                if (selectedCategories.length < MAX_CATEGORIES) {
+                    selectedCategories.push(categoryId);
+                    element.classList.add('selected');
+                } else {
+                    showAlert("تنبيه", `يمكنك اختيار ${MAX_CATEGORIES} أقسام فقط.`);
+                }
+            }
+            updateSelectionCounter();
+        }
+
+        function updateSelectionCounter() {
+            selectionCounter.textContent = `تم اختيار ${selectedCategories.length} من ${MAX_CATEGORIES}`;
+            startActualGameBtn.disabled = selectedCategories.length !== MAX_CATEGORIES;
+        }
+
+        // --- Start Actual Game Button ---
+        startActualGameBtn.addEventListener('click', () => {
+            if (selectedCategories.length === MAX_CATEGORIES) {
+                const team1Name = team1NameInput.value.trim() || "الفريق الأول";
+                const team2Name = team2NameInput.value.trim() || "الفريق الثاني";
+                showAlert("اللعبة جاهزة!", `الفرق: ${team1Name} و ${team2Name}. الأقسام المختارة: ${selectedCategories.join(', ')}. اضغط موافق للانتقال (قيد الإنشاء).`);
+                console.log("Selected Categories:", selectedCategories);
+                console.log("Team 1:", { name: team1NameInput.value, color: team1ColorInput.value });
+                console.log("Team 2:", { name: team2NameInput.value, color: team2ColorInput.value });
+            } else {
+                showAlert("خطأ", `الرجاء اختيار ${MAX_CATEGORIES} أقسام لبدء اللعبة.`);
+            }
+        });
+
+        // Initial call to set up team headers based on default values
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTeamInputListeners();
+        });
+
+    </script>
+</body>
+</html>
+
