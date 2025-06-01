@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة سين جيم</title> <link rel="icon" type="image/png" href="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png">
+    <title>لعبة سين جيم نسخة نسخة خبزة</title>
+    <link rel="icon" type="image/png" href="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -15,74 +16,75 @@
             background-image: linear-gradient(to bottom, #FF6B6B, #FFA07A, #FFC371);
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* Allow stacking of pages */
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Align to top for scroll */
             margin: 0;
-            padding: 1rem; /* Add some padding for smaller screens */
+            padding: 1rem;
+            overflow-y: auto; /* Allow scrolling for content */
         }
         .page-container {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* Center content vertically within its container */
+            padding-bottom: 2rem; /* Space at the bottom */
         }
-        .main-container, .game-setup-container {
+        .main-container, .game-setup-container, .game-play-container {
             background-color: #ffffff;
             padding: 2rem;
-            border-radius: 1.5rem; /* 24px */
+            border-radius: 1.5rem;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             text-align: center;
             width: 100%;
+            margin-top: 1rem; /* Add some top margin */
         }
         .main-container {
              max-width: 400px;
         }
         .game-setup-container {
-            max-width: 700px; /* Wider for setup options */
-             margin-top: 2rem; /* Spacing if both somehow visible, good for transitions */
+            max-width: 700px;
         }
-
+        .game-play-container {
+            max-width: 800px; /* Wider for game elements */
+        }
         .logo-display-area {
-            background-color: #ffffff; /* Or transparent if container has bg */
-            padding: 1rem;
-            border-radius: 1rem; /* 16px */
+            padding: 1rem 0; /* Adjusted padding */
+            border-radius: 1rem;
             position: relative;
             cursor: pointer;
-            margin-bottom: 1rem; /* Space before name or buttons */
+            margin-bottom: 1rem;
         }
         .logo-img {
-            width: 220px;
+            width: 180px; /* Slightly smaller for game screen */
             max-width: 100%;
             height: auto;
-            border-radius: 0.5rem; /* 8px */
+            border-radius: 0.5rem;
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
         .name-wrapper {
             position: relative;
-            margin-top: -30px;
-            transform: translateX(-10px) rotate(-8deg);
+            margin-top: -25px; /* Adjusted for smaller logo */
+            transform: translateX(-8px) rotate(-8deg); /* Adjusted */
             z-index: 10;
         }
         .editable-name {
-            font-size: 1.4rem;
+            font-size: 1.2rem; /* Adjusted */
             font-weight: 900;
             background-image: linear-gradient(to right, #FF6B6B, #F2994A);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            padding: 3px 8px;
+            padding: 2px 6px; /* Adjusted */
             cursor: pointer;
             min-width: auto;
             display: inline-block;
-            border-radius: 0.3125rem; /* 5px */
+            border-radius: 0.3125rem;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
         }
-
-        /* Modal Styles */
         .modal {
             position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.6);
             display: flex; align-items: center; justify-content: center;
@@ -110,8 +112,6 @@
         .modal-buttons .save-btn:hover { background-color: #218838; }
         .modal-buttons .cancel-btn { background-color: #6c757d; color: white; }
         .modal-buttons .cancel-btn:hover { background-color: #5a6268; }
-
-        /* Custom Alert Styles */
         .custom-alert-overlay {
             position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.75);
             display: flex; align-items: center; justify-content: center;
@@ -132,12 +132,8 @@
             cursor: pointer; transition: background-color 0.2s ease;
         }
         .custom-alert-box button:hover { background-color: #E55A5A; }
-
-        /* Styles for Game Setup Page */
         .team-setup-card {
-            background-color: #f9fafb;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
+            background-color: #f9fafb; padding: 1.5rem; border-radius: 0.75rem;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
             text-align: right;
         }
@@ -155,10 +151,8 @@
          .team-setup-card input[type="color"] {
             height: 48px; padding: 0.25rem;
         }
-
         .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 1rem; margin-bottom: 1.5rem;
         }
         .category-item {
@@ -179,9 +173,92 @@
         .category-item p {
             font-size: 0.875rem; font-weight: 500; color: #374151; overflow-wrap: break-word;
         }
-        .hidden {
-            display: none !important;
+        .hidden { display: none !important; }
+
+        /* Game Play Screen Styles */
+        .game-play-container .team-scores {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1.5rem; /* 24px */
+            width: 100%;
         }
+        .game-play-container .team-score-card {
+            background-color: #f9fafb; /* Light gray */
+            padding: 1rem 1.5rem; /* 16px 24px */
+            border-radius: 0.75rem; /* 12px */
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            width: 45%; /* Each card takes up nearly half */
+            text-align: center;
+        }
+        .game-play-container .team-score-card h3 {
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+            margin-bottom: 0.5rem; /* 8px */
+        }
+        .game-play-container .team-score-card p {
+            font-size: 2rem; /* 32px */
+            font-weight: 700;
+            color: #1f2937; /* Dark gray */
+        }
+        .game-play-container .current-category-name {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 700;
+            color: #111827; /* Even darker gray */
+            margin-bottom: 0.5rem; /* 8px */
+        }
+         .game-play-container .current-points-display {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 500;
+            color: #4b5563; /* Gray */
+            margin-bottom: 1.5rem; /* 24px */
+        }
+        .game-play-container .question-area {
+            background-color: #e0f2fe; /* Light blue */
+            padding: 1.5rem; /* 24px */
+            border-radius: 0.75rem; /* 12px */
+            margin-bottom: 1.5rem; /* 24px */
+            min-height: 100px; /* Ensure some height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.25rem; /* 20px */
+            font-weight: 500;
+            color: #0c4a6e; /* Darker blue */
+            line-height: 1.6;
+        }
+        .game-play-container .answer-area {
+            background-color: #dcfce7; /* Light green */
+            padding: 1.5rem; /* 24px */
+            border-radius: 0.75rem; /* 12px */
+            margin-bottom: 1.5rem; /* 24px */
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+            color: #15803d; /* Darker green */
+            line-height: 1.6;
+        }
+        .game-play-container .game-controls button {
+            padding: 0.75rem 1.5rem; /* 12px 24px */
+            border-radius: 0.5rem; /* 8px */
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            border: none;
+            margin: 0.5rem; /* 8px */
+            min-width: 150px; /* Ensure buttons have decent width */
+        }
+        .game-play-container .game-controls button:active {
+            transform: scale(0.98);
+        }
+        #showAnswerBtn { background-color: #3b82f6; color: white; } /* Blue */
+        #showAnswerBtn:hover { background-color: #2563eb; }
+        #changeQuestionBtn { background-color: #f97316; color: white; } /* Orange */
+        #changeQuestionBtn:hover { background-color: #ea580c; }
+        #awardTeam1Btn, #awardTeam2Btn { background-color: #16a34a; color: white; } /* Green */
+        #awardTeam1Btn:hover, #awardTeam2Btn:hover { background-color: #15803d; }
+        #backToSetupBtn { background-color: #6b7280; color: white; } /* Gray */
+        #backToSetupBtn:hover { background-color: #4b5563; }
+
     </style>
 </head>
 <body>
@@ -189,74 +266,77 @@
     <div id="initialPageContainer" class="page-container">
         <div class="main-container">
             <div id="logoAreaTrigger" class="logo-display-area">
-                <div>
-                    <img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png"
-                         alt="شعار سين جيم"
-                         class="logo-img mx-auto"
-                         onerror="this.onerror=null; this.src='https://placehold.co/220x100/FFC371/FFFFFF?text=Logo+Error';">
-                </div>
-                <div class="name-wrapper">
-                    <div id="nameDisplay" class="editable-name">
-                        نسخة خبزة
-                    </div>
-                </div>
+                <div><img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png" alt="شعار سين جيم" class="logo-img mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/220x100/FFC371/FFFFFF?text=Logo+Error';"></div>
+                <div class="name-wrapper"><div id="nameDisplay" class="editable-name">نسخة خبزة</div></div>
             </div>
-            <button id="navigateToSetupBtn" class="mt-6 w-full bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg hover:shadow-xl transition duration-150 ease-in-out transform hover:scale-105">
-                بدء الإعداد
-            </button>
+            <button id="navigateToSetupBtn" class="mt-6 w-full bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg hover:shadow-xl transition duration-150 ease-in-out transform hover:scale-105">بدء الإعداد</button>
         </div>
     </div>
 
     <div id="gameSetupContainer" class="page-container hidden">
         <div class="game-setup-container">
             <div id="logoAreaTriggerGameSetup" class="logo-display-area mb-6">
-                <div>
-                    <img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png"
-                         alt="شعار سين جيم"
-                         class="logo-img mx-auto"
-                         onerror="this.onerror=null; this.src='https://placehold.co/220x100/FFC371/FFFFFF?text=Logo+Error';">
-                </div>
-                <div class="name-wrapper">
-                    <div id="nameDisplayGameSetup" class="editable-name">
-                        خبزة
-                    </div>
-                </div>
+                <div><img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png" alt="شعار سين جيم" class="logo-img mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/220x100/FFC371/FFFFFF?text=Logo+Error';"></div>
+                <div class="name-wrapper"><div id="nameDisplayGameSetup" class="editable-name">نسخة خبزة</div></div>
             </div>
-
             <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">إعدادات الفرق</h2>
             <div class="grid md:grid-cols-2 gap-6 mb-8">
                 <div class="team-setup-card">
                     <h3 id="team1DisplayHeader">الفريق الأول</h3>
-                    <label for="team1NameInput">اسم الفريق:</label>
-                    <input type="text" id="team1NameInput" class="w-full" value="الفريق الأول">
-                    <label for="team1ColorInput">لون الفريق:</label>
-                    <input type="color" id="team1ColorInput" value="#E57373" class="w-full">
+                    <label for="team1NameInput">اسم الفريق:</label><input type="text" id="team1NameInput" class="w-full" value="الفريق الأول">
+                    <label for="team1ColorInput">لون الفريق:</label><input type="color" id="team1ColorInput" value="#E57373" class="w-full">
                 </div>
                 <div class="team-setup-card">
                     <h3 id="team2DisplayHeader">الفريق الثاني</h3>
-                    <label for="team2NameInput">اسم الفريق:</label>
-                    <input type="text" id="team2NameInput" class="w-full" value="الفريق الثاني">
-                    <label for="team2ColorInput">لون الفريق:</label>
-                    <input type="color" id="team2ColorInput" value="#64B5F6" class="w-full">
+                    <label for="team2NameInput">اسم الفريق:</label><input type="text" id="team2NameInput" class="w-full" value="الفريق الثاني">
+                    <label for="team2ColorInput">لون الفريق:</label><input type="color" id="team2ColorInput" value="#64B5F6" class="w-full">
+                </div>
+            </div>
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">اختر ٦ أقسام للعبة</h2>
+            <div id="categorySelectionArea" class="category-grid mb-4"></div>
+            <p id="selectionCounter" class="text-center text-gray-600 font-medium mb-6">تم اختيار 0 من 6</p>
+            <button id="startActualGameBtn" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg hover:shadow-xl transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed" disabled>بدء اللعبة</button>
+        </div>
+    </div>
+
+    <div id="gamePlayContainer" class="page-container hidden">
+        <div class="game-play-container">
+            <div id="logoAreaTriggerGamePlay" class="logo-display-area mb-4">
+                <div><img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png" alt="شعار سين جيم" class="logo-img mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/180x80/FFC371/FFFFFF?text=Logo+Error';"></div>
+                <div class="name-wrapper"><div id="nameDisplayGamePlay" class="editable-name">نسخة خبزة</div></div>
+            </div>
+
+            <div class="team-scores">
+                <div class="team-score-card" id="team1ScoreCard">
+                    <h3 id="gameTeam1NameDisplay">الفريق الأول</h3>
+                    <p id="gameTeam1ScoreDisplay">0</p>
+                </div>
+                <div class="team-score-card" id="team2ScoreCard">
+                    <h3 id="gameTeam2NameDisplay">الفريق الثاني</h3>
+                    <p id="gameTeam2ScoreDisplay">0</p>
                 </div>
             </div>
 
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">اختر ٦ أقسام للعبة</h2>
-            <div id="categorySelectionArea" class="category-grid mb-4">
-                </div>
-            <p id="selectionCounter" class="text-center text-gray-600 font-medium mb-6">تم اختيار 0 من 6</p>
+            <div id="currentCategoryNameDisplay" class="current-category-name">اسم القسم</div>
+            <div id="currentPointsDisplay" class="current-points-display">النقاط: 0</div>
+            <div id="currentQuestionDisplay" class="question-area">سيظهر السؤال هنا...</div>
+            <div id="currentAnswerDisplay" class="answer-area hidden">ستظهر الإجابة هنا...</div>
 
-            <button id="startActualGameBtn" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg hover:shadow-xl transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                بدء اللعبة
-            </button>
+            <div class="game-controls mt-6 flex flex-wrap justify-center">
+                <button id="showAnswerBtn">إظهار الإجابة</button>
+                <button id="changeQuestionBtn">تغيير السؤال</button>
+                <button id="awardTeam1Btn">الفريق الأول استحق النقاط</button>
+                <button id="awardTeam2Btn">الفريق الثاني استحق النقاط</button>
+                <button id="backToSetupBtn" class="mt-4">العودة للإعدادات</button>
+            </div>
         </div>
     </div>
+
 
     <div id="editModal" class="modal">
         <div class="modal-content">
             <h2>تعديل الاسم</h2>
-            <label for="nameModalInput">الاسم الجديد:</label>
-            <input type="text" id="nameModalInput" placeholder="أدخل الاسم هنا...">
+            <label for="nameModalInput">الاسم الجديد:</label><input type="text" id="nameModalInput" placeholder="أدخل الاسم هنا...">
             <div class="modal-buttons">
                 <button id="saveModalBtn" class="save-btn">حفظ</button>
                 <button id="cancelModalBtn" class="cancel-btn">إلغاء</button>
@@ -276,12 +356,16 @@
         // DOM Elements
         const initialPageContainer = document.getElementById('initialPageContainer');
         const gameSetupContainer = document.getElementById('gameSetupContainer');
+        const gamePlayContainer = document.getElementById('gamePlayContainer'); // New Game Play Page
         const navigateToSetupBtn = document.getElementById('navigateToSetupBtn');
 
         const nameDisplay = document.getElementById('nameDisplay');
         const nameDisplayGameSetup = document.getElementById('nameDisplayGameSetup');
+        const nameDisplayGamePlay = document.getElementById('nameDisplayGamePlay'); // Name on Game Play Page
         const logoAreaTrigger = document.getElementById('logoAreaTrigger');
         const logoAreaTriggerGameSetup = document.getElementById('logoAreaTriggerGameSetup');
+        const logoAreaTriggerGamePlay = document.getElementById('logoAreaTriggerGamePlay'); // Logo on Game Play Page
+
 
         const editModal = document.getElementById('editModal');
         const nameModalInput = document.getElementById('nameModalInput');
@@ -293,7 +377,6 @@
         const customAlertMessage = document.getElementById('customAlertMessage');
         const customAlertCloseBtn = document.getElementById('customAlertClose');
 
-        // Game Setup Page Elements
         const team1NameInput = document.getElementById('team1NameInput');
         const team1ColorInput = document.getElementById('team1ColorInput');
         const team1DisplayHeader = document.getElementById('team1DisplayHeader');
@@ -304,23 +387,46 @@
         const selectionCounter = document.getElementById('selectionCounter');
         const startActualGameBtn = document.getElementById('startActualGameBtn');
 
-        // Game Data
-        let gameQuestionsData = null; // To store questions from JSON file
+        // Game Play DOM Elements
+        const gameTeam1NameDisplay = document.getElementById('gameTeam1NameDisplay');
+        const gameTeam1ScoreDisplay = document.getElementById('gameTeam1ScoreDisplay');
+        const team1ScoreCard = document.getElementById('team1ScoreCard');
+        const gameTeam2NameDisplay = document.getElementById('gameTeam2NameDisplay');
+        const gameTeam2ScoreDisplay = document.getElementById('gameTeam2ScoreDisplay');
+        const team2ScoreCard = document.getElementById('team2ScoreCard');
+        const currentCategoryNameDisplay = document.getElementById('currentCategoryNameDisplay');
+        const currentPointsDisplay = document.getElementById('currentPointsDisplay');
+        const currentQuestionDisplay = document.getElementById('currentQuestionDisplay');
+        const currentAnswerDisplay = document.getElementById('currentAnswerDisplay');
+        const showAnswerBtn = document.getElementById('showAnswerBtn');
+        const changeQuestionBtn = document.getElementById('changeQuestionBtn');
+        const awardTeam1Btn = document.getElementById('awardTeam1Btn');
+        const awardTeam2Btn = document.getElementById('awardTeam2Btn');
+        const backToSetupBtn = document.getElementById('backToSetupBtn');
 
-        const allCategories = [ // This might be replaced or augmented by data from الأسئلة.json
-            { id: 'history', name: 'تاريخ', imageUrl: 'https://placehold.co/150x80/8E44AD/FFFFFF?text=تاريخ' },
-            { id: 'geography', name: 'جغرافيا', imageUrl: 'https://placehold.co/150x80/2ECC71/FFFFFF?text=جغرافيا' },
-            { id: 'science', name: 'علوم', imageUrl: 'https://placehold.co/150x80/3498DB/FFFFFF?text=علوم' },
-            { id: 'sports', name: 'رياضة', imageUrl: 'https://placehold.co/150x80/F39C12/FFFFFF?text=رياضة' },
-            { id: 'literature', name: 'أدب', imageUrl: 'https://placehold.co/150x80/E74C3C/FFFFFF?text=أدب' },
-            { id: 'arts', name: 'فنون', imageUrl: 'https://placehold.co/150x80/1ABC9C/FFFFFF?text=فنون' },
-            { id: 'movies', name: 'أفلام ومسلسلات', imageUrl: 'https://placehold.co/150x80/9B59B6/FFFFFF?text=أفلام' },
-            { id: 'general', name: 'معلومات عامة', imageUrl: 'https://placehold.co/150x80/34495E/FFFFFF?text=عامة' },
-            { id: 'religion', name: 'دين', imageUrl: 'https://placehold.co/150x80/D35400/FFFFFF?text=دين' },
-            { id: 'tech', name: 'تقنية', imageUrl: 'https://placehold.co/150x80/2980B9/FFFFFF?text=تقنية' }
+
+        // Game Data & State
+        let questionsForSelectedGame = [];
+        const allAvailableCategories = [
+            { id: 'تاريخ', name: 'تاريخ', imageUrl: 'https://placehold.co/150x80/8E44AD/FFFFFF?text=تاريخ' },
+            { id: 'جغرافيا', name: 'جغرافيا', imageUrl: 'https://placehold.co/150x80/2ECC71/FFFFFF?text=جغرافيا' },
+            { id: 'علوم', name: 'علوم', imageUrl: 'https://placehold.co/150x80/3498DB/FFFFFF?text=علوم' },
+            { id: 'رياضة', name: 'رياضة', imageUrl: 'https://placehold.co/150x80/F39C12/FFFFFF?text=رياضة' },
+            { id: 'أدب', name: 'أدب', imageUrl: 'https://placehold.co/150x80/E74C3C/FFFFFF?text=أدب' },
+            { id: 'فنون', name: 'فنون', imageUrl: 'https://placehold.co/150x80/1ABC9C/FFFFFF?text=فنون' },
+            { id: 'أفلام', name: 'أفلام ومسلسلات', imageUrl: 'https://placehold.co/150x80/9B59B6/FFFFFF?text=أفلام' },
+            { id: 'عامة', name: 'معلومات عامة', imageUrl: 'https://placehold.co/150x80/34495E/FFFFFF?text=عامة' },
+            { id: 'دين', name: 'دين', imageUrl: 'https://placehold.co/150x80/D35400/FFFFFF?text=دين' },
+            { id: 'تقنية', name: 'تقنية', imageUrl: 'https://placehold.co/150x80/2980B9/FFFFFF?text=تقنية' }
         ];
-        let selectedCategories = [];
+        let selectedCategoryIds = [];
         const MAX_CATEGORIES = 6;
+
+        let currentGameCategoryIndex = 0; // Index in questionsForSelectedGame
+        let currentQuestionArrayIndex = 0; // Index within the category's questions array
+        let team1Score = 0;
+        let team2Score = 0;
+        let currentQuestionData = null; // To hold the current question object
 
         // --- Alert Function ---
         function showAlert(title, message) {
@@ -333,187 +439,285 @@
             if (event.target === customAlert) customAlert.classList.remove('active');
         });
 
-        // --- Load Questions from JSON ---
-        async function loadQuestions() {
-            try {
-                const response = await fetch('الأسئلة.json'); // Assumes الأسئلة.json is in the same directory
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+        // --- Load Questions for Selected Categories ---
+        async function loadQuestionsForCategories(categoryIds) {
+            questionsForSelectedGame = [];
+            let allFilesLoadedSuccessfully = true;
+            const loadingPromises = categoryIds.map(async (catId) => {
+                const categoryInfo = allAvailableCategories.find(c => c.id === catId);
+                const categoryDisplayName = categoryInfo ? categoryInfo.name : catId;
+                try {
+                    const encodedCatId = encodeURIComponent(catId);
+                    const filePath = `الأسئلة/${encodedCatId}.json`;
+                    const response = await fetch(filePath);
+                    if (!response.ok) throw new Error(`ملف "${catId}.json" غير موجود (الحالة: ${response.status})`);
+                    const categoryData = await response.json();
+                    if (categoryData && categoryData.questions && Array.isArray(categoryData.questions)) {
+                        questionsForSelectedGame.push({
+                            categoryId: catId,
+                            categoryName: categoryData.categoryName || categoryDisplayName,
+                            questions: categoryData.questions.sort((a,b) => a.points - b.points) // Sort by points
+                        });
+                    } else throw new Error(`تنسيق ملف "${catId}.json" غير صحيح.`);
+                } catch (error) {
+                    console.error(`Error loading questions for ${catId}:`, error);
+                    showAlert("خطأ تحميل الأسئلة", `لم نتمكن من تحميل قسم "${categoryDisplayName}". ${error.message}`);
+                    allFilesLoadedSuccessfully = false;
                 }
-                gameQuestionsData = await response.json();
-                console.log("Questions loaded successfully:", gameQuestionsData);
-                showAlert("نجاح", "تم تحميل ملف الأسئلة بنجاح!");
-            } catch (error) {
-                console.error("Error loading questions:", error);
-                showAlert("خطأ في تحميل الأسئلة", `لم نتمكن من تحميل ملف الأسئلة.json. تأكد من وجود الملف وأن تنسيقه صحيح. الخطأ: ${error.message}`);
-                gameQuestionsData = null; // Ensure it's null if loading fails
+            });
+            await Promise.all(loadingPromises);
+            // Sort selected categories based on the order in allAvailableCategories for consistency
+            questionsForSelectedGame.sort((a, b) => {
+                return selectedCategoryIds.indexOf(a.categoryId) - selectedCategoryIds.indexOf(b.categoryId);
+            });
+            return allFilesLoadedSuccessfully;
+        }
+
+        // --- Logo Name Management with localStorage ---
+        function updateLogoNameUI(name) {
+             if (nameDisplay) nameDisplay.textContent = name;
+             if (nameDisplayGameSetup) nameDisplayGameSetup.textContent = name;
+             if (nameDisplayGamePlay) nameDisplayGamePlay.textContent = name; // Update on game play screen too
+             nameModalInput.value = name;
+             document.title = `لعبة سين جيم نسخة ${name}`;
+        }
+        function saveLogoNameToStorage(name) {
+            try {
+                localStorage.setItem('gameVersionName', name);
+                console.log("Logo name saved to localStorage:", name);
+            } catch (e) {
+                console.error("Failed to save name to localStorage:", e);
             }
         }
-
-        // --- Logo Name Management (Local Session Only) ---
-        function updateLogoName(newText) {
-            const sanitizedText = newText || "خبزة"; // Default if empty
-            if (nameDisplay) nameDisplay.textContent = sanitizedText;
-            if (nameDisplayGameSetup) nameDisplayGameSetup.textContent = sanitizedText;
-            nameModalInput.value = sanitizedText; // Keep modal input synced
-            document.title = `لعبة سين جيم ${sanitizedText}`; // Update HTML title
-            console.log("Logo name updated locally:", sanitizedText);
-            console.log("Document title updated to:", document.title);
+        function loadNameFromStorage() {
+            let storedName = "نسخة خبزة"; // Default
+            try {
+                const nameFromStorage = localStorage.getItem('gameVersionName');
+                if (nameFromStorage) {
+                    storedName = nameFromStorage;
+                }
+            } catch (e) {
+                console.error("Failed to load name from localStorage:", e);
+            }
+            updateLogoNameUI(storedName);
         }
-
         function openEditModal() {
-            nameModalInput.value = nameDisplay.textContent || nameDisplayGameSetup.textContent || "خبزة";
+            nameModalInput.value = nameDisplay.textContent || "خبزة";
             editModal.classList.add('active');
             nameModalInput.focus();
         }
-        function closeEditModal() {
-            editModal.classList.remove('active');
-        }
+        function closeEditModal() { editModal.classList.remove('active'); }
         saveModalBtn.addEventListener('click', () => {
-            const newText = nameModalInput.value.trim();
-            if (newText) {
-                updateLogoName(newText);
-            } else {
-                showAlert("تنبيه", "لا يمكن ترك الاسم فارغًا. سيتم استخدام الاسم الافتراضي.");
-                updateLogoName("خبزة"); // Revert to a default or current name
-            }
+            const newText = nameModalInput.value.trim() || "خبزة";
+            updateLogoNameUI(newText);
+            saveLogoNameToStorage(newText);
             closeEditModal();
         });
         cancelModalBtn.addEventListener('click', closeEditModal);
-        editModal.addEventListener('click', (event) => {
-            if (event.target === editModal) closeEditModal();
+        editModal.addEventListener('click', (event) => { if (event.target === editModal) closeEditModal(); });
+        [logoAreaTrigger, logoAreaTriggerGameSetup, logoAreaTriggerGamePlay].forEach(trigger => {
+            if(trigger) trigger.addEventListener('dblclick', openEditModal);
         });
 
-        logoAreaTrigger.addEventListener('dblclick', openEditModal);
-        logoAreaTriggerGameSetup.addEventListener('dblclick', openEditModal);
-        
-        // Initialize logo name and title on load
-        updateLogoName("نسخة خبزة");
 
-
-        // --- Team Data Management (Local Session Only) ---
+        // --- Team Data Management ---
         function setupTeamInputListeners() {
             const handleTeamDataChange = () => {
                 const team1Name = team1NameInput.value.trim() || "الفريق الأول";
                 const team1Color = team1ColorInput.value;
                 const team2Name = team2NameInput.value.trim() || "الفريق الثاني";
                 const team2Color = team2ColorInput.value;
-
                 team1DisplayHeader.textContent = team1Name;
                 team1DisplayHeader.style.borderBottomColor = team1Color;
                 team2DisplayHeader.textContent = team2Name;
                 team2DisplayHeader.style.borderBottomColor = team2Color;
-
-                console.log("Team data updated locally.");
             };
-
-            team1NameInput.addEventListener('input', handleTeamDataChange);
-            team1ColorInput.addEventListener('input', handleTeamDataChange);
-            team2NameInput.addEventListener('input', handleTeamDataChange);
-            team2ColorInput.addEventListener('input', handleTeamDataChange);
-
-            // Initial setup of display headers based on default input values
+            [team1NameInput, team1ColorInput, team2NameInput, team2ColorInput].forEach(input => {
+                input.addEventListener('input', handleTeamDataChange);
+            });
             handleTeamDataChange();
         }
-
 
         // --- Page Navigation ---
         navigateToSetupBtn.addEventListener('click', () => {
             initialPageContainer.classList.add('hidden');
             gameSetupContainer.classList.remove('hidden');
-            populateCategories();
-            if (nameDisplayGameSetup && nameDisplay) {
-                 nameDisplayGameSetup.textContent = nameDisplay.textContent;
-            }
-            if (!gameQuestionsData) { // Attempt to load questions if not already loaded
-                loadQuestions();
-            }
+            gamePlayContainer.classList.add('hidden');
+            populateCategorySelectionUI();
+            if (nameDisplayGameSetup && nameDisplay) nameDisplayGameSetup.textContent = nameDisplay.textContent;
         });
 
-        // --- Category Selection Logic ---
-        function populateCategories() {
-            categorySelectionArea.innerHTML = ''; // Clear previous items
-            allCategories.forEach(cat => {
+        function navigateToGamePlayScreen() {
+            gameSetupContainer.classList.add('hidden');
+            gamePlayContainer.classList.remove('hidden');
+            initialPageContainer.classList.add('hidden');
+
+            // Setup team display on game screen
+            gameTeam1NameDisplay.textContent = team1NameInput.value.trim() || "الفريق الأول";
+            team1ScoreCard.style.borderColor = team1ColorInput.value; // Example: use color
+            gameTeam1ScoreDisplay.textContent = team1Score;
+
+            gameTeam2NameDisplay.textContent = team2NameInput.value.trim() || "الفريق الثاني";
+            team2ScoreCard.style.borderColor = team2ColorInput.value; // Example: use color
+            gameTeam2ScoreDisplay.textContent = team2Score;
+            
+            if (nameDisplayGamePlay && nameDisplay) nameDisplayGamePlay.textContent = nameDisplay.textContent;
+
+
+            // Initialize with the first question of the first category
+            currentGameCategoryIndex = 0;
+            currentQuestionArrayIndex = 0;
+            displayCurrentQuestion();
+        }
+        
+        backToSetupBtn.addEventListener('click', () => {
+            gamePlayContainer.classList.add('hidden');
+            gameSetupContainer.classList.remove('hidden');
+            // Reset scores or game state if needed
+            team1Score = 0;
+            team2Score = 0;
+        });
+
+
+        // --- Category Selection UI Logic ---
+        function populateCategorySelectionUI() {
+            categorySelectionArea.innerHTML = '';
+            allAvailableCategories.forEach(cat => {
                 const item = document.createElement('div');
                 item.classList.add('category-item');
                 item.dataset.categoryId = cat.id;
-                item.innerHTML = `
-                    <img src="${cat.imageUrl}" alt="${cat.name}" onerror="this.onerror=null; this.src='https://placehold.co/150x80/CCCCCC/FFFFFF?text=Error';">
-                    <p>${cat.name}</p>
-                `;
+                item.innerHTML = `<img src="${cat.imageUrl}" alt="${cat.name}" onerror="this.onerror=null; this.src='https://placehold.co/150x80/CCCCCC/FFFFFF?text=Error';"><p>${cat.name}</p>`;
                 item.addEventListener('click', () => toggleCategorySelection(item, cat.id));
-                if (selectedCategories.includes(cat.id)) {
-                    item.classList.add('selected');
-                }
+                if (selectedCategoryIds.includes(cat.id)) item.classList.add('selected');
                 categorySelectionArea.appendChild(item);
             });
             updateSelectionCounter();
         }
-
         function toggleCategorySelection(element, categoryId) {
-            if (selectedCategories.includes(categoryId)) {
-                selectedCategories = selectedCategories.filter(id => id !== categoryId);
+            const index = selectedCategoryIds.indexOf(categoryId);
+            if (index > -1) {
+                selectedCategoryIds.splice(index, 1);
                 element.classList.remove('selected');
             } else {
-                if (selectedCategories.length < MAX_CATEGORIES) {
-                    selectedCategories.push(categoryId);
+                if (selectedCategoryIds.length < MAX_CATEGORIES) {
+                    selectedCategoryIds.push(categoryId);
                     element.classList.add('selected');
-                } else {
-                    showAlert("تنبيه", `يمكنك اختيار ${MAX_CATEGORIES} أقسام فقط.`);
-                }
+                } else showAlert("تنبيه", `يمكنك اختيار ${MAX_CATEGORIES} أقسام فقط.`);
             }
             updateSelectionCounter();
         }
-
         function updateSelectionCounter() {
-            selectionCounter.textContent = `تم اختيار ${selectedCategories.length} من ${MAX_CATEGORIES}`;
-            startActualGameBtn.disabled = selectedCategories.length !== MAX_CATEGORIES;
+            selectionCounter.textContent = `تم اختيار ${selectedCategoryIds.length} من ${MAX_CATEGORIES}`;
+            startActualGameBtn.disabled = selectedCategoryIds.length !== MAX_CATEGORIES;
         }
 
-        // --- Start Actual Game Button ---
-        startActualGameBtn.addEventListener('click', () => {
-            if (selectedCategories.length !== MAX_CATEGORIES) {
-                 showAlert("خطأ", `الرجاء اختيار ${MAX_CATEGORIES} أقسام لبدء اللعبة.`);
-                 return;
-            }
-            if (!gameQuestionsData) {
-                showAlert("خطأ في الأسئلة", "لم يتم تحميل الأسئلة بعد أو حدث خطأ أثناء التحميل. يرجى المحاولة مرة أخرى أو التأكد من ملف الأسئلة.");
-                loadQuestions(); // Try loading again
+        // --- Game Play Logic ---
+        function displayCurrentQuestion() {
+            if (questionsForSelectedGame.length === 0 || !questionsForSelectedGame[currentGameCategoryIndex]) {
+                currentQuestionDisplay.textContent = "لا توجد أسئلة محملة لهذا القسم.";
+                currentCategoryNameDisplay.textContent = "خطأ في القسم";
+                currentPointsDisplay.textContent = "النقاط: 0";
+                currentAnswerDisplay.classList.add('hidden');
+                currentQuestionData = null;
                 return;
             }
 
-            const team1Name = team1NameInput.value.trim() || "الفريق الأول";
-            const team2Name = team2NameInput.value.trim() || "الفريق الثاني";
-            
-            // Filter gameQuestionsData to include only selected categories and their questions
-            const questionsForSelectedCategories = gameQuestionsData.filter(category => 
-                selectedCategories.includes(category.categoryId)
-            );
-
-            if (questionsForSelectedCategories.length !== MAX_CATEGORIES) {
-                 console.warn("Mismatch between selected categories and available questions in JSON for those categories.");
-                 // This might happen if a selected category ID is not found in the JSON file.
+            const category = questionsForSelectedGame[currentGameCategoryIndex];
+            if (!category.questions || category.questions.length === 0) {
+                 currentQuestionDisplay.textContent = `لا توجد أسئلة في قسم "${category.categoryName}".`;
+                 currentCategoryNameDisplay.textContent = category.categoryName;
+                 currentPointsDisplay.textContent = "النقاط: 0";
+                 currentAnswerDisplay.classList.add('hidden');
+                 currentQuestionData = null;
+                 return;
             }
             
-            showAlert("اللعبة جاهزة!", `الفرق: ${team1Name} و ${team2Name}. الأقسام المختارة: ${selectedCategories.join(', ')}. الأسئلة جاهزة. اضغط موافق للانتقال (قيد الإنشاء).`);
-            console.log("Selected Categories IDs:", selectedCategories);
-            console.log("Team 1:", { name: team1NameInput.value, color: team1ColorInput.value });
-            console.log("Team 2:", { name: team2NameInput.value, color: team2ColorInput.value });
-            console.log("All Loaded Questions Data:", gameQuestionsData);
-            console.log("Questions for selected categories:", questionsForSelectedCategories);
-            // Here you would navigate to the actual game page,
-            // passing team info, selected category IDs, and 'questionsForSelectedCategories'.
+            // Ensure currentQuestionArrayIndex is within bounds
+            if (currentQuestionArrayIndex >= category.questions.length) {
+                currentQuestionArrayIndex = 0; // Loop back or handle end of category
+            }
+            if (currentQuestionArrayIndex < 0) { // Should not happen with current logic but good check
+                currentQuestionArrayIndex = 0;
+            }
+
+            currentQuestionData = category.questions[currentQuestionArrayIndex];
+
+            currentCategoryNameDisplay.textContent = category.categoryName;
+            currentQuestionDisplay.textContent = currentQuestionData.questionText;
+            currentPointsDisplay.textContent = `النقاط: ${currentQuestionData.points}`;
+            currentAnswerDisplay.textContent = currentQuestionData.answerText;
+            currentAnswerDisplay.classList.add('hidden'); // Hide answer initially
+            showAnswerBtn.disabled = false; // Enable show answer button
+        }
+
+        showAnswerBtn.addEventListener('click', () => {
+            if (currentQuestionData) {
+                currentAnswerDisplay.classList.remove('hidden');
+                showAnswerBtn.disabled = true; // Disable after showing
+            }
         });
 
-        // Initial DOM setup and event listeners
+        changeQuestionBtn.addEventListener('click', () => {
+            if (questionsForSelectedGame.length === 0 || !questionsForSelectedGame[currentGameCategoryIndex] || !questionsForSelectedGame[currentGameCategoryIndex].questions || questionsForSelectedGame[currentGameCategoryIndex].questions.length === 0) {
+                showAlert("لا أسئلة", "لا توجد أسئلة لتغييرها في هذا القسم.");
+                return;
+            }
+            const currentCategoryQuestions = questionsForSelectedGame[currentGameCategoryIndex].questions;
+            currentQuestionArrayIndex = (currentQuestionArrayIndex + 1) % currentCategoryQuestions.length;
+            displayCurrentQuestion();
+        });
+        
+        awardTeam1Btn.addEventListener('click', () => {
+            if (currentQuestionData) {
+                team1Score += currentQuestionData.points;
+                gameTeam1ScoreDisplay.textContent = team1Score;
+                // Optionally, move to next question or category, or disable buttons
+                // For now, just awards points. User can change question manually.
+                showAlert("نقاط!", `تم إضافة ${currentQuestionData.points} نقطة للفريق الأول.`);
+            }
+        });
+
+        awardTeam2Btn.addEventListener('click', () => {
+            if (currentQuestionData) {
+                team2Score += currentQuestionData.points;
+                gameTeam2ScoreDisplay.textContent = team2Score;
+                showAlert("نقاط!", `تم إضافة ${currentQuestionData.points} نقطة للفريق الثاني.`);
+            }
+        });
+
+
+        // --- Start Actual Game Button ---
+        startActualGameBtn.addEventListener('click', async () => {
+            if (selectedCategoryIds.length !== MAX_CATEGORIES) {
+                 showAlert("خطأ", `الرجاء اختيار ${MAX_CATEGORIES} أقسام لبدء اللعبة.`);
+                 return;
+            }
+            startActualGameBtn.textContent = "جاري تحميل الأسئلة...";
+            startActualGameBtn.disabled = true;
+
+            const success = await loadQuestionsForCategories(selectedCategoryIds);
+
+            startActualGameBtn.textContent = "بدء اللعبة";
+            startActualGameBtn.disabled = selectedCategoryIds.length !== MAX_CATEGORIES;
+
+            if (success && questionsForSelectedGame.length > 0) {
+                // Ensure we have exactly MAX_CATEGORIES loaded, or handle partial loads if desired
+                if (questionsForSelectedGame.length < MAX_CATEGORIES) {
+                     showAlert("تحذير تحميل", `تم تحميل أسئلة لـ ${questionsForSelectedGame.length} قسم فقط. تأكد من وجود جميع ملفات الأقسام المختارة.`);
+                }
+                team1Score = 0; // Reset scores
+                team2Score = 0;
+                navigateToGamePlayScreen();
+            } else {
+                showAlert("خطأ فادح", "لم يتم تحميل أي أسئلة. يرجى التحقق من ملفات الأسئلة في مجلد 'الأسئلة' ومن الـ console.");
+            }
+        });
+
+        // Initial DOM setup
         document.addEventListener('DOMContentLoaded', () => {
             setupTeamInputListeners();
-            // Optionally, try to load questions on initial page load if desired,
-            // or wait until "بدء الإعداد" is clicked as it is now.
-            // loadQuestions(); // Uncomment to load questions immediately
+            loadNameFromStorage();
         });
-
     </script>
 </body>
 </html>
-
