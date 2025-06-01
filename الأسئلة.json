@@ -1,5 +1,67 @@
-
 [
+  {
+    "categoryId": "history",
+    "categoryName": "تاريخ",
+    "questions": [
+      {
+        "points": 100,
+        "questionText": "من هو مؤسس الدولة السعودية الأولى؟",
+        "answerText": "الإمام محمد بن سعود"
+      },
+      {
+        "points": 200,
+        "questionText": "في أي عام وقعت غزوة بدر الكبرى؟",
+        "answerText": "في العام الثاني للهجرة (624م)"
+      },
+      {
+        "points": 300,
+        "questionText": "من هو القائد المسلم الذي فتح الأندلس؟",
+        "answerText": "طارق بن زياد"
+      }
+    ]
+  },
+  {
+    "categoryId": "geography",
+    "categoryName": "جغرافيا",
+    "questions": [
+      {
+        "points": 100,
+        "questionText": "ما هي عاصمة المملكة العربية السعودية؟",
+        "answerText": "الرياض"
+      },
+      {
+        "points": 200,
+        "questionText": "ما هو أطول نهر في العالم؟",
+        "answerText": "نهر النيل"
+      },
+      {
+        "points": 300,
+        "questionText": "أين يقع جبل إفرست؟",
+        "answerText": "في سلسلة جبال الهيمالايا (على حدود نيبال والصين)"
+      }
+    ]
+  },
+  {
+    "categoryId": "science",
+    "categoryName": "علوم",
+    "questions": [
+      {
+        "points": 100,
+        "questionText": "ما هو الرمز الكيميائي للماء؟",
+        "answerText": "H₂O"
+      },
+      {
+        "points": 200,
+        "questionText": "ما هو الكوكب الأقرب إلى الشمس؟",
+        "answerText": "عطارد"
+      },
+      {
+        "points": 300,
+        "questionText": "ما هي وحدة قياس القوة؟",
+        "answerText": "النيوتن"
+      }
+    ]
+  },
   {
     "categoryId": "sports",
     "categoryName": "رياضة",
@@ -13,8 +75,93 @@
         "points": 200,
         "questionText": "ما هي الدولة التي فازت بكأس العالم لكرة القدم 2022؟",
         "answerText": "الأرجنتين"
+      },
+      {
+        "points": 300,
+        "questionText": "أين أقيمت دورة الألعاب الأولمبية الصيفية 2020 (التي أقيمت في 2021)؟",
+        "answerText": "طوكيو، اليابان"
+      }
+    ]
+  },
+  {
+    "categoryId": "literature",
+    "categoryName": "أدب",
+    "questions": [
+      {
+        "points": 100,
+        "questionText": "من هو مؤلف كتاب \"ألف ليلة وليلة\" كما هو معروف في شكله الحالي؟",
+        "answerText": "مجموعة من المؤلفين والمترجمين على مر العصور (ليس له مؤلف واحد محدد)"
+      },
+      {
+        "points": 200,
+        "questionText": "ما هي أشهر مسرحيات وليم شكسبير؟ (اذكر واحدة)",
+        "answerText": "هاملت / روميو وجولييت / عطيل (أمثلة)"
+      }
+    ]
+  },
+  {
+    "categoryId": "arts",
+    "categoryName": "فنون",
+    "questions": [
+      {
+        "points": 100,
+        "questionText": "من هو رسام لوحة الموناليزا؟",
+        "answerText": "ليوناردو دا فينشي"
+      },
+      {
+        "points": 200,
+        "questionText": "ما هو اسم أقدم الحضارات المعروفة في بلاد ما بين النهرين؟",
+        "answerText": "الحضارة السومرية"
+      }
+    ]
+  },
+  {
+    "categoryId": "movies",
+    "categoryName": "أفلام ومسلسلات",
+    "questions": [
+      {
+        "points": 100,
+        "questionText": "من هو مخرج سلسلة أفلام \"سيد الخواتم\" (Lord of the Rings)؟",
+        "answerText": "بيتر جاكسون"
+      }
+    ]
+  },
+  {
+    "categoryId": "general",
+    "categoryName": "معلومات عامة",
+    "questions": [
+      {
+        "points": 100,
+        "questionText": "كم عدد أيام الأسبوع؟",
+        "answerText": "7 أيام"
+      },
+      {
+        "points": 200,
+        "questionText": "ما هو أكبر حيوان على وجه الأرض؟",
+        "answerText": "الحوت الأزرق"
+      }
+    ]
+  },
+  {
+    "categoryId": "religion",
+    "categoryName": "دين",
+    "questions": [
+      {
+        "points": 100,
+        "questionText": "كم عدد أركان الإسلام؟",
+        "answerText": "خمسة أركان"
+      }
+    ]
+  },
+  {
+    "categoryId": "tech",
+    "categoryName": "تقنية",
+    "questions": [
+      {
+        "points": 100,
+        "questionText": "ما هو اختصار \"WWW\" في عناوين الإنترنت؟",
+        "answerText": "World Wide Web (شبكة الويب العالمية)"
       }
     ]
   }
-  // ... يمكنك إضافة المزيد من الأقسام هنا بنفس التنسيق
 ]
