@@ -1,7 +1,7 @@
 [
   {
-    "categoryId": "movies",
-    "categoryName": "أفلام ومسلسلات",
+    "id": "أفلام",
+    "name": "أفلام ومسلسلات",
     "questions": [
       {
         "points": 100,
