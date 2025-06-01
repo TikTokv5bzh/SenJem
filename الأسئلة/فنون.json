@@ -1,7 +1,7 @@
 [
   {
-    "categoryId": "arab_islamic_arts",
-    "categoryName": "فنون عربية وإسلامية (شعر وإلقاء)",
+    "Id": "فنون",
+    "Name": "فنون عربية وإسلامية (شعر وإلقاء)",
     "questions": [
       {
         "points": 100,
