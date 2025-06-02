@@ -276,12 +276,13 @@
         .game-category-item-new { 
             display: flex;
             align-items: center; 
-            justify-content: space-between; 
+            justify-content: center; /* Center items and use gap for spacing */
+            gap: 6px; /* Small gap between point columns and image block */
             background-color: #F3F4F6; 
             padding: 0.75rem;
             border-radius: 0.75rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            min-height: 220px; /* Adjusted to accommodate taller image block */
+            min-height: 200px; 
         }
 
         .points-column {
@@ -290,30 +291,29 @@
             justify-content: space-around; 
             align-items: center;
             gap: 0.5rem; 
-            height: 100%; 
+            height: 200px; /* Match height of category-image-block */
         }
 
         .category-image-block { 
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between; /* Ensure name is at the bottom */
+            justify-content: space-between; 
             background-color: #FEF3C7; 
             border-radius: 0.5rem;
             padding: 0.5rem;
             width: 150px; 
-            height: 200px; /* Overall height of the central block */
+            height: 200px; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             text-align: center;
         }
 
         .category-image-block-img-container { 
             width: 100%;
-            height: 150px; /* Height for the image area */
+            height: 150px; 
             background-color: #E0F2FE; 
             border-radius: 0.5rem; 
             overflow: hidden;
-            /* margin-bottom: 0.5rem; Removed to allow name to be at bottom */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -336,24 +336,28 @@
             border-radius: 0.375rem;
             border-bottom-left-radius: 0.75rem; 
             border-bottom-right-radius: 0.75rem; 
-            margin-top: 0.5rem; /* Add space above name if image container doesn't have margin-bottom */
+            margin-top: 0.5rem; 
         }
 
         .point-bubble-side { 
-            background-color: #FF8C00; /* Orange background */
+            background-color: rgb(255, 120, 0); /* Orange like the example image */
             color: white;
-            padding: 0.5rem 0.75rem; 
-            border-radius: 25px; /* Pill shape */
-            font-size: 1.1rem; 
+            height: 36px; 
+            padding: 4px 12px; 
+            border-radius: 18px; /* Pill shape */
+            font-size: 1rem; 
             font-weight: bold; 
             text-align: center;
-            min-width: 70px; /* Adjusted min-width */
+            min-width: 65px; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.15);
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+            display: flex; 
+            align-items: center;
+            justify-content: center;
         }
         .point-bubble-side:hover {
-            background-color: #FFA500; /* Lighter orange on hover */
+            background-color: rgb(255, 150, 50); /* Lighter orange on hover */
             transform: scale(1.05);
         }
         .point-bubble-side.answered {
