@@ -209,37 +209,68 @@
 
         .hidden { display: none !important; }
 
-        /* Game Board Screen Styles - NEW LAYOUT */
-        .game-board-container .team-scores {
+        /* Game Board Screen Styles - UPDATED LAYOUT */
+        .game-board-layout { /* New main container for game board screen */
+            display: flex;
+            flex-direction: row-reverse; /* Sidebar on the right */
+            width: 100%;
+            gap: 1.5rem;
+        }
+
+        .game-board-main-content { /* Container for scores and grid */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .game-board-sidebar { /* Sidebar for logo and end button */
+            width: 200px; /* Adjust as needed */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .game-board-sidebar .logo-display-area {
+             margin-bottom: 1rem; /* Reset margin if needed */
+        }
+         .game-board-sidebar #endGameFromBoardBtn {
+            width: 100%; /* Make button full width of sidebar */
+        }
+
+
+        .game-board-container .team-scores { /* Scores at the top */
             display: flex;
             justify-content: space-around;
             margin-bottom: 1.5rem; 
             width: 100%;
+            order: -1; /* Move scores to the top of the main content flex container */
         }
         .game-board-container .team-score-card {
             background-color: #f9fafb; 
-            padding: 1rem 1.5rem; 
+            padding: 0.75rem 1rem; /* Adjusted padding */
             border-radius: 0.75rem; 
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
             width: 45%; 
             text-align: center;
+            border-top-width: 8px; /* Thick top border with team color */
+            border-top-style: solid;
         }
         .game-board-container .team-score-card h3 {
-            font-size: 1.125rem; 
+            font-size: 1rem; /* Adjusted font size */
             font-weight: 600;
-            margin-bottom: 0.5rem; 
+            margin-bottom: 0.25rem; 
         }
         .game-board-container .team-score-card p {
-            font-size: 2rem; 
+            font-size: 1.75rem; /* Adjusted font size */
             font-weight: 700;
             color: #1f2937; 
         }
         .game-board-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 1.5rem; 
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 1rem; 
             width: 100%;
+            margin: 0 auto; /* Center the grid if it's narrower than container */
         }
 
         .game-category-item-new { 
@@ -250,7 +281,7 @@
             padding: 0.75rem;
             border-radius: 0.75rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            min-height: 180px; 
+            min-height: 200px; /* Adjusted to match central block */
         }
 
         .points-column {
@@ -271,16 +302,16 @@
             border-radius: 0.5rem;
             padding: 0.5rem;
             width: 150px; 
-            height: 160px; 
+            height: 200px; /* Adjusted height */
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             text-align: center;
         }
 
-        .category-image-block-img-container {
+        .category-image-block-img-container { /* Blue background container for image */
             width: 100%;
-            height: 100px; 
+            height: 150px; /* Container height to match image */
             background-color: #E0F2FE; 
-            border-radius: 0.375rem;
+            border-radius: 0.5rem; /* Match image radius */
             overflow: hidden;
             margin-bottom: 0.5rem;
             display: flex;
@@ -288,10 +319,11 @@
             justify-content: center;
         }
 
-        .category-image-block img {
+        .category-image-block img { /* The actual image */
             width: 100%;
-            height: 100%;
+            height: 150px; /* Explicit height for the image */
             object-fit: cover;
+            border-radius: 0.5rem; /* Rounded corners for the image itself */
         }
 
         .category-image-block-name {
@@ -458,25 +490,29 @@
 
     <div id="gameBoardContainer" class="page-container hidden">
         <div class="game-board-container">
-            <div id="logoAreaTriggerGameBoard" class="logo-display-area mb-4">
-                <div><img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png" alt="شعار سين جيم" class="logo-img mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/180x80/FFC371/FFFFFF?text=Logo+Error';"></div>
-                <div class="name-wrapper"><div id="nameDisplayGameBoard" class="editable-name">نسخة خبزة</div></div>
+            <div class="game-board-layout">
+                <div class="game-board-main-content">
+                    <div class="team-scores">
+                        <div class="team-score-card" id="boardTeam1ScoreCard">
+                            <h3 id="boardTeam1NameDisplay">الفريق الأول</h3>
+                            <p id="boardTeam1ScoreDisplay">0</p>
+                        </div>
+                        <div class="team-score-card" id="boardTeam2ScoreCard">
+                            <h3 id="boardTeam2NameDisplay">الفريق الثاني</h3>
+                            <p id="boardTeam2ScoreDisplay">0</p>
+                        </div>
+                    </div>
+                    <div id="gameBoardGrid" class="game-board-grid">
+                        </div>
+                </div>
+                <div class="game-board-sidebar">
+                    <div id="logoAreaTriggerGameBoard" class="logo-display-area">
+                        <div><img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png" alt="شعار سين جيم" class="logo-img mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/180x80/FFC371/FFFFFF?text=Logo+Error';"></div>
+                        <div class="name-wrapper"><div id="nameDisplayGameBoard" class="editable-name">نسخة خبزة</div></div>
+                    </div>
+                    <button id="endGameFromBoardBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg">إنهاء اللعبة والعودة للإعدادات</button>
+                </div>
             </div>
-
-            <div class="team-scores">
-                <div class="team-score-card" id="boardTeam1ScoreCard">
-                    <h3 id="boardTeam1NameDisplay">الفريق الأول</h3>
-                    <p id="boardTeam1ScoreDisplay">0</p>
-                </div>
-                <div class="team-score-card" id="boardTeam2ScoreCard">
-                    <h3 id="boardTeam2NameDisplay">الفريق الثاني</h3>
-                    <p id="boardTeam2ScoreDisplay">0</p>
-                </div>
-            </div>
-
-            <div id="gameBoardGrid" class="game-board-grid">
-                </div>
-             <button id="endGameFromBoardBtn" class="mt-8 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg">إنهاء اللعبة والعودة للإعدادات</button>
         </div>
     </div>
 
@@ -741,6 +777,10 @@
                 team1DisplayHeader.style.borderBottomColor = team1Color;
                 team2DisplayHeader.textContent = team2Name;
                 team2DisplayHeader.style.borderBottomColor = team2Color;
+
+                // Update score card border colors on game board
+                if(boardTeam1ScoreCard) boardTeam1ScoreCard.style.borderTopColor = team1Color;
+                if(boardTeam2ScoreCard) boardTeam2ScoreCard.style.borderTopColor = team2Color;
             };
             [team1NameInput, team1ColorInput, team2NameInput, team2ColorInput].forEach(input => {
                 input.addEventListener('input', handleTeamDataChange);
@@ -765,7 +805,7 @@
 
         function navigateToGameBoardScreen() {
             showPage('gameBoardContainer');
-            updateTeamScoresOnBoard();
+            updateTeamScoresOnBoard(); // This will also set the border colors
             populateGameBoardGrid();
         }
 
@@ -1029,21 +1069,21 @@
         // --- Scoring Logic ---
         function updateTeamScoresOnBoard() {
             boardTeam1NameDisplay.textContent = team1NameInput.value.trim() || "الفريق الأول";
-            boardTeam1ScoreCard.style.borderColor = team1ColorInput.value;
+            boardTeam1ScoreCard.style.borderTopColor = team1ColorInput.value; // Apply team color to top border
             boardTeam1ScoreDisplay.textContent = team1Score;
 
             boardTeam2NameDisplay.textContent = team2NameInput.value.trim() || "الفريق الثاني";
-            boardTeam2ScoreCard.style.borderColor = team2ColorInput.value;
+            boardTeam2ScoreCard.style.borderTopColor = team2ColorInput.value; // Apply team color to top border
             boardTeam2ScoreDisplay.textContent = team2Score;
         }
 
         function updateTeamScoresOnQuestionScreen() {
             questionTeam1NameDisplay.textContent = team1NameInput.value.trim() || "الفريق الأول";
-            questionTeam1ScoreCard.style.borderColor = team1ColorInput.value;
+            // questionTeam1ScoreCard.style.borderColor = team1ColorInput.value; // Not strictly needed here if design is simpler
             questionTeam1ScoreDisplay.textContent = team1Score;
 
             questionTeam2NameDisplay.textContent = team2NameInput.value.trim() || "الفريق الثاني";
-            questionTeam2ScoreCard.style.borderColor = team2ColorInput.value;
+            // questionTeam2ScoreCard.style.borderColor = team2ColorInput.value; // Not strictly needed here
             questionTeam2ScoreDisplay.textContent = team2Score;
         }
 
