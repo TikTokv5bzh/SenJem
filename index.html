@@ -380,7 +380,8 @@
         .question-display-sidebar .logo-display-area {
             margin-bottom: 0.5rem;
         }
-        .question-display-sidebar .team-award-btn {
+        .question-display-sidebar .team-award-btn, 
+        .question-display-sidebar #changeQuestionBtn { /* Combined style for similar buttons */
             width: 100%;
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
@@ -391,7 +392,8 @@
             border: none;
             text-align: center;
         }
-        .question-display-sidebar .team-award-btn:active {
+        .question-display-sidebar .team-award-btn:active,
+        .question-display-sidebar #changeQuestionBtn:active {
             transform: scale(0.98);
         }
         .question-display-sidebar #showAnswerBtn { 
@@ -400,6 +402,13 @@
             padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 600;
         }
          .question-display-sidebar #showAnswerBtn:hover { background-color: #2563eb; }
+         .question-display-sidebar #changeQuestionBtn {
+            background-color: #f59e0b; /* Amber color for change question */
+         }
+         .question-display-sidebar #changeQuestionBtn:hover {
+            background-color: #d97706; /* Darker amber on hover */
+         }
+
         .question-display-container .team-scores { 
              display: flex;
              justify-content: space-around;
@@ -569,6 +578,7 @@
                     <button id="awardTeam1Btn" class="team-award-btn">الفريق الأول</button>
                     <button id="awardTeam2Btn" class="team-award-btn">الفريق الثاني</button>
                     <button id="showAnswerBtn">إظهار الإجابة</button>
+                    <button id="changeQuestionBtn">تغيير السؤال</button> 
                 </div>
             </div>
         </div>
@@ -661,6 +671,7 @@
         const awardTeam1Btn = document.getElementById('awardTeam1Btn');
         const awardTeam2Btn = document.getElementById('awardTeam2Btn');
         const backToBoardBtn = document.getElementById('backToBoardBtn');
+        const changeQuestionBtn = document.getElementById('changeQuestionBtn'); // New Button
 
 
         // Game Data & State
@@ -685,6 +696,7 @@
         let team2Score = 0;
         let currentQuestionData = null; 
         let answeredQuestions = {}; 
+        let slotQuestionAssignment = {}; // Stores { "catId_points_side": questionArrayIndex }
 
         // --- Alert Function ---
         function showAlert(title, message) {
@@ -711,6 +723,7 @@
         async function loadQuestionsForCategories(categoryIds) {
             questionsData = {}; 
             answeredQuestions = {}; 
+            slotQuestionAssignment = {}; // Reset assignments
             let allFilesLoadedSuccessfully = true;
             const loadingPromises = categoryIds.map(async (catId) => {
                 const categoryInfo = allAvailableCategories.find(c => c.id === catId);
@@ -727,27 +740,21 @@
                             categoryId: catId,
                             categoryName: categoryFileData.categoryName || categoryDisplayName,
                             imageUrl: categoryInfo.imageUrl,
-                            questionsByPointLevel: {} // Changed from questions to questionsByPointLevel
+                            questionsByPointLevel: {} 
                         };
                         
                         const allQsInFileForCategory = categoryFileData.questions;
 
                         POINTS_LEVELS.forEach(level => {
-                            // Filter questions from the file that match the current point level
-                            const matchingQsForLevel = allQsInFileForCategory.filter(q => q.points === level);
-                            
-                            // Assign to left and right slots
-                            const leftQuestion = matchingQsForLevel[0] || { questionText: "سؤال غير متوفر", answerText: "إجابة غير متوفرة", points: level, unavailable: true };
-                            const rightQuestion = matchingQsForLevel[1] || { questionText: "سؤال غير متوفر", answerText: "إجابة غير متوفرة", points: level, unavailable: true };
-                            
-                            // Ensure points property is set correctly, especially for fallbacks
-                            leftQuestion.points = level;
-                            rightQuestion.points = level;
-
-                            questionsData[catId].questionsByPointLevel[level] = {
-                                left: leftQuestion,
-                                right: rightQuestion
-                            };
+                            // Store all questions for this category and point level as an array
+                            const questionsForLevel = allQsInFileForCategory.filter(q => q.points === level);
+                            if (questionsForLevel.length > 0) {
+                                questionsData[catId].questionsByPointLevel[level] = questionsForLevel;
+                            } else {
+                                // Add a placeholder if no questions for this level
+                                questionsData[catId].questionsByPointLevel[level] = [{ questionText: "سؤال غير متوفر", answerText: "إجابة غير متوفرة", points: level, unavailable: true }];
+                                console.warn(`No questions found for level ${level} in category ${catId}. Assigning unavailable placeholder.`);
+                            }
                         });
 
                     } else throw new Error(`تنسيق ملف "${catId}.json" غير صحيح.`);
@@ -871,6 +878,7 @@
                 selectedCategoryIds = [];
                 questionsData = {};
                 answeredQuestions = {};
+                slotQuestionAssignment = {};
                 populateCategorySelectionUI(); 
                 updateSelectionCounter(); 
                 removeEndGameListeners();
@@ -938,6 +946,7 @@
                 const categoryItemNew = document.createElement('div');
                 categoryItemNew.classList.add('game-category-item-new');
 
+                // Left Column
                 const leftPointsColumn = document.createElement('div');
                 leftPointsColumn.classList.add('points-column');
                 POINTS_LEVELS.forEach(points => {
@@ -946,8 +955,9 @@
                     pointBubble.textContent = points;
                     pointBubble.dataset.categoryId = category.categoryId;
                     pointBubble.dataset.points = points;
-                    // Unique ID for this specific bubble (left side)
                     const bubbleId = `${category.categoryId}_${points}_left`;
+                    slotQuestionAssignment[bubbleId] = slotQuestionAssignment[bubbleId] ?? 0; // Default to first question index
+
                     if (answeredQuestions[bubbleId]) { 
                         pointBubble.classList.add('answered');
                     } else {
@@ -956,6 +966,7 @@
                     leftPointsColumn.appendChild(pointBubble);
                 });
 
+                // Image Block
                 const imageBlock = document.createElement('div');
                 imageBlock.classList.add('category-image-block');
                 imageBlock.innerHTML = `
@@ -965,6 +976,7 @@
                     <div class="category-image-block-name">${category.categoryName}</div>
                 `;
 
+                // Right Column
                 const rightPointsColumn = document.createElement('div');
                 rightPointsColumn.classList.add('points-column');
                  POINTS_LEVELS.forEach(points => {
@@ -973,8 +985,10 @@
                     pointBubble.textContent = points;
                     pointBubble.dataset.categoryId = category.categoryId;
                     pointBubble.dataset.points = points;
-                    // Unique ID for this specific bubble (right side)
                     const bubbleId = `${category.categoryId}_${points}_right`;
+                    const questionPool = questionsData[category.categoryId]?.questionsByPointLevel[points] || [];
+                    slotQuestionAssignment[bubbleId] = slotQuestionAssignment[bubbleId] ?? (questionPool.length > 1 ? 1 : 0); // Default to second or first
+
                      if (answeredQuestions[bubbleId]) { 
                         pointBubble.classList.add('answered');
                     } else {
@@ -991,14 +1005,24 @@
             });
         }
 
-        function handlePointSelection(event, side) { // side is 'left' or 'right'
+        function handlePointSelection(event, side) { 
             const categoryId = event.target.dataset.categoryId;
             const points = parseInt(event.target.dataset.points);
+            const slotId = `${categoryId}_${points}_${side}`;
             
-            // Fetch the question based on side from the new structure
-            const questionDetails = questionsData[categoryId]?.questionsByPointLevel[points]?.[side];
+            const questionPool = questionsData[categoryId]?.questionsByPointLevel[points] || [];
+            let questionArrayIndex = slotQuestionAssignment[slotId];
 
-            const answeredQuestionId = `${categoryId}_${points}_${side}`; 
+            if (questionPool.length === 0 || questionArrayIndex === undefined || questionArrayIndex >= questionPool.length) {
+                 // This case should ideally be prevented by populateGameBoardGrid or question loading
+                customAlertCloseBtn.classList.remove('hidden');
+                showAlert("سؤال غير متوفر", "عذراً، هذا السؤال غير متوفر حالياً أو حدث خطأ.");
+                event.target.classList.add('answered'); 
+                answeredQuestions[slotId] = true; 
+                return;
+            }
+
+            const questionDetails = questionPool[questionArrayIndex];
 
             if (questionDetails && !questionDetails.unavailable) {
                 currentQuestionData = {
@@ -1008,15 +1032,17 @@
                     questionText: questionDetails.questionText,
                     answerText: questionDetails.answerText,
                     element: event.target, 
-                    answeredId: answeredQuestionId 
-                    // side is implicitly handled by fetching the correct questionDetails
+                    answeredId: slotId, // This is the ID for the *slot*
+                    questionArrayIndex: questionArrayIndex,
+                    side: side,
+                    slotId: slotId // Keep track of the specific slot
                 };
                 navigateToQuestionDisplayScreen();
             } else {
                 customAlertCloseBtn.classList.remove('hidden');
                 showAlert("سؤال غير متوفر", "عذراً، هذا السؤال غير متوفر حالياً.");
                 event.target.classList.add('answered'); 
-                answeredQuestions[answeredQuestionId] = true; 
+                answeredQuestions[slotId] = true; 
             }
         }
 
@@ -1027,35 +1053,80 @@
                 currentCategoryNameDisplay.textContent = "خطأ";
                 currentPointsDisplay.textContent = "النقاط: 0";
                 currentAnswerDisplay.classList.add('hidden');
+                changeQuestionBtn.disabled = true;
                 return;
             }
             currentCategoryNameDisplay.textContent = currentQuestionData.categoryName;
             currentPointsDisplay.textContent = `النقاط: ${currentQuestionData.points}`;
             currentQuestionDisplay.textContent = currentQuestionData.questionText;
             currentAnswerDisplay.textContent = currentQuestionData.answerText;
-            currentAnswerDisplay.classList.add('hidden'); // Answer is hidden initially
-            showAnswerBtn.disabled = false; // Enable show answer button
-            awardTeam1Btn.disabled = true;  // Disable award buttons until answer is shown
+            currentAnswerDisplay.classList.add('hidden'); 
+            showAnswerBtn.disabled = false; 
+            awardTeam1Btn.disabled = true;  
             awardTeam2Btn.disabled = true; 
+            changeQuestionBtn.disabled = false; // Enable change question button initially
         }
 
         showAnswerBtn.addEventListener('click', () => {
             if (currentQuestionData) {
                 currentAnswerDisplay.classList.remove('hidden');
-                showAnswerBtn.disabled = true; // Disable after showing
-                awardTeam1Btn.disabled = false; // Enable awarding points
+                showAnswerBtn.disabled = true; 
+                awardTeam1Btn.disabled = false; 
                 awardTeam2Btn.disabled = false;
+                changeQuestionBtn.disabled = true; // Disable change question when answer is shown
             }
         });
+        
+        changeQuestionBtn.addEventListener('click', () => {
+            if (!currentQuestionData || showAnswerBtn.disabled) { // Don't change if no question or answer shown
+                return;
+            }
+
+            const { categoryId, points, slotId, questionArrayIndex } = currentQuestionData;
+            const questionPool = questionsData[categoryId]?.questionsByPointLevel[points] || [];
+
+            if (questionPool.length <= 1) {
+                customAlertCloseBtn.classList.remove('hidden');
+                showAlert("تنبيه", "لا توجد أسئلة أخرى متاحة لهذا الخيار.");
+                changeQuestionBtn.disabled = true; // No other questions to change to
+                return;
+            }
+
+            let newQuestionIndex = (questionArrayIndex + 1) % questionPool.length;
+            
+            // Update the assignment for this slot
+            slotQuestionAssignment[slotId] = newQuestionIndex;
+            const newQuestionDetails = questionPool[newQuestionIndex];
+
+            currentQuestionData.questionText = newQuestionDetails.questionText;
+            currentQuestionData.answerText = newQuestionDetails.answerText;
+            currentQuestionData.questionArrayIndex = newQuestionIndex; // Update index in current data
+
+            displaySelectedQuestion(); // Refresh the display with the new question
+            // Keep changeQuestionBtn enabled if there are still other questions in the pool (after this change)
+            const nextPotentialIndex = (newQuestionIndex + 1) % questionPool.length;
+            if (nextPotentialIndex === slotQuestionAssignment[slotId] && questionPool.length > 1) { // Cycled through all unique
+                 // If after this change, the next one would be the same, means we only have 1 distinct left.
+                 // This logic might need refinement if we want to strictly prevent re-showing the exact same question
+                 // before all others in the pool for this slot are shown.
+                 // For now, if pool > 1, it just picks the next.
+            }
+             if (questionPool.length <= 1 || ((newQuestionIndex + 1) % questionPool.length === slotQuestionAssignment[slotId] && questionPool.length === 2 && newQuestionIndex !== slotQuestionAssignment[slotId])) {
+                // If only one question in pool, or if pool has 2 and we just picked the other one
+                // This condition is tricky. Simpler: if pool.length > 1, it's likely there's another.
+                // A more robust check: count unique questions available for this slot.
+            }
+
+
+        });
+
 
         backToBoardBtn.addEventListener('click', () => {
             if (currentQuestionData && currentQuestionData.element && currentQuestionData.answeredId) {
-                // Only mark the question as answered on the board IF the answer was revealed
-                if (showAnswerBtn.disabled) { // showAnswerBtn is disabled when the answer IS visible
+                if (showAnswerBtn.disabled) { 
                     currentQuestionData.element.classList.add('answered');
                     answeredQuestions[currentQuestionData.answeredId] = true;
                 }
-                // If the answer was not shown, the point bubble on the board remains active
             }
             
             if (checkAllQuestionsAnswered()) {
@@ -1066,9 +1137,9 @@
         });
         
         function checkAllQuestionsAnswered() {
-            const totalPossibleQuestions = Object.keys(questionsData).length * POINTS_LEVELS.length * 2; // 2 sides
+            const totalPossibleSlots = Object.keys(questionsData).length * POINTS_LEVELS.length * 2; // 2 slots (left/right)
             const answeredCount = Object.keys(answeredQuestions).length;
-            return answeredCount >= totalPossibleQuestions;
+            return answeredCount >= totalPossibleSlots;
         }
 
         function showGameEndSummary() {
@@ -1099,6 +1170,7 @@
                 selectedCategoryIds = [];
                 questionsData = {};
                 answeredQuestions = {};
+                slotQuestionAssignment = {};
                 populateCategorySelectionUI();
                 updateSelectionCounter();
                 if(okBtn) okBtn.removeEventListener('click', okHandler); 
@@ -1137,6 +1209,7 @@
                 showAlert("نقاط!", `تم إضافة ${currentQuestionData.points} نقطة لـ ${team1NameInput.value || 'الفريق الأول'}.`);
                 awardTeam1Btn.disabled = true;
                 awardTeam2Btn.disabled = true;
+                changeQuestionBtn.disabled = true; 
             } else if (!showAnswerBtn.disabled) {
                  customAlertCloseBtn.classList.remove('hidden');
                  showAlert("تنبيه", "يجب إظهار الإجابة أولاً قبل منح النقاط.");
@@ -1152,6 +1225,7 @@
                 showAlert("نقاط!", `تم إضافة ${currentQuestionData.points} نقطة لـ ${team2NameInput.value || 'الفريق الثاني'}.`);
                 awardTeam1Btn.disabled = true;
                 awardTeam2Btn.disabled = true;
+                changeQuestionBtn.disabled = true;
             } else if (!showAnswerBtn.disabled) {
                  customAlertCloseBtn.classList.remove('hidden');
                  showAlert("تنبيه", "يجب إظهار الإجابة أولاً قبل منح النقاط.");
@@ -1179,6 +1253,7 @@
                 team1Score = 0; 
                 team2Score = 0;
                 answeredQuestions = {}; 
+                slotQuestionAssignment = {}; // Ensure this is reset
                 navigateToGameBoardScreen();
             } else {
                 customAlertCloseBtn.classList.remove('hidden');
