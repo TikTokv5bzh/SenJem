@@ -1,7 +1,6 @@
 [
   {
-    "id": "تقنية",
-    "name": "تقنية",
+    "categoryName": "تقنية",
     "questions": [
       {
         "points": 100,
