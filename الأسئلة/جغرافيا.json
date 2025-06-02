@@ -1,7 +1,6 @@
 [
   {
-    "id": "جغرافيا",
-    "name": "جغرافيا",
+    "categoryName": "جغرافيا",
     "questions": [
       {
         "points": 100,
