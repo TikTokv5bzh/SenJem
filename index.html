@@ -163,10 +163,10 @@
             height: 48px; padding: 0.25rem;
         }
         
-        /* Category Selection Styling (Setup Screen) - REVERTED to simpler cards */
+        /* Category Selection Styling (Setup Screen) */
         .category-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); /* Aim for ~100px content width + padding */
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
             gap: 1rem; 
             margin-bottom: 1.5rem;
         }
@@ -174,12 +174,12 @@
             background-color: #fff; 
             border: 3px solid transparent; 
             border-radius: 0.75rem;
-            padding: 0.5rem; /* Padding for content inside the card */
+            padding: 0.5rem; 
             cursor: pointer; 
             transition: all 0.2s ease-in-out;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             text-align: center;
-            width: 100%; /* Take width from grid column */
+            width: 100%; 
             box-sizing: border-box;
         }
         .category-item:hover {
@@ -192,37 +192,34 @@
         }
         .category-item img { 
             width: 100%; 
-            height: 150px; /* Requested height */
+            height: 150px; 
             object-fit: cover; 
             border-radius: 0.5rem; 
             margin-bottom: 0.5rem; 
         }
-        .category-item p { /* Name text in setup screen card */
+        .category-item p { 
             font-size: 0.8rem; 
             font-weight: 500;
             color: #374151;
             overflow-wrap: break-word;
             line-height: 1.2;
         }
-        /* END of Category Selection Styling */
 
 
         .hidden { display: none !important; }
 
-        /* Game Board Screen Styles - UPDATED LAYOUT */
+        /* Game Board Screen Styles */
         .game-board-layout { 
             display: flex;
             flex-direction: row-reverse; 
             width: 100%;
             gap: 1.5rem;
         }
-
         .game-board-main-content { 
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        
         .game-board-sidebar { 
             width: 200px; 
             display: flex;
@@ -236,8 +233,6 @@
          .game-board-sidebar #endGameFromBoardBtn {
             width: 100%; 
         }
-
-
         .game-board-container .team-scores { 
             display: flex;
             justify-content: space-around;
@@ -268,11 +263,10 @@
         .game-board-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr); 
-            gap: 0.5rem;  /* Reduced gap between category items */
+            gap: 0.5rem;  
             width: 100%;
             margin: 0 auto; 
         }
-
         .game-category-item-new { 
             display: flex;
             align-items: center; 
@@ -284,7 +278,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             min-height: 200px; 
         }
-
         .points-column {
             display: flex;
             flex-direction: column;
@@ -293,7 +286,6 @@
             gap: 0.5rem; 
             height: 200px; 
         }
-
         .category-image-block { 
             display: flex;
             flex-direction: column;
@@ -307,7 +299,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             text-align: center;
         }
-
         .category-image-block-img-container { 
             width: 100%;
             height: 150px; 
@@ -318,14 +309,12 @@
             align-items: center;
             justify-content: center;
         }
-
         .category-image-block img { 
             width: 100%;
             height: 150px; 
             object-fit: cover;
             border-radius: 0.5rem; 
         }
-
         .category-image-block-name {
             width: 100%;
             background-color: #FDBA74; 
@@ -338,7 +327,6 @@
             border-bottom-right-radius: 0.75rem; 
             margin-top: 0.5rem; 
         }
-
         .point-bubble-side { 
             background-color: rgb(255, 120, 0); 
             color: white;
@@ -369,8 +357,7 @@
             box-shadow: none;
         }
 
-
-        /* Question Display Screen Styles - UPDATED LAYOUT */
+        /* Question Display Screen Styles */
         .question-display-layout { 
             display: flex;
             flex-direction: row-reverse; 
@@ -413,8 +400,6 @@
             padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 600;
         }
          .question-display-sidebar #showAnswerBtn:hover { background-color: #2563eb; }
-
-
         .question-display-container .team-scores { 
              display: flex;
              justify-content: space-around;
@@ -437,7 +422,6 @@
         .question-display-container .team-score-card p { 
             font-size: 1.5rem; font-weight: 700; color: #1f2937;
         }
-
         .question-display-container .current-category-name {
             font-size: 1.5rem; 
             font-weight: 700;
@@ -477,7 +461,7 @@
             color: #15803d; 
             line-height: 1.6;
         }
-        .question-display-container .game-controls { /* For back to board button */
+        .question-display-container .game-controls { 
             margin-top: 1rem;
             width: 100%;
             display: flex;
@@ -691,7 +675,7 @@
             { id: 'أفلام', name: 'أفلام ومسلسلات', imageUrl: 'https://www.ts3a.com/wp-content/uploads/2016/09/%D8%A7%D9%84%D8%B3%D9%8A%D9%86%D9%85%D8%A7-%D9%88%D8%A7%D9%84%D9%88%D8%A7%D9%82%D8%B9.jpg' },
             { id: 'عامة', name: 'معلومات عامة', imageUrl: 'https://api.robquiz.com/storage/survey/surveys_17324735257725.jfif' },
             { id: 'دين', name: 'دين', imageUrl: 'https://media.elbalad.news/2024/10/large/877/3/805.jpg' },
-            { id: 'تقنية', name: 'تقنية', imageUrl: 'https://cdn.arageek.com/magazine/2021/04/encyclopedia-%D8%AA%D8%B9%D8%B1%D9%8A%D9%81-%D8%AA%D9%82%D9%86%D9%8A%D8%A9-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA.jpg' }
+            { id: 'تقنية', name: 'تقنية', imageUrl: 'https://cdn.arageek.com/magazine/2021/04/encyclopedia-%D8%AA%D8%B9%D8%B1%D9%8A%D9%81-%D8%AA%D9%82%D9%8A%D8%A9-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA.jpg' }
         ];
         let selectedCategoryIds = [];
         const MAX_CATEGORIES = 6;
@@ -714,7 +698,7 @@
                  customAlertCloseBtn.classList.remove('hidden');
             }
         });
-        customAlert.addEventListener('click', (event) => { // Click outside modal content
+        customAlert.addEventListener('click', (event) => { 
             if (event.target === customAlert) {
                  customAlert.classList.remove('active');
                  if (!customAlertMessage.querySelector('button#confirmEndGameYes') && !customAlertMessage.querySelector('button#gameEndOkBtn')) {
@@ -733,7 +717,7 @@
                 const categoryDisplayName = categoryInfo ? categoryInfo.name : catId;
                 try {
                     const encodedCatId = encodeURIComponent(catId);
-                    const filePath = `الأسئلة/${encodedCatId}.json`; // Path to local JSON files
+                    const filePath = `الأسئلة/${encodedCatId}.json`;
                     const response = await fetch(filePath);
                     if (!response.ok) throw new Error(`ملف "${catId}.json" غير موجود (الحالة: ${response.status}) at path ${filePath}`);
                     const categoryFileData = await response.json();
@@ -743,20 +727,27 @@
                             categoryId: catId,
                             categoryName: categoryFileData.categoryName || categoryDisplayName,
                             imageUrl: categoryInfo.imageUrl,
-                            questions: {}
+                            questionsByPointLevel: {} // Changed from questions to questionsByPointLevel
                         };
-                        const sortedQuestions = categoryFileData.questions.sort((a, b) => a.points - b.points);
                         
-                        POINTS_LEVELS.forEach((level, index) => {
-                            if (sortedQuestions[index]) {
-                                questionsData[catId].questions[level] = {
-                                    ...sortedQuestions[index], 
-                                    points: level 
-                                };
-                            } else {
-                                console.warn(`No question found for level ${level} (index ${index}) in category ${catId}. Assigning unavailable.`);
-                                questionsData[catId].questions[level] = { questionText: "سؤال غير متوفر", answerText: "إجابة غير متوفرة", points: level, unavailable: true };
-                            }
+                        const allQsInFileForCategory = categoryFileData.questions;
+
+                        POINTS_LEVELS.forEach(level => {
+                            // Filter questions from the file that match the current point level
+                            const matchingQsForLevel = allQsInFileForCategory.filter(q => q.points === level);
+                            
+                            // Assign to left and right slots
+                            const leftQuestion = matchingQsForLevel[0] || { questionText: "سؤال غير متوفر", answerText: "إجابة غير متوفرة", points: level, unavailable: true };
+                            const rightQuestion = matchingQsForLevel[1] || { questionText: "سؤال غير متوفر", answerText: "إجابة غير متوفرة", points: level, unavailable: true };
+                            
+                            // Ensure points property is set correctly, especially for fallbacks
+                            leftQuestion.points = level;
+                            rightQuestion.points = level;
+
+                            questionsData[catId].questionsByPointLevel[level] = {
+                                left: leftQuestion,
+                                right: rightQuestion
+                            };
                         });
 
                     } else throw new Error(`تنسيق ملف "${catId}.json" غير صحيح.`);
@@ -940,7 +931,7 @@
             startActualGameBtn.disabled = selectedCategoryIds.length !== MAX_CATEGORIES;
         }
 
-        // --- Game Board Population (NEW LAYOUT) ---
+        // --- Game Board Population ---
         function populateGameBoardGrid() {
             gameBoardGrid.innerHTML = ''; 
             Object.values(questionsData).forEach(category => {
@@ -955,7 +946,9 @@
                     pointBubble.textContent = points;
                     pointBubble.dataset.categoryId = category.categoryId;
                     pointBubble.dataset.points = points;
-                    if (answeredQuestions[`${category.categoryId}_${points}_left`]) { 
+                    // Unique ID for this specific bubble (left side)
+                    const bubbleId = `${category.categoryId}_${points}_left`;
+                    if (answeredQuestions[bubbleId]) { 
                         pointBubble.classList.add('answered');
                     } else {
                         pointBubble.addEventListener('click', (e) => handlePointSelection(e, 'left'));
@@ -980,14 +973,15 @@
                     pointBubble.textContent = points;
                     pointBubble.dataset.categoryId = category.categoryId;
                     pointBubble.dataset.points = points;
-                     if (answeredQuestions[`${category.categoryId}_${points}_right`]) { 
+                    // Unique ID for this specific bubble (right side)
+                    const bubbleId = `${category.categoryId}_${points}_right`;
+                     if (answeredQuestions[bubbleId]) { 
                         pointBubble.classList.add('answered');
                     } else {
                         pointBubble.addEventListener('click', (e) => handlePointSelection(e, 'right'));
                     }
                     rightPointsColumn.appendChild(pointBubble);
                 });
-
 
                 categoryItemNew.appendChild(leftPointsColumn);
                 categoryItemNew.appendChild(imageBlock);
@@ -997,12 +991,14 @@
             });
         }
 
-        function handlePointSelection(event, side) {
+        function handlePointSelection(event, side) { // side is 'left' or 'right'
             const categoryId = event.target.dataset.categoryId;
             const points = parseInt(event.target.dataset.points);
-            const questionDetails = questionsData[categoryId]?.questions[points]; 
+            
+            // Fetch the question based on side from the new structure
+            const questionDetails = questionsData[categoryId]?.questionsByPointLevel[points]?.[side];
 
-            const answeredQuestionId = `${categoryId}_${points}_${side}`;
+            const answeredQuestionId = `${categoryId}_${points}_${side}`; 
 
             if (questionDetails && !questionDetails.unavailable) {
                 currentQuestionData = {
@@ -1013,6 +1009,7 @@
                     answerText: questionDetails.answerText,
                     element: event.target, 
                     answeredId: answeredQuestionId 
+                    // side is implicitly handled by fetching the correct questionDetails
                 };
                 navigateToQuestionDisplayScreen();
             } else {
@@ -1036,27 +1033,31 @@
             currentPointsDisplay.textContent = `النقاط: ${currentQuestionData.points}`;
             currentQuestionDisplay.textContent = currentQuestionData.questionText;
             currentAnswerDisplay.textContent = currentQuestionData.answerText;
-            currentAnswerDisplay.classList.add('hidden');
-            showAnswerBtn.disabled = false;
-            awardTeam1Btn.disabled = true; 
+            currentAnswerDisplay.classList.add('hidden'); // Answer is hidden initially
+            showAnswerBtn.disabled = false; // Enable show answer button
+            awardTeam1Btn.disabled = true;  // Disable award buttons until answer is shown
             awardTeam2Btn.disabled = true; 
         }
 
         showAnswerBtn.addEventListener('click', () => {
             if (currentQuestionData) {
                 currentAnswerDisplay.classList.remove('hidden');
-                showAnswerBtn.disabled = true;
-                awardTeam1Btn.disabled = false;
+                showAnswerBtn.disabled = true; // Disable after showing
+                awardTeam1Btn.disabled = false; // Enable awarding points
                 awardTeam2Btn.disabled = false;
             }
         });
 
         backToBoardBtn.addEventListener('click', () => {
             if (currentQuestionData && currentQuestionData.element && currentQuestionData.answeredId) {
-                // Mark the question as answered regardless of whether the answer was shown
-                currentQuestionData.element.classList.add('answered');
-                answeredQuestions[currentQuestionData.answeredId] = true;
+                // Only mark the question as answered on the board IF the answer was revealed
+                if (showAnswerBtn.disabled) { // showAnswerBtn is disabled when the answer IS visible
+                    currentQuestionData.element.classList.add('answered');
+                    answeredQuestions[currentQuestionData.answeredId] = true;
+                }
+                // If the answer was not shown, the point bubble on the board remains active
             }
+            
             if (checkAllQuestionsAnswered()) {
                 showGameEndSummary();
             } else {
@@ -1065,7 +1066,7 @@
         });
         
         function checkAllQuestionsAnswered() {
-            const totalPossibleQuestions = Object.keys(questionsData).length * POINTS_LEVELS.length * 2; 
+            const totalPossibleQuestions = Object.keys(questionsData).length * POINTS_LEVELS.length * 2; // 2 sides
             const answeredCount = Object.keys(answeredQuestions).length;
             return answeredCount >= totalPossibleQuestions;
         }
