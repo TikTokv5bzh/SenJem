@@ -18,46 +18,50 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Align to top for scroll */
+            justify-content: flex-start; 
             margin: 0;
             padding: 1rem;
-            overflow-y: auto; /* Allow scrolling for content */
+            overflow-y: auto; 
         }
         .page-container {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Center content vertically within its container */
-            padding-bottom: 2rem; /* Space at the bottom */
+            justify-content: center; 
+            padding-bottom: 2rem; 
         }
-        .main-container, .game-setup-container, .game-play-container {
+        .main-container, .game-setup-container, .game-board-container, .question-display-container {
             background-color: #ffffff;
             padding: 2rem;
             border-radius: 1.5rem;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             text-align: center;
             width: 100%;
-            margin-top: 1rem; /* Add some top margin */
+            margin-top: 1rem; 
         }
         .main-container {
-             max-width: 400px;
+            max-width: 400px;
         }
         .game-setup-container {
             max-width: 700px;
         }
-        .game-play-container {
-            max-width: 800px; /* Wider for game elements */
+        .game-board-container { 
+            max-width: 98%; /* Wider for game elements */
+            lg:max-width: 1300px; /* Adjusted for new layout */
+        }
+        .question-display-container { 
+             max-width: 800px;
         }
         .logo-display-area {
-            padding: 1rem 0; /* Adjusted padding */
+            padding: 1rem 0; 
             border-radius: 1rem;
             position: relative;
             cursor: pointer;
             margin-bottom: 1rem;
         }
         .logo-img {
-            width: 180px; /* Slightly smaller for game screen */
+            width: 180px; 
             max-width: 100%;
             height: auto;
             border-radius: 0.5rem;
@@ -67,18 +71,18 @@
         }
         .name-wrapper {
             position: relative;
-            margin-top: -25px; /* Adjusted for smaller logo */
-            transform: translateX(-8px) rotate(-8deg); /* Adjusted */
+            margin-top: -25px; 
+            transform: translateX(-8px) rotate(-8deg); 
             z-index: 10;
         }
         .editable-name {
-            font-size: 1.2rem; /* Adjusted */
+            font-size: 1.2rem; 
             font-weight: 900;
             background-image: linear-gradient(to right, #FF6B6B, #F2994A);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            padding: 2px 6px; /* Adjusted */
+            padding: 2px 6px; 
             cursor: pointer;
             min-width: auto;
             display: inline-block;
@@ -126,12 +130,19 @@
         }
         .custom-alert-box h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: #333; }
         .custom-alert-box p { font-size: 1rem; color: #555; margin-bottom: 1.5rem; line-height: 1.6; }
-        .custom-alert-box button {
+        .custom-alert-box button { /* Default close button for alert */
             width: 100%; background-color: #FF6B6B; color: white; font-weight: 600;
             padding: 0.75rem; border-radius: 0.5rem; border: none;
             cursor: pointer; transition: background-color 0.2s ease;
         }
         .custom-alert-box button:hover { background-color: #E55A5A; }
+         /* Custom buttons within alert message */
+        .custom-alert-box p button.save-btn { background-color: #28a745; color: white; padding: 0.6rem 1rem; margin: 0 0.25rem;}
+        .custom-alert-box p button.save-btn:hover { background-color: #218838; }
+        .custom-alert-box p button.cancel-btn { background-color: #6c757d; color: white; padding: 0.6rem 1rem; margin: 0 0.25rem;}
+        .custom-alert-box p button.cancel-btn:hover { background-color: #5a6268; }
+
+
         .team-setup-card {
             background-color: #f9fafb; padding: 1.5rem; border-radius: 0.75rem;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
@@ -151,11 +162,11 @@
          .team-setup-card input[type="color"] {
             height: 48px; padding: 0.25rem;
         }
-        .category-grid {
+        .category-grid { 
             display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 1rem; margin-bottom: 1.5rem;
         }
-        .category-item {
+        .category-item { 
             background-color: #fff; border: 3px solid transparent; border-radius: 0.75rem;
             padding: 0.75rem; cursor: pointer; transition: all 0.2s ease-in-out;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: center;
@@ -166,98 +177,225 @@
         .category-item.selected {
             border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3);
         }
-        .category-item img {
-            width: 100%; height: 80px; object-fit: cover;
-            border-radius: 0.5rem; margin-bottom: 0.5rem;
+        .category-item img { 
+            width: 100%;
+            height: 150px; /* UPDATED HEIGHT */
+            object-fit: cover; 
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
         }
         .category-item p {
             font-size: 0.875rem; font-weight: 500; color: #374151; overflow-wrap: break-word;
         }
         .hidden { display: none !important; }
 
-        /* Game Play Screen Styles */
-        .game-play-container .team-scores {
+        /* Game Board Screen Styles - NEW LAYOUT */
+        .game-board-container .team-scores {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 1.5rem; /* 24px */
+            margin-bottom: 1.5rem; 
             width: 100%;
         }
-        .game-play-container .team-score-card {
-            background-color: #f9fafb; /* Light gray */
-            padding: 1rem 1.5rem; /* 16px 24px */
-            border-radius: 0.75rem; /* 12px */
+        .game-board-container .team-score-card {
+            background-color: #f9fafb; 
+            padding: 1rem 1.5rem; 
+            border-radius: 0.75rem; 
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            width: 45%; /* Each card takes up nearly half */
+            width: 45%; 
             text-align: center;
         }
-        .game-play-container .team-score-card h3 {
-            font-size: 1.125rem; /* 18px */
+        .game-board-container .team-score-card h3 {
+            font-size: 1.125rem; 
             font-weight: 600;
-            margin-bottom: 0.5rem; /* 8px */
+            margin-bottom: 0.5rem; 
         }
-        .game-play-container .team-score-card p {
-            font-size: 2rem; /* 32px */
+        .game-board-container .team-score-card p {
+            font-size: 2rem; 
             font-weight: 700;
-            color: #1f2937; /* Dark gray */
+            color: #1f2937; 
         }
-        .game-play-container .current-category-name {
-            font-size: 1.75rem; /* 28px */
+        .game-board-grid {
+            display: grid;
+            /* Adjust to fit 2 or 3 category items per row based on screen size */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* More flexible */
+            gap: 1.5rem; /* Increased gap */
+            margin-top: 1.5rem;
+            width: 100%;
+        }
+
+        .game-category-item-new { /* This is the main container for one category (image + points on sides) */
+            display: flex;
+            align-items: center; /* Vertically align points and image block */
+            justify-content: space-between; /* Pushes point columns to sides */
+            background-color: #F3F4F6; /* Light gray background for the whole item */
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            min-height: 180px; /* Ensure enough height for points and image */
+        }
+
+        .points-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around; /* Distribute points vertically */
+            align-items: center;
+            gap: 0.5rem; /* Gap between point bubbles */
+            height: 100%; /* Take full height of parent */
+        }
+
+        .category-image-block { /* The central block for image and name */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #FEF3C7; /* Light orange/yellow for the card itself */
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            width: 150px; /* Fixed width for the central image block */
+            height: 160px; /* Fixed height */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .category-image-block-img-container {
+            width: 100%;
+            height: 100px; /* Height for the image area */
+            background-color: #E0F2FE; /* Light blue for image background */
+            border-radius: 0.375rem;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-image-block img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-image-block-name {
+            width: 100%;
+            background-color: #FDBA74; /* Orange for name */
+            color: white;
+            font-weight: 600; /* Slightly less bold */
+            font-size: 0.875rem; /* Smaller font for name */
+            padding: 0.35rem;
+            border-radius: 0.375rem;
+            border-bottom-left-radius: 0.75rem; 
+            border-bottom-right-radius: 0.75rem; 
+        }
+
+        .point-bubble-side { /* Points on the side */
+            width: 50px; 
+            height: 50px;
+            background-color: #D1D5DB; /* Lighter gray for unselected points, as in example */
+            color: #1F2937; /* Darker text for points */
+            border-radius: 0.5rem; /* More squared-off, like example */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem; 
             font-weight: 700;
-            color: #111827; /* Even darker gray */
-            margin-bottom: 0.5rem; /* 8px */
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
-         .game-play-container .current-points-display {
-            font-size: 1.25rem; /* 20px */
+        .point-bubble-side:hover {
+            background-color: #9CA3AF; /* Darker gray on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+        .point-bubble-side.answered {
+            background-color: #6B7280; /* Darkest gray for answered */
+            color: #E5E7EB; /* Light text for answered */
+            cursor: not-allowed;
+            pointer-events: none; 
+            opacity: 0.7;
+        }
+
+
+        /* Question Display Screen Styles */
+        .question-display-container .team-scores { 
+             display: flex;
+             justify-content: space-around;
+             margin-bottom: 1.5rem;
+             width: 100%;
+        }
+        .question-display-container .team-score-card { 
+             background-color: #f9fafb;
+             padding: 1rem 1.5rem;
+             border-radius: 0.75rem;
+             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+             width: 45%;
+             text-align: center;
+        }
+         .question-display-container .team-score-card h3 { 
+            font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;
+        }
+        .question-display-container .team-score-card p { 
+            font-size: 2rem; font-weight: 700; color: #1f2937;
+        }
+
+        .question-display-container .current-category-name {
+            font-size: 1.75rem; 
+            font-weight: 700;
+            color: #111827; 
+            margin-bottom: 0.5rem; 
+        }
+         .question-display-container .current-points-display {
+            font-size: 1.25rem; 
             font-weight: 500;
-            color: #4b5563; /* Gray */
-            margin-bottom: 1.5rem; /* 24px */
+            color: #4b5563; 
+            margin-bottom: 1.5rem; 
         }
-        .game-play-container .question-area {
-            background-color: #e0f2fe; /* Light blue */
-            padding: 1.5rem; /* 24px */
-            border-radius: 0.75rem; /* 12px */
-            margin-bottom: 1.5rem; /* 24px */
-            min-height: 100px; /* Ensure some height */
+        .question-display-container .question-area {
+            background-color: #e0f2fe; 
+            padding: 1.5rem; 
+            border-radius: 0.75rem; 
+            margin-bottom: 1.5rem; 
+            min-height: 100px; 
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            font-size: 1.25rem; /* 20px */
+            font-size: 1.25rem; 
             font-weight: 500;
-            color: #0c4a6e; /* Darker blue */
+            color: #0c4a6e; 
             line-height: 1.6;
         }
-        .game-play-container .answer-area {
-            background-color: #dcfce7; /* Light green */
-            padding: 1.5rem; /* 24px */
-            border-radius: 0.75rem; /* 12px */
-            margin-bottom: 1.5rem; /* 24px */
-            font-size: 1.125rem; /* 18px */
+        .question-display-container .answer-area {
+            background-color: #dcfce7; 
+            padding: 1.5rem; 
+            border-radius: 0.75rem; 
+            margin-bottom: 1.5rem; 
+            font-size: 1.125rem; 
             font-weight: 600;
-            color: #15803d; /* Darker green */
+            color: #15803d; 
             line-height: 1.6;
         }
-        .game-play-container .game-controls button {
-            padding: 0.75rem 1.5rem; /* 12px 24px */
-            border-radius: 0.5rem; /* 8px */
+        .question-display-container .game-controls button {
+            padding: 0.75rem 1.5rem; 
+            border-radius: 0.5rem; 
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.1s ease;
             border: none;
-            margin: 0.5rem; /* 8px */
-            min-width: 150px; /* Ensure buttons have decent width */
+            margin: 0.5rem; 
+            min-width: 150px; 
         }
-        .game-play-container .game-controls button:active {
+        .question-display-container .game-controls button:active {
             transform: scale(0.98);
         }
-        #showAnswerBtn { background-color: #3b82f6; color: white; } /* Blue */
+        #showAnswerBtn { background-color: #3b82f6; color: white; } 
         #showAnswerBtn:hover { background-color: #2563eb; }
-        #changeQuestionBtn { background-color: #f97316; color: white; } /* Orange */
-        #changeQuestionBtn:hover { background-color: #ea580c; }
-        #awardTeam1Btn, #awardTeam2Btn { background-color: #16a34a; color: white; } /* Green */
+        #awardTeam1Btn, #awardTeam2Btn { background-color: #16a34a; color: white; } 
         #awardTeam1Btn:hover, #awardTeam2Btn:hover { background-color: #15803d; }
-        #backToSetupBtn { background-color: #6b7280; color: white; } /* Gray */
-        #backToSetupBtn:hover { background-color: #4b5563; }
+        #backToBoardBtn { background-color: #6b7280; color: white; } 
+        #backToBoardBtn:hover { background-color: #4b5563; }
+        #endGameBtn { background-color: #ef4444; color: white; } 
+        #endGameBtn:hover { background-color: #dc2626; }
 
     </style>
 </head>
@@ -299,21 +437,46 @@
         </div>
     </div>
 
-    <div id="gamePlayContainer" class="page-container hidden">
-        <div class="game-play-container">
-            <div id="logoAreaTriggerGamePlay" class="logo-display-area mb-4">
+    <div id="gameBoardContainer" class="page-container hidden">
+        <div class="game-board-container">
+            <div id="logoAreaTriggerGameBoard" class="logo-display-area mb-4">
                 <div><img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png" alt="شعار سين جيم" class="logo-img mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/180x80/FFC371/FFFFFF?text=Logo+Error';"></div>
-                <div class="name-wrapper"><div id="nameDisplayGamePlay" class="editable-name">نسخة خبزة</div></div>
+                <div class="name-wrapper"><div id="nameDisplayGameBoard" class="editable-name">نسخة خبزة</div></div>
             </div>
 
             <div class="team-scores">
-                <div class="team-score-card" id="team1ScoreCard">
-                    <h3 id="gameTeam1NameDisplay">الفريق الأول</h3>
-                    <p id="gameTeam1ScoreDisplay">0</p>
+                <div class="team-score-card" id="boardTeam1ScoreCard">
+                    <h3 id="boardTeam1NameDisplay">الفريق الأول</h3>
+                    <p id="boardTeam1ScoreDisplay">0</p>
                 </div>
-                <div class="team-score-card" id="team2ScoreCard">
-                    <h3 id="gameTeam2NameDisplay">الفريق الثاني</h3>
-                    <p id="gameTeam2ScoreDisplay">0</p>
+                <div class="team-score-card" id="boardTeam2ScoreCard">
+                    <h3 id="boardTeam2NameDisplay">الفريق الثاني</h3>
+                    <p id="boardTeam2ScoreDisplay">0</p>
+                </div>
+            </div>
+
+            <div id="gameBoardGrid" class="game-board-grid">
+                </div>
+             <button id="endGameFromBoardBtn" class="mt-8 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl text-lg shadow-lg">إنهاء اللعبة والعودة للإعدادات</button>
+        </div>
+    </div>
+
+
+    <div id="questionDisplayContainer" class="page-container hidden">
+        <div class="question-display-container">
+             <div id="logoAreaTriggerQuestionDisp" class="logo-display-area mb-4">
+                <div><img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png" alt="شعار سين جيم" class="logo-img mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/180x80/FFC371/FFFFFF?text=Logo+Error';"></div>
+                <div class="name-wrapper"><div id="nameDisplayQuestionDisp" class="editable-name">نسخة خبزة</div></div>
+            </div>
+
+            <div class="team-scores">
+                <div class="team-score-card" id="questionTeam1ScoreCard">
+                    <h3 id="questionTeam1NameDisplay">الفريق الأول</h3>
+                    <p id="questionTeam1ScoreDisplay">0</p>
+                </div>
+                <div class="team-score-card" id="questionTeam2ScoreCard">
+                    <h3 id="questionTeam2NameDisplay">الفريق الثاني</h3>
+                    <p id="questionTeam2ScoreDisplay">0</p>
                 </div>
             </div>
 
@@ -324,10 +487,9 @@
 
             <div class="game-controls mt-6 flex flex-wrap justify-center">
                 <button id="showAnswerBtn">إظهار الإجابة</button>
-                <button id="changeQuestionBtn">تغيير السؤال</button>
                 <button id="awardTeam1Btn">الفريق الأول استحق النقاط</button>
                 <button id="awardTeam2Btn">الفريق الثاني استحق النقاط</button>
-                <button id="backToSetupBtn" class="mt-4">العودة للإعدادات</button>
+                <button id="backToBoardBtn" class="mt-4">العودة إلى لوحة الأقسام</button>
             </div>
         </div>
     </div>
@@ -356,15 +518,20 @@
         // DOM Elements
         const initialPageContainer = document.getElementById('initialPageContainer');
         const gameSetupContainer = document.getElementById('gameSetupContainer');
-        const gamePlayContainer = document.getElementById('gamePlayContainer'); // New Game Play Page
+        const gameBoardContainer = document.getElementById('gameBoardContainer');
+        const questionDisplayContainer = document.getElementById('questionDisplayContainer');
+
         const navigateToSetupBtn = document.getElementById('navigateToSetupBtn');
 
         const nameDisplay = document.getElementById('nameDisplay');
         const nameDisplayGameSetup = document.getElementById('nameDisplayGameSetup');
-        const nameDisplayGamePlay = document.getElementById('nameDisplayGamePlay'); // Name on Game Play Page
+        const nameDisplayGameBoard = document.getElementById('nameDisplayGameBoard');
+        const nameDisplayQuestionDisp = document.getElementById('nameDisplayQuestionDisp');
+
         const logoAreaTrigger = document.getElementById('logoAreaTrigger');
         const logoAreaTriggerGameSetup = document.getElementById('logoAreaTriggerGameSetup');
-        const logoAreaTriggerGamePlay = document.getElementById('logoAreaTriggerGamePlay'); // Logo on Game Play Page
+        const logoAreaTriggerGameBoard = document.getElementById('logoAreaTriggerGameBoard');
+        const logoAreaTriggerQuestionDisp = document.getElementById('logoAreaTriggerQuestionDisp');
 
 
         const editModal = document.getElementById('editModal');
@@ -387,26 +554,37 @@
         const selectionCounter = document.getElementById('selectionCounter');
         const startActualGameBtn = document.getElementById('startActualGameBtn');
 
-        // Game Play DOM Elements
-        const gameTeam1NameDisplay = document.getElementById('gameTeam1NameDisplay');
-        const gameTeam1ScoreDisplay = document.getElementById('gameTeam1ScoreDisplay');
-        const team1ScoreCard = document.getElementById('team1ScoreCard');
-        const gameTeam2NameDisplay = document.getElementById('gameTeam2NameDisplay');
-        const gameTeam2ScoreDisplay = document.getElementById('gameTeam2ScoreDisplay');
-        const team2ScoreCard = document.getElementById('team2ScoreCard');
+        // Game Board DOM Elements
+        const boardTeam1NameDisplay = document.getElementById('boardTeam1NameDisplay');
+        const boardTeam1ScoreDisplay = document.getElementById('boardTeam1ScoreDisplay');
+        const boardTeam1ScoreCard = document.getElementById('boardTeam1ScoreCard'); 
+        const boardTeam2NameDisplay = document.getElementById('boardTeam2NameDisplay');
+        const boardTeam2ScoreDisplay = document.getElementById('boardTeam2ScoreDisplay');
+        const boardTeam2ScoreCard = document.getElementById('boardTeam2ScoreCard'); 
+        const gameBoardGrid = document.getElementById('gameBoardGrid');
+        const endGameFromBoardBtn = document.getElementById('endGameFromBoardBtn');
+
+
+        // Question Display DOM Elements
+        const questionTeam1NameDisplay = document.getElementById('questionTeam1NameDisplay');
+        const questionTeam1ScoreDisplay = document.getElementById('questionTeam1ScoreDisplay');
+        const questionTeam1ScoreCard = document.getElementById('questionTeam1ScoreCard'); 
+        const questionTeam2NameDisplay = document.getElementById('questionTeam2NameDisplay');
+        const questionTeam2ScoreDisplay = document.getElementById('questionTeam2ScoreDisplay');
+        const questionTeam2ScoreCard = document.getElementById('questionTeam2ScoreCard'); 
+
         const currentCategoryNameDisplay = document.getElementById('currentCategoryNameDisplay');
         const currentPointsDisplay = document.getElementById('currentPointsDisplay');
         const currentQuestionDisplay = document.getElementById('currentQuestionDisplay');
         const currentAnswerDisplay = document.getElementById('currentAnswerDisplay');
         const showAnswerBtn = document.getElementById('showAnswerBtn');
-        const changeQuestionBtn = document.getElementById('changeQuestionBtn');
         const awardTeam1Btn = document.getElementById('awardTeam1Btn');
         const awardTeam2Btn = document.getElementById('awardTeam2Btn');
-        const backToSetupBtn = document.getElementById('backToSetupBtn');
+        const backToBoardBtn = document.getElementById('backToBoardBtn');
 
 
         // Game Data & State
-        let questionsForSelectedGame = [];
+        let questionsData = {}; 
         const allAvailableCategories = [
             { id: 'تاريخ', name: 'تاريخ', imageUrl: 'https://i.pinimg.com/originals/48/1a/32/481a32f836ed64532deb0ce9010b26d5.jpg' },
             { id: 'جغرافيا', name: 'جغرافيا', imageUrl: 'https://www.edarabia.com/ar/wp-content/uploads/2018/09/3-basic-information-geography.jpg' },
@@ -421,27 +599,38 @@
         ];
         let selectedCategoryIds = [];
         const MAX_CATEGORIES = 6;
+        const POINTS_LEVELS = [100, 200, 300]; 
 
-        let currentGameCategoryIndex = 0; // Index in questionsForSelectedGame
-        let currentQuestionArrayIndex = 0; // Index within the category's questions array
         let team1Score = 0;
         let team2Score = 0;
-        let currentQuestionData = null; // To hold the current question object
+        let currentQuestionData = null; 
+        let answeredQuestions = {}; 
 
         // --- Alert Function ---
         function showAlert(title, message) {
             customAlertTitle.innerText = title;
-            customAlertMessage.innerText = message;
+            customAlertMessage.innerHTML = message; 
             customAlert.classList.add('active');
         }
-        customAlertCloseBtn.addEventListener('click', () => customAlert.classList.remove('active'));
-        customAlert.addEventListener('click', (event) => {
-            if (event.target === customAlert) customAlert.classList.remove('active');
+        customAlertCloseBtn.addEventListener('click', () => {
+            customAlert.classList.remove('active');
+             if (!customAlertMessage.querySelector('button#confirmEndGameYes') && !customAlertMessage.querySelector('button#gameEndOkBtn')) {
+                customAlertCloseBtn.classList.remove('hidden');
+            }
+        });
+        customAlert.addEventListener('click', (event) => { // Click outside modal content
+            if (event.target === customAlert) {
+                 customAlert.classList.remove('active');
+                 if (!customAlertMessage.querySelector('button#confirmEndGameYes') && !customAlertMessage.querySelector('button#gameEndOkBtn')) {
+                    customAlertCloseBtn.classList.remove('hidden');
+                }
+            }
         });
 
         // --- Load Questions for Selected Categories ---
         async function loadQuestionsForCategories(categoryIds) {
-            questionsForSelectedGame = [];
+            questionsData = {}; 
+            answeredQuestions = {}; 
             let allFilesLoadedSuccessfully = true;
             const loadingPromises = categoryIds.map(async (catId) => {
                 const categoryInfo = allAvailableCategories.find(c => c.id === catId);
@@ -450,73 +639,75 @@
                     const encodedCatId = encodeURIComponent(catId);
                     const filePath = `الأسئلة/${encodedCatId}.json`;
                     const response = await fetch(filePath);
-                    if (!response.ok) throw new Error(`ملف "${catId}.json" غير موجود (الحالة: ${response.status})`);
-                    const categoryData = await response.json();
-                    if (categoryData && categoryData.questions && Array.isArray(categoryData.questions)) {
-                        questionsForSelectedGame.push({
+                    if (!response.ok) throw new Error(`ملف "${catId}.json" غير موجود (الحالة: ${response.status}) at path ${filePath}`);
+                    const categoryFileData = await response.json();
+
+                    if (categoryFileData && categoryFileData.questions && Array.isArray(categoryFileData.questions)) {
+                        questionsData[catId] = {
                             categoryId: catId,
-                            categoryName: categoryData.categoryName || categoryDisplayName,
-                            questions: categoryData.questions.sort((a,b) => a.points - b.points) // Sort by points
+                            categoryName: categoryFileData.categoryName || categoryDisplayName,
+                            imageUrl: categoryInfo.imageUrl,
+                            questions: {}
+                        };
+                        const sortedQuestions = categoryFileData.questions.sort((a, b) => a.points - b.points);
+                        
+                        POINTS_LEVELS.forEach((level, index) => {
+                            if (sortedQuestions[index]) {
+                                questionsData[catId].questions[level] = {
+                                    ...sortedQuestions[index], 
+                                    points: level 
+                                };
+                            } else {
+                                console.warn(`No question found for level ${level} (index ${index}) in category ${catId}. Assigning unavailable.`);
+                                questionsData[catId].questions[level] = { questionText: "سؤال غير متوفر", answerText: "إجابة غير متوفرة", points: level, unavailable: true };
+                            }
                         });
+
                     } else throw new Error(`تنسيق ملف "${catId}.json" غير صحيح.`);
                 } catch (error) {
                     console.error(`Error loading questions for ${catId}:`, error);
+                    customAlertCloseBtn.classList.remove('hidden');
                     showAlert("خطأ تحميل الأسئلة", `لم نتمكن من تحميل قسم "${categoryDisplayName}". ${error.message}`);
                     allFilesLoadedSuccessfully = false;
                 }
             });
             await Promise.all(loadingPromises);
-            // Sort selected categories based on the order in allAvailableCategories for consistency
-            questionsForSelectedGame.sort((a, b) => {
-                return selectedCategoryIds.indexOf(a.categoryId) - selectedCategoryIds.indexOf(b.categoryId);
+            const orderedQuestionsData = {};
+            selectedCategoryIds.forEach(id => {
+                if (questionsData[id]) {
+                    orderedQuestionsData[id] = questionsData[id];
+                }
             });
-            return allFilesLoadedSuccessfully;
+            questionsData = orderedQuestionsData;
+
+            return allFilesLoadedSuccessfully && Object.keys(questionsData).length === MAX_CATEGORIES;
         }
+
 
         // --- Logo Name Management with localStorage ---
         function updateLogoNameUI(name) {
              if (nameDisplay) nameDisplay.textContent = name;
              if (nameDisplayGameSetup) nameDisplayGameSetup.textContent = name;
-             if (nameDisplayGamePlay) nameDisplayGamePlay.textContent = name; // Update on game play screen too
+             if (nameDisplayGameBoard) nameDisplayGameBoard.textContent = name;
+             if (nameDisplayQuestionDisp) nameDisplayQuestionDisp.textContent = name;
              nameModalInput.value = name;
              document.title = `لعبة سين جيم ${name}`;
         }
         function saveLogoNameToStorage(name) {
-            try {
-                localStorage.setItem('gameVersionName', name);
-                console.log("Logo name saved to localStorage:", name);
-            } catch (e) {
-                console.error("Failed to save name to localStorage:", e);
-            }
+            try { localStorage.setItem('gameVersionName', name); } catch (e) { console.error("Failed to save name:", e); }
         }
         function loadNameFromStorage() {
-            let storedName = "نسخة خبزة"; // Default
-            try {
-                const nameFromStorage = localStorage.getItem('gameVersionName');
-                if (nameFromStorage) {
-                    storedName = nameFromStorage;
-                }
-            } catch (e) {
-                console.error("Failed to load name from localStorage:", e);
-            }
+            let storedName = "نسخة خبزة";
+            try { const nameFromStorage = localStorage.getItem('gameVersionName'); if (nameFromStorage) storedName = nameFromStorage; } catch (e) { console.error("Failed to load name:", e); }
             updateLogoNameUI(storedName);
         }
-        function openEditModal() {
-            nameModalInput.value = nameDisplay.textContent || "خبزة";
-            editModal.classList.add('active');
-            nameModalInput.focus();
-        }
+        function openEditModal() { nameModalInput.value = nameDisplay.textContent || "خبزة"; editModal.classList.add('active'); nameModalInput.focus(); }
         function closeEditModal() { editModal.classList.remove('active'); }
-        saveModalBtn.addEventListener('click', () => {
-            const newText = nameModalInput.value.trim() || "خبزة";
-            updateLogoNameUI(newText);
-            saveLogoNameToStorage(newText);
-            closeEditModal();
-        });
+        saveModalBtn.addEventListener('click', () => { const newText = nameModalInput.value.trim() || "خبزة"; updateLogoNameUI(newText); saveLogoNameToStorage(newText); closeEditModal(); });
         cancelModalBtn.addEventListener('click', closeEditModal);
         editModal.addEventListener('click', (event) => { if (event.target === editModal) closeEditModal(); });
-        [logoAreaTrigger, logoAreaTriggerGameSetup, logoAreaTriggerGamePlay].forEach(trigger => {
-            if(trigger) trigger.addEventListener('dblclick', openEditModal);
+        [logoAreaTrigger, logoAreaTriggerGameSetup, logoAreaTriggerGameBoard, logoAreaTriggerQuestionDisp].forEach(trigger => {
+             if(trigger) trigger.addEventListener('dblclick', openEditModal);
         });
 
 
@@ -535,51 +726,77 @@
             [team1NameInput, team1ColorInput, team2NameInput, team2ColorInput].forEach(input => {
                 input.addEventListener('input', handleTeamDataChange);
             });
-            handleTeamDataChange();
+            handleTeamDataChange(); 
         }
 
         // --- Page Navigation ---
+        function showPage(pageId) {
+            [initialPageContainer, gameSetupContainer, gameBoardContainer, questionDisplayContainer].forEach(container => {
+                container.classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+            const currentLogoName = nameDisplay.textContent || "نسخة خبزة";
+            updateLogoNameUI(currentLogoName);
+        }
+
         navigateToSetupBtn.addEventListener('click', () => {
-            initialPageContainer.classList.add('hidden');
-            gameSetupContainer.classList.remove('hidden');
-            gamePlayContainer.classList.add('hidden');
+            showPage('gameSetupContainer');
             populateCategorySelectionUI();
-            if (nameDisplayGameSetup && nameDisplay) nameDisplayGameSetup.textContent = nameDisplay.textContent;
         });
 
-        function navigateToGamePlayScreen() {
-            gameSetupContainer.classList.add('hidden');
-            gamePlayContainer.classList.remove('hidden');
-            initialPageContainer.classList.add('hidden');
+        function navigateToGameBoardScreen() {
+            showPage('gameBoardContainer');
+            updateTeamScoresOnBoard();
+            populateGameBoardGrid();
+        }
 
-            // Setup team display on game screen
-            gameTeam1NameDisplay.textContent = team1NameInput.value.trim() || "الفريق الأول";
-            team1ScoreCard.style.borderColor = team1ColorInput.value; // Example: use color
-            gameTeam1ScoreDisplay.textContent = team1Score;
-
-            gameTeam2NameDisplay.textContent = team2NameInput.value.trim() || "الفريق الثاني";
-            team2ScoreCard.style.borderColor = team2ColorInput.value; // Example: use color
-            gameTeam2ScoreDisplay.textContent = team2Score;
-            
-            if (nameDisplayGamePlay && nameDisplay) nameDisplayGamePlay.textContent = nameDisplay.textContent;
-
-
-            // Initialize with the first question of the first category
-            currentGameCategoryIndex = 0;
-            currentQuestionArrayIndex = 0;
-            displayCurrentQuestion();
+        function navigateToQuestionDisplayScreen() {
+            showPage('questionDisplayContainer');
+            updateTeamScoresOnQuestionScreen();
+            displaySelectedQuestion();
         }
         
-        backToSetupBtn.addEventListener('click', () => {
-            gamePlayContainer.classList.add('hidden');
-            gameSetupContainer.classList.remove('hidden');
-            // Reset scores or game state if needed
-            team1Score = 0;
-            team2Score = 0;
+        endGameFromBoardBtn.addEventListener('click', () => {
+            customAlertCloseBtn.classList.add('hidden'); 
+            showAlert("تأكيد إنهاء اللعبة", 
+                "هل أنت متأكد أنك تريد إنهاء اللعبة الحالية والعودة إلى شاشة الإعدادات؟ ستفقد جميع النقاط الحالية.<br><br> <button id='confirmEndGameYes' class='modal-buttons save-btn mr-2'>نعم, قم بالإنهاء</button> <button id='confirmEndGameNo' class='modal-buttons cancel-btn'>لا, استمر باللعب</button>"
+            );
+
+            const yesBtn = document.getElementById('confirmEndGameYes');
+            const noBtn = document.getElementById('confirmEndGameNo');
+
+            const yesHandler = () => {
+                customAlert.classList.remove('active');
+                customAlertCloseBtn.classList.remove('hidden'); 
+                showPage('gameSetupContainer');
+                team1Score = 0;
+                team2Score = 0;
+                selectedCategoryIds = [];
+                questionsData = {};
+                answeredQuestions = {};
+                populateCategorySelectionUI(); 
+                updateSelectionCounter(); 
+                removeEndGameListeners();
+            };
+
+            const noHandler = () => {
+                customAlert.classList.remove('active');
+                customAlertCloseBtn.classList.remove('hidden'); 
+                removeEndGameListeners();
+            };
+            
+            // Add event listeners only if buttons exist
+            if(yesBtn) yesBtn.addEventListener('click', yesHandler);
+            if(noBtn) noBtn.addEventListener('click', noHandler);
+
+            function removeEndGameListeners() {
+                if(yesBtn) yesBtn.removeEventListener('click', yesHandler);
+                if(noBtn) noBtn.removeEventListener('click', noHandler);
+            }
         });
 
 
-        // --- Category Selection UI Logic ---
+        // --- Category Selection UI Logic (Setup Screen) ---
         function populateCategorySelectionUI() {
             categorySelectionArea.innerHTML = '';
             allAvailableCategories.forEach(cat => {
@@ -602,7 +819,10 @@
                 if (selectedCategoryIds.length < MAX_CATEGORIES) {
                     selectedCategoryIds.push(categoryId);
                     element.classList.add('selected');
-                } else showAlert("تنبيه", `يمكنك اختيار ${MAX_CATEGORIES} أقسام فقط.`);
+                } else {
+                     customAlertCloseBtn.classList.remove('hidden'); 
+                    showAlert("تنبيه", `يمكنك اختيار ${MAX_CATEGORIES} أقسام فقط.`);
+                }
             }
             updateSelectionCounter();
         }
@@ -611,77 +831,225 @@
             startActualGameBtn.disabled = selectedCategoryIds.length !== MAX_CATEGORIES;
         }
 
-        // --- Game Play Logic ---
-        function displayCurrentQuestion() {
-            if (questionsForSelectedGame.length === 0 || !questionsForSelectedGame[currentGameCategoryIndex]) {
-                currentQuestionDisplay.textContent = "لا توجد أسئلة محملة لهذا القسم.";
-                currentCategoryNameDisplay.textContent = "خطأ في القسم";
+        // --- Game Board Population (NEW LAYOUT) ---
+        function populateGameBoardGrid() {
+            gameBoardGrid.innerHTML = ''; 
+            Object.values(questionsData).forEach(category => {
+                const categoryItemNew = document.createElement('div');
+                categoryItemNew.classList.add('game-category-item-new');
+
+                // Left Points Column
+                const leftPointsColumn = document.createElement('div');
+                leftPointsColumn.classList.add('points-column');
+                POINTS_LEVELS.forEach(points => {
+                    const pointBubble = document.createElement('div');
+                    pointBubble.classList.add('point-bubble-side');
+                    pointBubble.textContent = points;
+                    pointBubble.dataset.categoryId = category.categoryId;
+                    pointBubble.dataset.points = points;
+                    if (answeredQuestions[`${category.categoryId}_${points}_left`]) { // Unique ID for left
+                        pointBubble.classList.add('answered');
+                    } else {
+                        pointBubble.addEventListener('click', (e) => handlePointSelection(e, 'left'));
+                    }
+                    leftPointsColumn.appendChild(pointBubble);
+                });
+
+                // Central Image Block
+                const imageBlock = document.createElement('div');
+                imageBlock.classList.add('category-image-block');
+                imageBlock.innerHTML = `
+                    <div class="category-image-block-img-container">
+                        <img src="${category.imageUrl}" alt="${category.categoryName}" onerror="this.onerror=null; this.src='https://placehold.co/100x100/CCCCCC/FFFFFF?text=${encodeURIComponent(category.categoryName)}';">
+                    </div>
+                    <div class="category-image-block-name">${category.categoryName}</div>
+                `;
+
+                // Right Points Column
+                const rightPointsColumn = document.createElement('div');
+                rightPointsColumn.classList.add('points-column');
+                 POINTS_LEVELS.forEach(points => {
+                    const pointBubble = document.createElement('div');
+                    pointBubble.classList.add('point-bubble-side');
+                    pointBubble.textContent = points;
+                    pointBubble.dataset.categoryId = category.categoryId;
+                    pointBubble.dataset.points = points;
+                     if (answeredQuestions[`${category.categoryId}_${points}_right`]) { // Unique ID for right
+                        pointBubble.classList.add('answered');
+                    } else {
+                        pointBubble.addEventListener('click', (e) => handlePointSelection(e, 'right'));
+                    }
+                    rightPointsColumn.appendChild(pointBubble);
+                });
+
+
+                categoryItemNew.appendChild(leftPointsColumn);
+                categoryItemNew.appendChild(imageBlock);
+                categoryItemNew.appendChild(rightPointsColumn);
+                
+                gameBoardGrid.appendChild(categoryItemNew);
+            });
+        }
+
+        // Modified to handle side for unique answered tracking
+        function handlePointSelection(event, side) {
+            const categoryId = event.target.dataset.categoryId;
+            const points = parseInt(event.target.dataset.points);
+            const questionDetails = questionsData[categoryId]?.questions[points]; // Assumes one question per point value in category
+
+            // Create a unique ID for the answered question including the side
+            const answeredQuestionId = `${categoryId}_${points}_${side}`;
+
+            if (questionDetails && !questionDetails.unavailable) {
+                currentQuestionData = {
+                    categoryId: categoryId,
+                    categoryName: questionsData[categoryId].categoryName,
+                    points: points, 
+                    questionText: questionDetails.questionText,
+                    answerText: questionDetails.answerText,
+                    element: event.target, // The clicked point bubble
+                    answeredId: answeredQuestionId // Store the unique ID
+                };
+                navigateToQuestionDisplayScreen();
+            } else {
+                customAlertCloseBtn.classList.remove('hidden');
+                showAlert("سؤال غير متوفر", "عذراً، هذا السؤال غير متوفر حالياً.");
+                event.target.classList.add('answered'); 
+                answeredQuestions[answeredQuestionId] = true; // Mark this specific bubble as answered
+            }
+        }
+
+        // --- Question Display Logic ---
+        function displaySelectedQuestion() {
+            if (!currentQuestionData) {
+                currentQuestionDisplay.textContent = "خطأ: لا يوجد سؤال محدد.";
+                currentCategoryNameDisplay.textContent = "خطأ";
                 currentPointsDisplay.textContent = "النقاط: 0";
                 currentAnswerDisplay.classList.add('hidden');
-                currentQuestionData = null;
                 return;
             }
-
-            const category = questionsForSelectedGame[currentGameCategoryIndex];
-            if (!category.questions || category.questions.length === 0) {
-                 currentQuestionDisplay.textContent = `لا توجد أسئلة في قسم "${category.categoryName}".`;
-                 currentCategoryNameDisplay.textContent = category.categoryName;
-                 currentPointsDisplay.textContent = "النقاط: 0";
-                 currentAnswerDisplay.classList.add('hidden');
-                 currentQuestionData = null;
-                 return;
-            }
-            
-            // Ensure currentQuestionArrayIndex is within bounds
-            if (currentQuestionArrayIndex >= category.questions.length) {
-                currentQuestionArrayIndex = 0; // Loop back or handle end of category
-            }
-            if (currentQuestionArrayIndex < 0) { // Should not happen with current logic but good check
-                currentQuestionArrayIndex = 0;
-            }
-
-            currentQuestionData = category.questions[currentQuestionArrayIndex];
-
-            currentCategoryNameDisplay.textContent = category.categoryName;
-            currentQuestionDisplay.textContent = currentQuestionData.questionText;
+            currentCategoryNameDisplay.textContent = currentQuestionData.categoryName;
             currentPointsDisplay.textContent = `النقاط: ${currentQuestionData.points}`;
+            currentQuestionDisplay.textContent = currentQuestionData.questionText;
             currentAnswerDisplay.textContent = currentQuestionData.answerText;
-            currentAnswerDisplay.classList.add('hidden'); // Hide answer initially
-            showAnswerBtn.disabled = false; // Enable show answer button
+            currentAnswerDisplay.classList.add('hidden');
+            showAnswerBtn.disabled = false;
+            awardTeam1Btn.disabled = true; 
+            awardTeam2Btn.disabled = true; 
         }
 
         showAnswerBtn.addEventListener('click', () => {
             if (currentQuestionData) {
                 currentAnswerDisplay.classList.remove('hidden');
-                showAnswerBtn.disabled = true; // Disable after showing
+                showAnswerBtn.disabled = true;
+                awardTeam1Btn.disabled = false;
+                awardTeam2Btn.disabled = false;
             }
         });
 
-        changeQuestionBtn.addEventListener('click', () => {
-            if (questionsForSelectedGame.length === 0 || !questionsForSelectedGame[currentGameCategoryIndex] || !questionsForSelectedGame[currentGameCategoryIndex].questions || questionsForSelectedGame[currentGameCategoryIndex].questions.length === 0) {
-                showAlert("لا أسئلة", "لا توجد أسئلة لتغييرها في هذا القسم.");
-                return;
+        backToBoardBtn.addEventListener('click', () => {
+            if (currentQuestionData && currentQuestionData.element && currentQuestionData.answeredId) {
+                currentQuestionData.element.classList.add('answered');
+                answeredQuestions[currentQuestionData.answeredId] = true; // Use the unique answeredId
             }
-            const currentCategoryQuestions = questionsForSelectedGame[currentGameCategoryIndex].questions;
-            currentQuestionArrayIndex = (currentQuestionArrayIndex + 1) % currentCategoryQuestions.length;
-            displayCurrentQuestion();
+            if (checkAllQuestionsAnswered()) {
+                showGameEndSummary();
+            } else {
+                navigateToGameBoardScreen();
+            }
         });
         
+        function checkAllQuestionsAnswered() {
+            // Now we have 2 sets of points per category
+            const totalPossibleQuestions = Object.keys(questionsData).length * POINTS_LEVELS.length * 2; 
+            const answeredCount = Object.keys(answeredQuestions).length;
+            return answeredCount >= totalPossibleQuestions;
+        }
+
+        function showGameEndSummary() {
+            let winnerMessage;
+            const team1FinalName = team1NameInput.value.trim() || "الفريق الأول";
+            const team2FinalName = team2NameInput.value.trim() || "الفريق الثاني";
+
+            if (team1Score > team2Score) {
+                winnerMessage = `الفريق "${team1FinalName}" هو الفائز!`;
+            } else if (team2Score > team1Score) {
+                winnerMessage = `الفريق "${team2FinalName}" هو الفائز!`;
+            } else {
+                winnerMessage = "انتهت اللعبة بالتعادل!";
+            }
+            
+            customAlertCloseBtn.classList.add('hidden');
+            showAlert("انتهت اللعبة!", 
+                `النتيجة النهائية:<br>${team1FinalName}: ${team1Score} نقطة<br>${team2FinalName}: ${team2Score} نقطة<br><br>${winnerMessage}<br><br><button id='gameEndOkBtn' class='modal-buttons save-btn'>موافق والعودة للإعدادات</button>`
+            );
+            
+            const okBtn = document.getElementById('gameEndOkBtn');
+            const okHandler = () => {
+                customAlert.classList.remove('active');
+                customAlertCloseBtn.classList.remove('hidden');
+                showPage('gameSetupContainer');
+                team1Score = 0;
+                team2Score = 0;
+                selectedCategoryIds = [];
+                questionsData = {};
+                answeredQuestions = {};
+                populateCategorySelectionUI();
+                updateSelectionCounter();
+                if(okBtn) okBtn.removeEventListener('click', okHandler); // Clean up
+            };
+            if(okBtn) okBtn.addEventListener('click', okHandler);
+        }
+
+
+        // --- Scoring Logic ---
+        function updateTeamScoresOnBoard() {
+            boardTeam1NameDisplay.textContent = team1NameInput.value.trim() || "الفريق الأول";
+            boardTeam1ScoreCard.style.borderColor = team1ColorInput.value;
+            boardTeam1ScoreDisplay.textContent = team1Score;
+
+            boardTeam2NameDisplay.textContent = team2NameInput.value.trim() || "الفريق الثاني";
+            boardTeam2ScoreCard.style.borderColor = team2ColorInput.value;
+            boardTeam2ScoreDisplay.textContent = team2Score;
+        }
+
+        function updateTeamScoresOnQuestionScreen() {
+            questionTeam1NameDisplay.textContent = team1NameInput.value.trim() || "الفريق الأول";
+            questionTeam1ScoreCard.style.borderColor = team1ColorInput.value;
+            questionTeam1ScoreDisplay.textContent = team1Score;
+
+            questionTeam2NameDisplay.textContent = team2NameInput.value.trim() || "الفريق الثاني";
+            questionTeam2ScoreCard.style.borderColor = team2ColorInput.value;
+            questionTeam2ScoreDisplay.textContent = team2Score;
+        }
+
         awardTeam1Btn.addEventListener('click', () => {
-            if (currentQuestionData) {
+            if (currentQuestionData && showAnswerBtn.disabled) { 
                 team1Score += currentQuestionData.points;
-                gameTeam1ScoreDisplay.textContent = team1Score;
-                // Optionally, move to next question or category, or disable buttons
-                // For now, just awards points. User can change question manually.
-                showAlert("نقاط!", `تم إضافة ${currentQuestionData.points} نقطة للفريق الأول.`);
+                updateTeamScoresOnQuestionScreen();
+                updateTeamScoresOnBoard(); 
+                customAlertCloseBtn.classList.remove('hidden');
+                showAlert("نقاط!", `تم إضافة ${currentQuestionData.points} نقطة لـ ${team1NameInput.value || 'الفريق الأول'}.`);
+                awardTeam1Btn.disabled = true;
+                awardTeam2Btn.disabled = true;
+            } else if (!showAnswerBtn.disabled) {
+                 customAlertCloseBtn.classList.remove('hidden');
+                 showAlert("تنبيه", "يجب إظهار الإجابة أولاً قبل منح النقاط.");
             }
         });
 
         awardTeam2Btn.addEventListener('click', () => {
-            if (currentQuestionData) {
+            if (currentQuestionData && showAnswerBtn.disabled) { 
                 team2Score += currentQuestionData.points;
-                gameTeam2ScoreDisplay.textContent = team2Score;
-                showAlert("نقاط!", `تم إضافة ${currentQuestionData.points} نقطة للفريق الثاني.`);
+                updateTeamScoresOnQuestionScreen();
+                updateTeamScoresOnBoard(); 
+                customAlertCloseBtn.classList.remove('hidden');
+                showAlert("نقاط!", `تم إضافة ${currentQuestionData.points} نقطة لـ ${team2NameInput.value || 'الفريق الثاني'}.`);
+                awardTeam1Btn.disabled = true;
+                awardTeam2Btn.disabled = true;
+            } else if (!showAnswerBtn.disabled) {
+                 customAlertCloseBtn.classList.remove('hidden');
+                 showAlert("تنبيه", "يجب إظهار الإجابة أولاً قبل منح النقاط.");
             }
         });
 
@@ -689,8 +1057,9 @@
         // --- Start Actual Game Button ---
         startActualGameBtn.addEventListener('click', async () => {
             if (selectedCategoryIds.length !== MAX_CATEGORIES) {
-                 showAlert("خطأ", `الرجاء اختيار ${MAX_CATEGORIES} أقسام لبدء اللعبة.`);
-                 return;
+                customAlertCloseBtn.classList.remove('hidden');
+                showAlert("خطأ", `الرجاء اختيار ${MAX_CATEGORIES} أقسام لبدء اللعبة.`);
+                return;
             }
             startActualGameBtn.textContent = "جاري تحميل الأسئلة...";
             startActualGameBtn.disabled = true;
@@ -700,16 +1069,15 @@
             startActualGameBtn.textContent = "بدء اللعبة";
             startActualGameBtn.disabled = selectedCategoryIds.length !== MAX_CATEGORIES;
 
-            if (success && questionsForSelectedGame.length > 0) {
-                // Ensure we have exactly MAX_CATEGORIES loaded, or handle partial loads if desired
-                if (questionsForSelectedGame.length < MAX_CATEGORIES) {
-                     showAlert("تحذير تحميل", `تم تحميل أسئلة لـ ${questionsForSelectedGame.length} قسم فقط. تأكد من وجود جميع ملفات الأقسام المختارة.`);
-                }
-                team1Score = 0; // Reset scores
+
+            if (success) {
+                team1Score = 0; 
                 team2Score = 0;
-                navigateToGamePlayScreen();
+                answeredQuestions = {}; 
+                navigateToGameBoardScreen();
             } else {
-                showAlert("خطأ فادح", "لم يتم تحميل أي أسئلة. يرجى التحقق من ملفات الأسئلة في مجلد 'الأسئلة' ومن الـ console.");
+                customAlertCloseBtn.classList.remove('hidden');
+                showAlert("خطأ فادح", "لم يتم تحميل جميع أسئلة الأقسام المختارة بنجاح. يرجى التحقق من ملفات الأسئلة في مجلد 'الأسئلة' ومن الـ console. قد تحتاج لإعادة اختيار الأقسام.");
             }
         });
 
@@ -717,6 +1085,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             setupTeamInputListeners();
             loadNameFromStorage();
+            showPage('initialPageContainer'); 
         });
     </script>
 </body>
