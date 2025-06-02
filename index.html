@@ -711,14 +711,14 @@
         customAlertCloseBtn.addEventListener('click', () => {
             customAlert.classList.remove('active');
              if (!customAlertMessage.querySelector('button#confirmEndGameYes') && !customAlertMessage.querySelector('button#gameEndOkBtn')) {
-                customAlertCloseBtn.classList.remove('hidden');
+                 customAlertCloseBtn.classList.remove('hidden');
             }
         });
         customAlert.addEventListener('click', (event) => { // Click outside modal content
             if (event.target === customAlert) {
                  customAlert.classList.remove('active');
                  if (!customAlertMessage.querySelector('button#confirmEndGameYes') && !customAlertMessage.querySelector('button#gameEndOkBtn')) {
-                    customAlertCloseBtn.classList.remove('hidden');
+                     customAlertCloseBtn.classList.remove('hidden');
                 }
             }
         });
@@ -733,7 +733,7 @@
                 const categoryDisplayName = categoryInfo ? categoryInfo.name : catId;
                 try {
                     const encodedCatId = encodeURIComponent(catId);
-                    const filePath = `الأسئلة/${encodedCatId}.json`;
+                    const filePath = `الأسئلة/${encodedCatId}.json`; // Path to local JSON files
                     const response = await fetch(filePath);
                     if (!response.ok) throw new Error(`ملف "${catId}.json" غير موجود (الحالة: ${response.status}) at path ${filePath}`);
                     const categoryFileData = await response.json();
@@ -1053,11 +1053,9 @@
 
         backToBoardBtn.addEventListener('click', () => {
             if (currentQuestionData && currentQuestionData.element && currentQuestionData.answeredId) {
-                // Only mark as answered if the answer was shown
-                if (showAnswerBtn.disabled) { 
-                    currentQuestionData.element.classList.add('answered');
-                    answeredQuestions[currentQuestionData.answeredId] = true;
-                }
+                // Mark the question as answered regardless of whether the answer was shown
+                currentQuestionData.element.classList.add('answered');
+                answeredQuestions[currentQuestionData.answeredId] = true;
             }
             if (checkAllQuestionsAnswered()) {
                 showGameEndSummary();
