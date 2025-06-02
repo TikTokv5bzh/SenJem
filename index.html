@@ -50,8 +50,8 @@
             max-width: 98%; 
             lg:max-width: 1300px; 
         }
-        .question-display-container { 
-             max-width: 800px;
+        .question-display-container { /* Container for the question screen */
+             max-width: 900px; /* Increased width for new layout */
         }
         .logo-display-area {
             padding: 1rem 0; 
@@ -210,76 +210,76 @@
         .hidden { display: none !important; }
 
         /* Game Board Screen Styles - UPDATED LAYOUT */
-        .game-board-layout { /* New main container for game board screen */
+        .game-board-layout { 
             display: flex;
-            flex-direction: row-reverse; /* Sidebar on the right */
+            flex-direction: row-reverse; 
             width: 100%;
             gap: 1.5rem;
         }
 
-        .game-board-main-content { /* Container for scores and grid */
+        .game-board-main-content { 
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         
-        .game-board-sidebar { /* Sidebar for logo and end button */
-            width: 200px; /* Adjust as needed */
+        .game-board-sidebar { 
+            width: 200px; 
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 1rem;
         }
         .game-board-sidebar .logo-display-area {
-             margin-bottom: 1rem; /* Reset margin if needed */
+             margin-bottom: 1rem; 
         }
          .game-board-sidebar #endGameFromBoardBtn {
-            width: 100%; /* Make button full width of sidebar */
+            width: 100%; 
         }
 
 
-        .game-board-container .team-scores { /* Scores at the top */
+        .game-board-container .team-scores { 
             display: flex;
             justify-content: space-around;
             margin-bottom: 1.5rem; 
             width: 100%;
-            order: -1; /* Move scores to the top of the main content flex container */
+            order: -1; 
         }
         .game-board-container .team-score-card {
             background-color: #f9fafb; 
-            padding: 0.75rem 1rem; /* Adjusted padding */
+            padding: 0.75rem 1rem; 
             border-radius: 0.75rem; 
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
             width: 45%; 
             text-align: center;
-            border-top-width: 8px; /* Thick top border with team color */
+            border-top-width: 8px; 
             border-top-style: solid;
         }
         .game-board-container .team-score-card h3 {
-            font-size: 1rem; /* Adjusted font size */
+            font-size: 1rem; 
             font-weight: 600;
             margin-bottom: 0.25rem; 
         }
         .game-board-container .team-score-card p {
-            font-size: 1.75rem; /* Adjusted font size */
+            font-size: 1.75rem; 
             font-weight: 700;
             color: #1f2937; 
         }
         .game-board-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columns */
-            gap: 1rem; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 0.75rem;  /* Reduced gap between category items */
             width: 100%;
-            margin: 0 auto; /* Center the grid if it's narrower than container */
+            margin: 0 auto; 
         }
 
         .game-category-item-new { 
             display: flex;
             align-items: center; 
-            justify-content: center; /* Center items and use gap for spacing */
-            gap: 6px; /* Small gap between point columns and image block */
+            justify-content: center; 
+            gap: 0.25rem; /* Reduced gap for closer points */
             background-color: #F3F4F6; 
-            padding: 0.75rem;
+            padding: 0.5rem; /* Reduced padding */
             border-radius: 0.75rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             min-height: 200px; 
@@ -291,7 +291,7 @@
             justify-content: space-around; 
             align-items: center;
             gap: 0.5rem; 
-            height: 200px; /* Match height of category-image-block */
+            height: 200px; 
         }
 
         .category-image-block { 
@@ -340,11 +340,11 @@
         }
 
         .point-bubble-side { 
-            background-color: rgb(255, 120, 0); /* Orange like the example image */
+            background-color: rgb(255, 120, 0); 
             color: white;
             height: 36px; 
             padding: 4px 12px; 
-            border-radius: 18px; /* Pill shape */
+            border-radius: 18px; 
             font-size: 1rem; 
             font-weight: bold; 
             text-align: center;
@@ -357,12 +357,12 @@
             justify-content: center;
         }
         .point-bubble-side:hover {
-            background-color: rgb(255, 150, 50); /* Lighter orange on hover */
+            background-color: rgb(255, 150, 50); 
             transform: scale(1.05);
         }
         .point-bubble-side.answered {
-            background-color: #A9A9A9; /* Dark Gray for answered */
-            color: #D3D3D3; /* Light Gray text */
+            background-color: #A9A9A9; 
+            color: #D3D3D3; 
             cursor: not-allowed;
             pointer-events: none; 
             opacity: 0.8;
@@ -370,46 +370,91 @@
         }
 
 
-        /* Question Display Screen Styles */
-        .question-display-container .team-scores { 
+        /* Question Display Screen Styles - UPDATED LAYOUT */
+        .question-display-layout { /* Main flex container for question screen */
+            display: flex;
+            flex-direction: row-reverse; /* Sidebar on the right */
+            width: 100%;
+            gap: 1.5rem;
+        }
+        .question-display-main { /* Left side content */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content like category name, question, etc. */
+        }
+        .question-display-sidebar { /* Right sidebar */
+            width: 200px; /* Adjust as needed */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem; /* Space between sidebar items */
+        }
+        .question-display-sidebar .logo-display-area {
+            margin-bottom: 0.5rem;
+        }
+        .question-display-sidebar .team-award-btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            border: none;
+            text-align: center;
+        }
+        .question-display-sidebar .team-award-btn:active {
+            transform: scale(0.98);
+        }
+        .question-display-sidebar #showAnswerBtn { /* Specific styling if needed, or use a general button class */
+            width: 100%;
+            background-color: #3b82f6; color: white; 
+            padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 600;
+        }
+         .question-display-sidebar #showAnswerBtn:hover { background-color: #2563eb; }
+
+
+        .question-display-container .team-scores { /* Scores at the top of the main content area */
              display: flex;
              justify-content: space-around;
-             margin-bottom: 1.5rem;
+             margin-bottom: 1rem;
              width: 100%;
         }
         .question-display-container .team-score-card { 
              background-color: #f9fafb;
-             padding: 1rem 1.5rem;
+             padding: 0.75rem 1rem;
              border-radius: 0.75rem;
              box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
              width: 45%;
              text-align: center;
         }
          .question-display-container .team-score-card h3 { 
-            font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;
+            font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;
         }
         .question-display-container .team-score-card p { 
-            font-size: 2rem; font-weight: 700; color: #1f2937;
+            font-size: 1.5rem; font-weight: 700; color: #1f2937;
         }
 
         .question-display-container .current-category-name {
-            font-size: 1.75rem; 
+            font-size: 1.5rem; 
             font-weight: 700;
             color: #111827; 
-            margin-bottom: 0.5rem; 
+            margin-bottom: 0.25rem; 
         }
          .question-display-container .current-points-display {
-            font-size: 1.25rem; 
+            font-size: 1.1rem; 
             font-weight: 500;
             color: #4b5563; 
-            margin-bottom: 1.5rem; 
+            margin-bottom: 1rem; 
         }
         .question-display-container .question-area {
             background-color: #e0f2fe; 
             padding: 1.5rem; 
             border-radius: 0.75rem; 
-            margin-bottom: 1.5rem; 
-            min-height: 100px; 
+            margin-bottom: 1rem; 
+            min-height: 120px; 
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -423,33 +468,21 @@
             background-color: #dcfce7; 
             padding: 1.5rem; 
             border-radius: 0.75rem; 
-            margin-bottom: 1.5rem; 
+            margin-bottom: 1rem; 
+            width: 100%;
             font-size: 1.125rem; 
             font-weight: 600;
             color: #15803d; 
             line-height: 1.6;
         }
-        .question-display-container .game-controls button {
-            padding: 0.75rem 1.5rem; 
-            border-radius: 0.5rem; 
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            border: none;
-            margin: 0.5rem; 
-            min-width: 150px; 
+        .question-display-container .game-controls { /* For back to board button */
+            margin-top: 1rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
-        .question-display-container .game-controls button:active {
-            transform: scale(0.98);
-        }
-        #showAnswerBtn { background-color: #3b82f6; color: white; } 
-        #showAnswerBtn:hover { background-color: #2563eb; }
-        #awardTeam1Btn, #awardTeam2Btn { background-color: #16a34a; color: white; } 
-        #awardTeam1Btn:hover, #awardTeam2Btn:hover { background-color: #15803d; }
-        #backToBoardBtn { background-color: #6b7280; color: white; } 
+        #backToBoardBtn { background-color: #6b7280; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600;} 
         #backToBoardBtn:hover { background-color: #4b5563; }
-        #endGameBtn { background-color: #ef4444; color: white; } 
-        #endGameBtn:hover { background-color: #dc2626; }
 
     </style>
 </head>
@@ -522,32 +555,35 @@
 
     <div id="questionDisplayContainer" class="page-container hidden">
         <div class="question-display-container">
-             <div id="logoAreaTriggerQuestionDisp" class="logo-display-area mb-4">
-                <div><img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png" alt="شعار سين جيم" class="logo-img mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/180x80/FFC371/FFFFFF?text=Logo+Error';"></div>
-                <div class="name-wrapper"><div id="nameDisplayQuestionDisp" class="editable-name">نسخة خبزة</div></div>
-            </div>
-
-            <div class="team-scores">
-                <div class="team-score-card" id="questionTeam1ScoreCard">
-                    <h3 id="questionTeam1NameDisplay">الفريق الأول</h3>
-                    <p id="questionTeam1ScoreDisplay">0</p>
+            <div class="question-display-layout">
+                <div class="question-display-main">
+                    <div class="team-scores">
+                        <div class="team-score-card" id="questionTeam1ScoreCard">
+                            <h3 id="questionTeam1NameDisplay">الفريق الأول</h3>
+                            <p id="questionTeam1ScoreDisplay">0</p>
+                        </div>
+                        <div class="team-score-card" id="questionTeam2ScoreCard">
+                            <h3 id="questionTeam2NameDisplay">الفريق الثاني</h3>
+                            <p id="questionTeam2ScoreDisplay">0</p>
+                        </div>
+                    </div>
+                    <div id="currentCategoryNameDisplay" class="current-category-name">اسم القسم</div>
+                    <div id="currentPointsDisplay" class="current-points-display">النقاط: 0</div>
+                    <div id="currentQuestionDisplay" class="question-area">سيظهر السؤال هنا...</div>
+                    <div id="currentAnswerDisplay" class="answer-area hidden">ستظهر الإجابة هنا...</div>
+                    <div class="game-controls">
+                         <button id="backToBoardBtn">العودة إلى لوحة الأقسام</button>
+                    </div>
                 </div>
-                <div class="team-score-card" id="questionTeam2ScoreCard">
-                    <h3 id="questionTeam2NameDisplay">الفريق الثاني</h3>
-                    <p id="questionTeam2ScoreDisplay">0</p>
+                <div class="question-display-sidebar">
+                    <div id="logoAreaTriggerQuestionDisp" class="logo-display-area">
+                        <div><img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png" alt="شعار سين جيم" class="logo-img mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/180x80/FFC371/FFFFFF?text=Logo+Error';"></div>
+                        <div class="name-wrapper"><div id="nameDisplayQuestionDisp" class="editable-name">نسخة خبزة</div></div>
+                    </div>
+                    <button id="awardTeam1Btn" class="team-award-btn">الفريق الأول استحق النقاط</button>
+                    <button id="awardTeam2Btn" class="team-award-btn">الفريق الثاني استحق النقاط</button>
+                    <button id="showAnswerBtn">إظهار الإجابة</button>
                 </div>
-            </div>
-
-            <div id="currentCategoryNameDisplay" class="current-category-name">اسم القسم</div>
-            <div id="currentPointsDisplay" class="current-points-display">النقاط: 0</div>
-            <div id="currentQuestionDisplay" class="question-area">سيظهر السؤال هنا...</div>
-            <div id="currentAnswerDisplay" class="answer-area hidden">ستظهر الإجابة هنا...</div>
-
-            <div class="game-controls mt-6 flex flex-wrap justify-center">
-                <button id="showAnswerBtn">إظهار الإجابة</button>
-                <button id="awardTeam1Btn">الفريق الأول استحق النقاط</button>
-                <button id="awardTeam2Btn">الفريق الثاني استحق النقاط</button>
-                <button id="backToBoardBtn" class="mt-4">العودة إلى لوحة الأقسام</button>
             </div>
         </div>
     </div>
@@ -784,6 +820,9 @@
                 // Update score card border colors on game board
                 if(boardTeam1ScoreCard) boardTeam1ScoreCard.style.borderTopColor = team1Color;
                 if(boardTeam2ScoreCard) boardTeam2ScoreCard.style.borderTopColor = team2Color;
+                // Update award buttons background color on question screen
+                if(awardTeam1Btn) awardTeam1Btn.style.backgroundColor = team1Color;
+                if(awardTeam2Btn) awardTeam2Btn.style.backgroundColor = team2Color;
             };
             [team1NameInput, team1ColorInput, team2NameInput, team2ColorInput].forEach(input => {
                 input.addEventListener('input', handleTeamDataChange);
@@ -814,7 +853,10 @@
 
         function navigateToQuestionDisplayScreen() {
             showPage('questionDisplayContainer');
-            updateTeamScoresOnQuestionScreen();
+            updateTeamScoresOnQuestionScreen(); // Update scores on question screen
+            // Apply team colors to award buttons
+            if(awardTeam1Btn) awardTeam1Btn.style.backgroundColor = team1ColorInput.value;
+            if(awardTeam2Btn) awardTeam2Btn.style.backgroundColor = team2ColorInput.value;
             displaySelectedQuestion();
         }
         
@@ -1082,11 +1124,11 @@
 
         function updateTeamScoresOnQuestionScreen() {
             questionTeam1NameDisplay.textContent = team1NameInput.value.trim() || "الفريق الأول";
-            // questionTeam1ScoreCard.style.borderColor = team1ColorInput.value; // Not strictly needed here if design is simpler
+            questionTeam1ScoreCard.style.borderTopColor = team1ColorInput.value; // Apply team color to top border of score card
             questionTeam1ScoreDisplay.textContent = team1Score;
 
             questionTeam2NameDisplay.textContent = team2NameInput.value.trim() || "الفريق الثاني";
-            // questionTeam2ScoreCard.style.borderColor = team2ColorInput.value; // Not strictly needed here
+            questionTeam2ScoreCard.style.borderTopColor = team2ColorInput.value; // Apply team color to top border of score card
             questionTeam2ScoreDisplay.textContent = team2Score;
         }
 
