@@ -1,7 +1,6 @@
 [
   {
-    "id": "دين",
-    "name": "دين",
+    "categoryName": "دين",
     "questions": [
       {
         "points": 100,
