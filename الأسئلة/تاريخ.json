@@ -1,7 +1,6 @@
 [
   {
-    "id": "تاريخ",
-    "name": "تاريخ",
+    "categoryName": "تاريخ",
     "questions": [
       {
         "points": 100,
