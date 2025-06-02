@@ -268,7 +268,7 @@
         .game-board-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr); 
-            gap: 0.75rem;  /* Reduced gap between category items */
+            gap: 0.5rem;  /* Reduced gap between category items */
             width: 100%;
             margin: 0 auto; 
         }
@@ -277,9 +277,9 @@
             display: flex;
             align-items: center; 
             justify-content: center; 
-            gap: 0.25rem; /* Reduced gap for closer points */
+            gap: 0.25rem; 
             background-color: #F3F4F6; 
-            padding: 0.5rem; /* Reduced padding */
+            padding: 0.5rem; 
             border-radius: 0.75rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             min-height: 200px; 
@@ -371,24 +371,24 @@
 
 
         /* Question Display Screen Styles - UPDATED LAYOUT */
-        .question-display-layout { /* Main flex container for question screen */
+        .question-display-layout { 
             display: flex;
-            flex-direction: row-reverse; /* Sidebar on the right */
+            flex-direction: row-reverse; 
             width: 100%;
             gap: 1.5rem;
         }
-        .question-display-main { /* Left side content */
+        .question-display-main { 
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center content like category name, question, etc. */
+            align-items: center; 
         }
-        .question-display-sidebar { /* Right sidebar */
-            width: 200px; /* Adjust as needed */
+        .question-display-sidebar { 
+            width: 200px; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.75rem; /* Space between sidebar items */
+            gap: 0.75rem; 
         }
         .question-display-sidebar .logo-display-area {
             margin-bottom: 0.5rem;
@@ -407,7 +407,7 @@
         .question-display-sidebar .team-award-btn:active {
             transform: scale(0.98);
         }
-        .question-display-sidebar #showAnswerBtn { /* Specific styling if needed, or use a general button class */
+        .question-display-sidebar #showAnswerBtn { 
             width: 100%;
             background-color: #3b82f6; color: white; 
             padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 600;
@@ -415,7 +415,7 @@
          .question-display-sidebar #showAnswerBtn:hover { background-color: #2563eb; }
 
 
-        .question-display-container .team-scores { /* Scores at the top of the main content area */
+        .question-display-container .team-scores { 
              display: flex;
              justify-content: space-around;
              margin-bottom: 1rem;
@@ -428,6 +428,8 @@
              box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
              width: 45%;
              text-align: center;
+             border-top-width: 8px; 
+             border-top-style: solid;
         }
          .question-display-container .team-score-card h3 { 
             font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;
@@ -572,7 +574,7 @@
                     <div id="currentQuestionDisplay" class="question-area">سيظهر السؤال هنا...</div>
                     <div id="currentAnswerDisplay" class="answer-area hidden">ستظهر الإجابة هنا...</div>
                     <div class="game-controls">
-                         <button id="backToBoardBtn">العودة إلى لوحة الأقسام</button>
+                         <button id="backToBoardBtn">العودة للوحة الأقسام</button>
                     </div>
                 </div>
                 <div class="question-display-sidebar">
@@ -580,8 +582,8 @@
                         <div><img src="https://imgg.io/images/2025/06/01/1954f4a7460657641e3906a661c9408e.png" alt="شعار سين جيم" class="logo-img mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/180x80/FFC371/FFFFFF?text=Logo+Error';"></div>
                         <div class="name-wrapper"><div id="nameDisplayQuestionDisp" class="editable-name">نسخة خبزة</div></div>
                     </div>
-                    <button id="awardTeam1Btn" class="team-award-btn">الفريق الأول استحق النقاط</button>
-                    <button id="awardTeam2Btn" class="team-award-btn">الفريق الثاني استحق النقاط</button>
+                    <button id="awardTeam1Btn" class="team-award-btn">الفريق الأول</button>
+                    <button id="awardTeam2Btn" class="team-award-btn">الفريق الثاني</button>
                     <button id="showAnswerBtn">إظهار الإجابة</button>
                 </div>
             </div>
@@ -684,7 +686,7 @@
             { id: 'جغرافيا', name: 'جغرافيا', imageUrl: 'https://www.edarabia.com/ar/wp-content/uploads/2018/09/3-basic-information-geography.jpg' },
             { id: 'علوم', name: 'علوم', imageUrl: 'https://media.newyorker.com/photos/59095256019dfc3494e9de53/master/pass/gary-marcus-science.jpg' },
             { id: 'رياضة', name: 'رياضة', imageUrl: 'https://modo3.com/thumbs/fit630x300/73913/1687088775/%D8%A8%D8%AD%D8%B1_%D8%B9%D9%86_%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D8%A9.jpg' },
-            { id: 'أدب', name: 'أدب', imageUrl: 'https://sibadil.com/uploads/66d57e2b3b96c.webp' }, // REVERTED URL
+            { id: 'أدب', name: 'أدب', imageUrl: 'https://sibadil.com/uploads/66d57e2b3b96c.webp' }, 
             { id: 'فنون', name: 'فنون', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/df/Adriaen_van_Ostade_006.jpg' },
             { id: 'أفلام', name: 'أفلام ومسلسلات', imageUrl: 'https://www.ts3a.com/wp-content/uploads/2016/09/%D8%A7%D9%84%D8%B3%D9%8A%D9%86%D9%85%D8%A7-%D9%88%D8%A7%D9%84%D9%88%D8%A7%D9%82%D8%B9.jpg' },
             { id: 'عامة', name: 'معلومات عامة', imageUrl: 'https://api.robquiz.com/storage/survey/surveys_17324735257725.jfif' },
@@ -817,10 +819,11 @@
                 team2DisplayHeader.textContent = team2Name;
                 team2DisplayHeader.style.borderBottomColor = team2Color;
 
-                // Update score card border colors on game board
                 if(boardTeam1ScoreCard) boardTeam1ScoreCard.style.borderTopColor = team1Color;
                 if(boardTeam2ScoreCard) boardTeam2ScoreCard.style.borderTopColor = team2Color;
-                // Update award buttons background color on question screen
+                if(questionTeam1ScoreCard) questionTeam1ScoreCard.style.borderTopColor = team1Color;
+                if(questionTeam2ScoreCard) questionTeam2ScoreCard.style.borderTopColor = team2Color;
+                
                 if(awardTeam1Btn) awardTeam1Btn.style.backgroundColor = team1Color;
                 if(awardTeam2Btn) awardTeam2Btn.style.backgroundColor = team2Color;
             };
@@ -847,14 +850,13 @@
 
         function navigateToGameBoardScreen() {
             showPage('gameBoardContainer');
-            updateTeamScoresOnBoard(); // This will also set the border colors
+            updateTeamScoresOnBoard(); 
             populateGameBoardGrid();
         }
 
         function navigateToQuestionDisplayScreen() {
             showPage('questionDisplayContainer');
-            updateTeamScoresOnQuestionScreen(); // Update scores on question screen
-            // Apply team colors to award buttons
+            updateTeamScoresOnQuestionScreen(); 
             if(awardTeam1Btn) awardTeam1Btn.style.backgroundColor = team1ColorInput.value;
             if(awardTeam2Btn) awardTeam2Btn.style.backgroundColor = team2ColorInput.value;
             displaySelectedQuestion();
@@ -889,7 +891,6 @@
                 removeEndGameListeners();
             };
             
-            // Add event listeners only if buttons exist
             if(yesBtn) yesBtn.addEventListener('click', yesHandler);
             if(noBtn) noBtn.addEventListener('click', noHandler);
 
@@ -908,7 +909,6 @@
                 item.classList.add('category-item'); 
                 item.dataset.categoryId = cat.id;
                 
-                // Reverted to simpler structure for category selection items
                 item.innerHTML = `
                     <img src="${cat.imageUrl}" alt="${cat.name}" onerror="this.onerror=null; this.src='https://placehold.co/100x150/CCCCCC/FFFFFF?text=${encodeURIComponent(cat.name)}';">
                     <p>${cat.name}</p>
@@ -947,7 +947,6 @@
                 const categoryItemNew = document.createElement('div');
                 categoryItemNew.classList.add('game-category-item-new');
 
-                // Left Points Column
                 const leftPointsColumn = document.createElement('div');
                 leftPointsColumn.classList.add('points-column');
                 POINTS_LEVELS.forEach(points => {
@@ -956,7 +955,7 @@
                     pointBubble.textContent = points;
                     pointBubble.dataset.categoryId = category.categoryId;
                     pointBubble.dataset.points = points;
-                    if (answeredQuestions[`${category.categoryId}_${points}_left`]) { // Unique ID for left
+                    if (answeredQuestions[`${category.categoryId}_${points}_left`]) { 
                         pointBubble.classList.add('answered');
                     } else {
                         pointBubble.addEventListener('click', (e) => handlePointSelection(e, 'left'));
@@ -964,7 +963,6 @@
                     leftPointsColumn.appendChild(pointBubble);
                 });
 
-                // Central Image Block
                 const imageBlock = document.createElement('div');
                 imageBlock.classList.add('category-image-block');
                 imageBlock.innerHTML = `
@@ -974,7 +972,6 @@
                     <div class="category-image-block-name">${category.categoryName}</div>
                 `;
 
-                // Right Points Column
                 const rightPointsColumn = document.createElement('div');
                 rightPointsColumn.classList.add('points-column');
                  POINTS_LEVELS.forEach(points => {
@@ -983,7 +980,7 @@
                     pointBubble.textContent = points;
                     pointBubble.dataset.categoryId = category.categoryId;
                     pointBubble.dataset.points = points;
-                     if (answeredQuestions[`${category.categoryId}_${points}_right`]) { // Unique ID for right
+                     if (answeredQuestions[`${category.categoryId}_${points}_right`]) { 
                         pointBubble.classList.add('answered');
                     } else {
                         pointBubble.addEventListener('click', (e) => handlePointSelection(e, 'right'));
@@ -1000,13 +997,11 @@
             });
         }
 
-        // Modified to handle side for unique answered tracking
         function handlePointSelection(event, side) {
             const categoryId = event.target.dataset.categoryId;
             const points = parseInt(event.target.dataset.points);
-            const questionDetails = questionsData[categoryId]?.questions[points]; // Assumes one question per point value in category
+            const questionDetails = questionsData[categoryId]?.questions[points]; 
 
-            // Create a unique ID for the answered question including the side
             const answeredQuestionId = `${categoryId}_${points}_${side}`;
 
             if (questionDetails && !questionDetails.unavailable) {
@@ -1016,15 +1011,15 @@
                     points: points, 
                     questionText: questionDetails.questionText,
                     answerText: questionDetails.answerText,
-                    element: event.target, // The clicked point bubble
-                    answeredId: answeredQuestionId // Store the unique ID
+                    element: event.target, 
+                    answeredId: answeredQuestionId 
                 };
                 navigateToQuestionDisplayScreen();
             } else {
                 customAlertCloseBtn.classList.remove('hidden');
                 showAlert("سؤال غير متوفر", "عذراً، هذا السؤال غير متوفر حالياً.");
                 event.target.classList.add('answered'); 
-                answeredQuestions[answeredQuestionId] = true; // Mark this specific bubble as answered
+                answeredQuestions[answeredQuestionId] = true; 
             }
         }
 
@@ -1058,8 +1053,11 @@
 
         backToBoardBtn.addEventListener('click', () => {
             if (currentQuestionData && currentQuestionData.element && currentQuestionData.answeredId) {
-                currentQuestionData.element.classList.add('answered');
-                answeredQuestions[currentQuestionData.answeredId] = true; // Use the unique answeredId
+                // Only mark as answered if the answer was shown
+                if (showAnswerBtn.disabled) { 
+                    currentQuestionData.element.classList.add('answered');
+                    answeredQuestions[currentQuestionData.answeredId] = true;
+                }
             }
             if (checkAllQuestionsAnswered()) {
                 showGameEndSummary();
@@ -1069,7 +1067,6 @@
         });
         
         function checkAllQuestionsAnswered() {
-            // Now we have 2 sets of points per category
             const totalPossibleQuestions = Object.keys(questionsData).length * POINTS_LEVELS.length * 2; 
             const answeredCount = Object.keys(answeredQuestions).length;
             return answeredCount >= totalPossibleQuestions;
@@ -1105,7 +1102,7 @@
                 answeredQuestions = {};
                 populateCategorySelectionUI();
                 updateSelectionCounter();
-                if(okBtn) okBtn.removeEventListener('click', okHandler); // Clean up
+                if(okBtn) okBtn.removeEventListener('click', okHandler); 
             };
             if(okBtn) okBtn.addEventListener('click', okHandler);
         }
@@ -1114,21 +1111,21 @@
         // --- Scoring Logic ---
         function updateTeamScoresOnBoard() {
             boardTeam1NameDisplay.textContent = team1NameInput.value.trim() || "الفريق الأول";
-            boardTeam1ScoreCard.style.borderTopColor = team1ColorInput.value; // Apply team color to top border
+            boardTeam1ScoreCard.style.borderTopColor = team1ColorInput.value; 
             boardTeam1ScoreDisplay.textContent = team1Score;
 
             boardTeam2NameDisplay.textContent = team2NameInput.value.trim() || "الفريق الثاني";
-            boardTeam2ScoreCard.style.borderTopColor = team2ColorInput.value; // Apply team color to top border
+            boardTeam2ScoreCard.style.borderTopColor = team2ColorInput.value; 
             boardTeam2ScoreDisplay.textContent = team2Score;
         }
 
         function updateTeamScoresOnQuestionScreen() {
             questionTeam1NameDisplay.textContent = team1NameInput.value.trim() || "الفريق الأول";
-            questionTeam1ScoreCard.style.borderTopColor = team1ColorInput.value; // Apply team color to top border of score card
+            questionTeam1ScoreCard.style.borderTopColor = team1ColorInput.value; 
             questionTeam1ScoreDisplay.textContent = team1Score;
 
             questionTeam2NameDisplay.textContent = team2NameInput.value.trim() || "الفريق الثاني";
-            questionTeam2ScoreCard.style.borderTopColor = team2ColorInput.value; // Apply team color to top border of score card
+            questionTeam2ScoreCard.style.borderTopColor = team2ColorInput.value; 
             questionTeam2ScoreDisplay.textContent = team2Score;
         }
 
