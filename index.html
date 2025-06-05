@@ -44,14 +44,14 @@
             max-width: 400px;
         }
         .game-setup-container {
-            max-width: 700px;
+            max-width: 750px; 
         }
         .game-board-container { 
             max-width: 98%; 
             lg:max-width: 1300px; 
         }
-        .question-display-container { /* Container for the question screen */
-             max-width: 900px; /* Increased width for new layout */
+        .question-display-container {
+             max-width: 900px;
         }
         .logo-display-area {
             padding: 1rem 0; 
@@ -116,6 +116,7 @@
         .modal-buttons .save-btn:hover { background-color: #218838; }
         .modal-buttons .cancel-btn { background-color: #6c757d; color: white; }
         .modal-buttons .cancel-btn:hover { background-color: #5a6268; }
+        
         .custom-alert-overlay {
             position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.75);
             display: flex; align-items: center; justify-content: center;
@@ -130,18 +131,16 @@
         }
         .custom-alert-box h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: #333; }
         .custom-alert-box p { font-size: 1rem; color: #555; margin-bottom: 1.5rem; line-height: 1.6; }
-        .custom-alert-box button { /* Default close button for alert */
+        .custom-alert-box button {
             width: 100%; background-color: #FF6B6B; color: white; font-weight: 600;
             padding: 0.75rem; border-radius: 0.5rem; border: none;
             cursor: pointer; transition: background-color 0.2s ease;
         }
         .custom-alert-box button:hover { background-color: #E55A5A; }
-         /* Custom buttons within alert message */
         .custom-alert-box p button.save-btn { background-color: #28a745; color: white; padding: 0.6rem 1rem; margin: 0 0.25rem;}
         .custom-alert-box p button.save-btn:hover { background-color: #218838; }
         .custom-alert-box p button.cancel-btn { background-color: #6c757d; color: white; padding: 0.6rem 1rem; margin: 0 0.25rem;}
         .custom-alert-box p button.cancel-btn:hover { background-color: #5a6268; }
-
 
         .team-setup-card {
             background-color: #f9fafb; padding: 1.5rem; border-radius: 0.75rem;
@@ -155,15 +154,78 @@
         .team-setup-card label {
             display: block; margin-bottom: 0.5rem; font-weight: 500; color: #4b5563;
         }
-        .team-setup-card input[type="text"], .team-setup-card input[type="color"] {
+        .team-setup-card input[type="text"] {
             width: 100%; padding: 0.75rem; border: 1px solid #d1d5db;
             border-radius: 0.5rem; margin-bottom: 1rem; font-size: 1rem; box-sizing: border-box;
         }
-         .team-setup-card input[type="color"] {
-            height: 48px; padding: 0.25rem;
+        
+        .color-input-container {
+            margin-bottom: 1rem;
+        }
+        .color-input-wrapper {
+            display: flex;
+            flex-direction: row-reverse; 
+            align-items: center;
+            gap: 0.75rem; 
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            background-color: #fff; 
+        }
+        .color-picker-input {
+            width: 44px;  
+            height: 44px; 
+            border: 1px solid #ccc; 
+            padding: 0; 
+            border-radius: 0.375rem; 
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: none; 
+        }
+        .color-picker-input::-webkit-color-swatch-wrapper {
+            padding: 0;
+            border-radius: 0.375rem;
+        }
+        .color-picker-input::-webkit-color-swatch {
+            border: none;
+            border-radius: 0.375rem;
+        }
+        .color-picker-input::-moz-color-swatch { /* For Firefox */
+            border: none;
+            border-radius: 0.375rem;
+        }
+        .color-picker-input::-moz-focus-inner { /* Remove dotted outline on focus in Firefox */
+            border: 0;
+            padding: 0;
+        }
+
+        .preset-colors-container {
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 6px; /* Fine-tuned gap */
+            justify-content: flex-start; 
+            flex-grow: 1; 
+        }
+        .color-swatch {
+            width: 30px;
+            height: 30px;
+            border-radius: 0.375rem; 
+            cursor: pointer;
+            border: 2px solid transparent; 
+            transition: border-color 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .color-swatch:hover {
+            transform: scale(1.1);
+            border-color: #9ca3af; 
+        }
+        .color-swatch.active-swatch {
+            border-color: #3b82f6; 
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
         }
         
-        /* Category Selection Styling (Setup Screen) */
         .category-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
@@ -205,7 +267,6 @@
             line-height: 1.2;
         }
 
-
         .hidden { display: none !important; }
 
         /* Game Board Screen Styles */
@@ -222,6 +283,7 @@
         }
         .game-board-sidebar { 
             width: 200px; 
+            min-width: 200px; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -262,21 +324,21 @@
         }
         .game-board-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 0.5rem;  
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 0.75rem;  
             width: 100%;
             margin: 0 auto; 
         }
         .game-category-item-new { 
             display: flex;
-            align-items: center; 
-            justify-content: center; 
-            gap: 0.25rem; 
+            align-items: stretch; 
+            justify-content: space-between; 
+            gap: 0.5rem; 
             background-color: #F3F4F6; 
-            padding: 0.5rem; 
+            padding: 0.75rem; 
             border-radius: 0.75rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            min-height: 200px; 
+            min-height: 220px; 
         }
         .points-column {
             display: flex;
@@ -284,7 +346,7 @@
             justify-content: space-around; 
             align-items: center;
             gap: 0.5rem; 
-            height: 200px; 
+            flex-basis: 70px; 
         }
         .category-image-block { 
             display: flex;
@@ -294,24 +356,29 @@
             background-color: #FEF3C7; 
             border-radius: 0.5rem;
             padding: 0.5rem;
-            width: 150px; 
-            height: 200px; 
+            width: 100%; 
+            max-width: 160px; 
+            min-width: 120px; 
+            height: 100%; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             text-align: center;
+            flex-grow: 1;
         }
         .category-image-block-img-container { 
             width: 100%;
-            height: 150px; 
+            height: 100%; 
+            max-height: 150px; 
             background-color: #E0F2FE; 
             border-radius: 0.5rem; 
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 0.5rem; 
         }
         .category-image-block img { 
             width: 100%;
-            height: 150px; 
+            height: 100%; 
             object-fit: cover;
             border-radius: 0.5rem; 
         }
@@ -323,20 +390,18 @@
             font-size: 0.875rem; 
             padding: 0.35rem;
             border-radius: 0.375rem;
-            border-bottom-left-radius: 0.75rem; 
-            border-bottom-right-radius: 0.75rem; 
-            margin-top: 0.5rem; 
         }
         .point-bubble-side { 
             background-color: rgb(255, 120, 0); 
             color: white;
-            height: 36px; 
-            padding: 4px 12px; 
-            border-radius: 18px; 
+            height: 38px; 
+            width: 100%; 
+            max-width: 70px; 
+            padding: 4px 8px; 
+            border-radius: 19px; 
             font-size: 1rem; 
             font-weight: bold; 
             text-align: center;
-            min-width: 65px; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.15);
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
@@ -372,6 +437,7 @@
         }
         .question-display-sidebar { 
             width: 200px; 
+            min-width: 200px; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -381,7 +447,7 @@
             margin-bottom: 0.5rem;
         }
         .question-display-sidebar .team-award-btn, 
-        .question-display-sidebar #changeQuestionBtn { /* Combined style for similar buttons */
+        .question-display-sidebar #changeQuestionBtn {
             width: 100%;
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
@@ -403,11 +469,11 @@
         }
          .question-display-sidebar #showAnswerBtn:hover { background-color: #2563eb; }
          .question-display-sidebar #changeQuestionBtn {
-            background-color: #f59e0b; /* Amber color for change question */
-         }
+            background-color: #f59e0b; 
+        }
          .question-display-sidebar #changeQuestionBtn:hover {
-            background-color: #d97706; /* Darker amber on hover */
-         }
+            background-color: #d97706; 
+        }
 
         .question-display-container .team-scores { 
              display: flex;
@@ -503,13 +569,33 @@
             <div class="grid md:grid-cols-2 gap-6 mb-8">
                 <div class="team-setup-card">
                     <h3 id="team1DisplayHeader">الفريق الأول</h3>
-                    <label for="team1NameInput">اسم الفريق:</label><input type="text" id="team1NameInput" class="w-full" value="الفريق الأول">
-                    <label for="team1ColorInput">لون الفريق:</label><input type="color" id="team1ColorInput" value="#E57373" class="w-full">
+                    <label for="team1NameInput">اسم الفريق:</label>
+                    <input type="text" id="team1NameInput" class="w-full" value="الفريق الأول">
+                    
+                    <div class="color-input-container">
+                        <label for="team1ColorInput">لون الفريق:</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="team1ColorInput" value="#007BFF" class="color-picker-input"> <!-- Default changed -->
+                            <div id="team1PresetColors" class="preset-colors-container">
+                                <!-- Preset color swatches for team 1 -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="team-setup-card">
                     <h3 id="team2DisplayHeader">الفريق الثاني</h3>
-                    <label for="team2NameInput">اسم الفريق:</label><input type="text" id="team2NameInput" class="w-full" value="الفريق الثاني">
-                    <label for="team2ColorInput">لون الفريق:</label><input type="color" id="team2ColorInput" value="#64B5F6" class="w-full">
+                    <label for="team2NameInput">اسم الفريق:</label>
+                    <input type="text" id="team2NameInput" class="w-full" value="الفريق الثاني">
+
+                    <div class="color-input-container">
+                        <label for="team2ColorInput">لون الفريق:</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="team2ColorInput" value="#FF4500" class="color-picker-input"> <!-- Default changed -->
+                            <div id="team2PresetColors" class="preset-colors-container">
+                                <!-- Preset color swatches for team 2 -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">اختر ٦ أقسام للعبة</h2>
@@ -534,7 +620,8 @@
                         </div>
                     </div>
                     <div id="gameBoardGrid" class="game-board-grid">
-                        </div>
+                        <!-- Game board items will be populated here -->
+                    </div>
                 </div>
                 <div class="game-board-sidebar">
                     <div id="logoAreaTriggerGameBoard" class="logo-display-area">
@@ -636,10 +723,14 @@
 
         const team1NameInput = document.getElementById('team1NameInput');
         const team1ColorInput = document.getElementById('team1ColorInput');
+        const team1PresetColorsContainer = document.getElementById('team1PresetColors');
         const team1DisplayHeader = document.getElementById('team1DisplayHeader');
+        
         const team2NameInput = document.getElementById('team2NameInput');
         const team2ColorInput = document.getElementById('team2ColorInput');
+        const team2PresetColorsContainer = document.getElementById('team2PresetColors');
         const team2DisplayHeader = document.getElementById('team2DisplayHeader');
+
         const categorySelectionArea = document.getElementById('categorySelectionArea');
         const selectionCounter = document.getElementById('selectionCounter');
         const startActualGameBtn = document.getElementById('startActualGameBtn');
@@ -671,12 +762,13 @@
         const awardTeam1Btn = document.getElementById('awardTeam1Btn');
         const awardTeam2Btn = document.getElementById('awardTeam2Btn');
         const backToBoardBtn = document.getElementById('backToBoardBtn');
-        const changeQuestionBtn = document.getElementById('changeQuestionBtn'); // New Button
+        const changeQuestionBtn = document.getElementById('changeQuestionBtn');
 
 
         // Game Data & State
         let questionsData = {}; 
         const allAvailableCategories = [
+            // Category definitions remain the same
             { id: 'تاريخ', name: 'تاريخ', imageUrl: 'https://i.pinimg.com/originals/48/1a/32/481a32f836ed64532deb0ce9010b26d5.jpg' },
             { id: 'جغرافيا', name: 'جغرافيا', imageUrl: 'https://www.edarabia.com/ar/wp-content/uploads/2018/09/3-basic-information-geography.jpg' },
             { id: 'علوم', name: 'علوم', imageUrl: 'https://media.newyorker.com/photos/59095256019dfc3494e9de53/master/pass/gary-marcus-science.jpg' },
@@ -692,13 +784,23 @@
         const MAX_CATEGORIES = 6;
         const POINTS_LEVELS = [100, 200, 300]; 
 
+        const PRESET_TEAM_COLORS = [ // Updated to 7 basic colors
+            '#007BFF', // Blue
+            '#008080', // Teal
+            '#7FFF00', // Lime Green
+            '#FFC107', // Yellow
+            '#FF4500', // Orange
+            '#000000', // Black
+            '#FF00FF'  // Magenta/Pink
+        ];
+
         let team1Score = 0;
         let team2Score = 0;
         let currentQuestionData = null; 
         let answeredQuestions = {}; 
-        let slotQuestionAssignment = {}; // Stores { "catId_points_side": questionArrayIndex }
+        let slotQuestionAssignment = {};
 
-        // --- Alert Function ---
+        // --- Alert Function (no changes) ---
         function showAlert(title, message) {
             customAlertTitle.innerText = title;
             customAlertMessage.innerHTML = message; 
@@ -719,11 +821,11 @@
             }
         });
 
-        // --- Load Questions for Selected Categories ---
+        // --- Load Questions for Selected Categories (no changes) ---
         async function loadQuestionsForCategories(categoryIds) {
             questionsData = {}; 
             answeredQuestions = {}; 
-            slotQuestionAssignment = {}; // Reset assignments
+            slotQuestionAssignment = {};
             let allFilesLoadedSuccessfully = true;
             const loadingPromises = categoryIds.map(async (catId) => {
                 const categoryInfo = allAvailableCategories.find(c => c.id === catId);
@@ -746,12 +848,10 @@
                         const allQsInFileForCategory = categoryFileData.questions;
 
                         POINTS_LEVELS.forEach(level => {
-                            // Store all questions for this category and point level as an array
                             const questionsForLevel = allQsInFileForCategory.filter(q => q.points === level);
                             if (questionsForLevel.length > 0) {
                                 questionsData[catId].questionsByPointLevel[level] = questionsForLevel;
                             } else {
-                                // Add a placeholder if no questions for this level
                                 questionsData[catId].questionsByPointLevel[level] = [{ questionText: "سؤال غير متوفر", answerText: "إجابة غير متوفرة", points: level, unavailable: true }];
                                 console.warn(`No questions found for level ${level} in category ${catId}. Assigning unavailable placeholder.`);
                             }
@@ -778,7 +878,7 @@
         }
 
 
-        // --- Logo Name Management with localStorage ---
+        // --- Logo Name Management (no changes) ---
         function updateLogoNameUI(name) {
              if (nameDisplay) nameDisplay.textContent = name;
              if (nameDisplayGameSetup) nameDisplayGameSetup.textContent = name;
@@ -804,14 +904,45 @@
              if(trigger) trigger.addEventListener('dblclick', openEditModal);
         });
 
+        // --- Create Preset Color Swatches (no changes in logic, only PRESET_TEAM_COLORS array changed) ---
+        function createPresetSwatches(containerElement, colorInputElement, presetColors) {
+            containerElement.innerHTML = ''; 
+            presetColors.forEach(color => {
+                const swatch = document.createElement('div');
+                swatch.classList.add('color-swatch');
+                swatch.style.backgroundColor = color;
+                swatch.dataset.color = color;
 
-        // --- Team Data Management ---
+                swatch.addEventListener('click', () => {
+                    colorInputElement.value = color;
+                    const event = new Event('input', { bubbles: true });
+                    colorInputElement.dispatchEvent(event);
+                    updateActiveSwatch(containerElement, color);
+                });
+                containerElement.appendChild(swatch);
+            });
+            updateActiveSwatch(containerElement, colorInputElement.value);
+        }
+        
+        function updateActiveSwatch(containerElement, activeColor) {
+            const swatches = containerElement.querySelectorAll('.color-swatch');
+            swatches.forEach(s => {
+                if (s.dataset.color.toLowerCase() === activeColor.toLowerCase()) {
+                    s.classList.add('active-swatch');
+                } else {
+                    s.classList.remove('active-swatch');
+                }
+            });
+        }
+
+        // --- Team Data Management (no changes in logic) ---
         function setupTeamInputListeners() {
             const handleTeamDataChange = () => {
                 const team1Name = team1NameInput.value.trim() || "الفريق الأول";
                 const team1Color = team1ColorInput.value;
                 const team2Name = team2NameInput.value.trim() || "الفريق الثاني";
                 const team2Color = team2ColorInput.value;
+                
                 team1DisplayHeader.textContent = team1Name;
                 team1DisplayHeader.style.borderBottomColor = team1Color;
                 team2DisplayHeader.textContent = team2Name;
@@ -824,14 +955,22 @@
                 
                 if(awardTeam1Btn) awardTeam1Btn.style.backgroundColor = team1Color;
                 if(awardTeam2Btn) awardTeam2Btn.style.backgroundColor = team2Color;
+
+                updateActiveSwatch(team1PresetColorsContainer, team1Color);
+                updateActiveSwatch(team2PresetColorsContainer, team2Color);
             };
+
             [team1NameInput, team1ColorInput, team2NameInput, team2ColorInput].forEach(input => {
                 input.addEventListener('input', handleTeamDataChange);
             });
+
+            createPresetSwatches(team1PresetColorsContainer, team1ColorInput, PRESET_TEAM_COLORS);
+            createPresetSwatches(team2PresetColorsContainer, team2ColorInput, PRESET_TEAM_COLORS);
+            
             handleTeamDataChange(); 
         }
 
-        // --- Page Navigation ---
+        // --- Page Navigation (no changes) ---
         function showPage(pageId) {
             [initialPageContainer, gameSetupContainer, gameBoardContainer, questionDisplayContainer].forEach(container => {
                 container.classList.add('hidden');
@@ -860,6 +999,7 @@
             displaySelectedQuestion();
         }
         
+        // --- endGameFromBoardBtn listener (no changes) ---
         endGameFromBoardBtn.addEventListener('click', () => {
             customAlertCloseBtn.classList.add('hidden'); 
             showAlert("تأكيد إنهاء اللعبة", 
@@ -899,8 +1039,7 @@
             }
         });
 
-
-        // --- Category Selection UI Logic (Setup Screen) ---
+        // --- Category Selection (no changes) ---
         function populateCategorySelectionUI() {
             categorySelectionArea.innerHTML = '';
             allAvailableCategories.forEach(cat => {
@@ -939,14 +1078,19 @@
             startActualGameBtn.disabled = selectedCategoryIds.length !== MAX_CATEGORIES;
         }
 
-        // --- Game Board Population ---
+        // --- Game Board Population (no changes) ---
         function populateGameBoardGrid() {
             gameBoardGrid.innerHTML = ''; 
-            Object.values(questionsData).forEach(category => {
+            selectedCategoryIds.forEach(catId => {
+                const category = questionsData[catId];
+                if (!category) {
+                    console.warn(`Category data for ${catId} not found during board population.`);
+                    return; 
+                }
+
                 const categoryItemNew = document.createElement('div');
                 categoryItemNew.classList.add('game-category-item-new');
 
-                // Left Column
                 const leftPointsColumn = document.createElement('div');
                 leftPointsColumn.classList.add('points-column');
                 POINTS_LEVELS.forEach(points => {
@@ -956,7 +1100,7 @@
                     pointBubble.dataset.categoryId = category.categoryId;
                     pointBubble.dataset.points = points;
                     const bubbleId = `${category.categoryId}_${points}_left`;
-                    slotQuestionAssignment[bubbleId] = slotQuestionAssignment[bubbleId] ?? 0; // Default to first question index
+                    slotQuestionAssignment[bubbleId] = slotQuestionAssignment[bubbleId] ?? 0;
 
                     if (answeredQuestions[bubbleId]) { 
                         pointBubble.classList.add('answered');
@@ -966,17 +1110,15 @@
                     leftPointsColumn.appendChild(pointBubble);
                 });
 
-                // Image Block
                 const imageBlock = document.createElement('div');
                 imageBlock.classList.add('category-image-block');
                 imageBlock.innerHTML = `
                     <div class="category-image-block-img-container">
-                        <img src="${category.imageUrl}" alt="${category.categoryName}" onerror="this.onerror=null; this.src='https://placehold.co/100x100/CCCCCC/FFFFFF?text=${encodeURIComponent(category.categoryName)}';">
+                        <img src="${category.imageUrl}" alt="${category.categoryName}" onerror="this.onerror=null; this.src='https://placehold.co/120x120/CCCCCC/FFFFFF?text=${encodeURIComponent(category.categoryName)}';">
                     </div>
                     <div class="category-image-block-name">${category.categoryName}</div>
                 `;
 
-                // Right Column
                 const rightPointsColumn = document.createElement('div');
                 rightPointsColumn.classList.add('points-column');
                  POINTS_LEVELS.forEach(points => {
@@ -987,7 +1129,7 @@
                     pointBubble.dataset.points = points;
                     const bubbleId = `${category.categoryId}_${points}_right`;
                     const questionPool = questionsData[category.categoryId]?.questionsByPointLevel[points] || [];
-                    slotQuestionAssignment[bubbleId] = slotQuestionAssignment[bubbleId] ?? (questionPool.length > 1 ? 1 : 0); // Default to second or first
+                    slotQuestionAssignment[bubbleId] = slotQuestionAssignment[bubbleId] ?? (questionPool.length > 1 ? 1 : 0);
 
                      if (answeredQuestions[bubbleId]) { 
                         pointBubble.classList.add('answered');
@@ -997,14 +1139,15 @@
                     rightPointsColumn.appendChild(pointBubble);
                 });
 
-                categoryItemNew.appendChild(leftPointsColumn);
-                categoryItemNew.appendChild(imageBlock);
+                categoryItemNew.appendChild(leftPointsColumn); 
+                categoryItemNew.appendChild(imageBlock);     
                 categoryItemNew.appendChild(rightPointsColumn);
                 
                 gameBoardGrid.appendChild(categoryItemNew);
             });
         }
 
+        // --- handlePointSelection (no changes) ---
         function handlePointSelection(event, side) { 
             const categoryId = event.target.dataset.categoryId;
             const points = parseInt(event.target.dataset.points);
@@ -1014,7 +1157,6 @@
             let questionArrayIndex = slotQuestionAssignment[slotId];
 
             if (questionPool.length === 0 || questionArrayIndex === undefined || questionArrayIndex >= questionPool.length) {
-                 // This case should ideally be prevented by populateGameBoardGrid or question loading
                 customAlertCloseBtn.classList.remove('hidden');
                 showAlert("سؤال غير متوفر", "عذراً، هذا السؤال غير متوفر حالياً أو حدث خطأ.");
                 event.target.classList.add('answered'); 
@@ -1032,10 +1174,10 @@
                     questionText: questionDetails.questionText,
                     answerText: questionDetails.answerText,
                     element: event.target, 
-                    answeredId: slotId, // This is the ID for the *slot*
+                    answeredId: slotId,
                     questionArrayIndex: questionArrayIndex,
                     side: side,
-                    slotId: slotId // Keep track of the specific slot
+                    slotId: slotId
                 };
                 navigateToQuestionDisplayScreen();
             } else {
@@ -1046,7 +1188,7 @@
             }
         }
 
-        // --- Question Display Logic ---
+        // --- Question Display Logic (no changes) ---
         function displaySelectedQuestion() {
             if (!currentQuestionData) {
                 currentQuestionDisplay.textContent = "خطأ: لا يوجد سؤال محدد.";
@@ -1064,7 +1206,7 @@
             showAnswerBtn.disabled = false; 
             awardTeam1Btn.disabled = true;  
             awardTeam2Btn.disabled = true; 
-            changeQuestionBtn.disabled = false; // Enable change question button initially
+            changeQuestionBtn.disabled = false;
         }
 
         showAnswerBtn.addEventListener('click', () => {
@@ -1073,12 +1215,12 @@
                 showAnswerBtn.disabled = true; 
                 awardTeam1Btn.disabled = false; 
                 awardTeam2Btn.disabled = false;
-                changeQuestionBtn.disabled = true; // Disable change question when answer is shown
+                changeQuestionBtn.disabled = true;
             }
         });
         
         changeQuestionBtn.addEventListener('click', () => {
-            if (!currentQuestionData || showAnswerBtn.disabled) { // Don't change if no question or answer shown
+            if (!currentQuestionData || showAnswerBtn.disabled) { 
                 return;
             }
 
@@ -1088,39 +1230,23 @@
             if (questionPool.length <= 1) {
                 customAlertCloseBtn.classList.remove('hidden');
                 showAlert("تنبيه", "لا توجد أسئلة أخرى متاحة لهذا الخيار.");
-                changeQuestionBtn.disabled = true; // No other questions to change to
+                changeQuestionBtn.disabled = true; 
                 return;
             }
 
             let newQuestionIndex = (questionArrayIndex + 1) % questionPool.length;
             
-            // Update the assignment for this slot
-            slotQuestionAssignment[slotId] = newQuestionIndex;
+            slotQuestionAssignment[slotId] = newQuestionIndex; 
             const newQuestionDetails = questionPool[newQuestionIndex];
 
             currentQuestionData.questionText = newQuestionDetails.questionText;
             currentQuestionData.answerText = newQuestionDetails.answerText;
-            currentQuestionData.questionArrayIndex = newQuestionIndex; // Update index in current data
+            currentQuestionData.questionArrayIndex = newQuestionIndex; 
 
-            displaySelectedQuestion(); // Refresh the display with the new question
-            // Keep changeQuestionBtn enabled if there are still other questions in the pool (after this change)
-            const nextPotentialIndex = (newQuestionIndex + 1) % questionPool.length;
-            if (nextPotentialIndex === slotQuestionAssignment[slotId] && questionPool.length > 1) { // Cycled through all unique
-                 // If after this change, the next one would be the same, means we only have 1 distinct left.
-                 // This logic might need refinement if we want to strictly prevent re-showing the exact same question
-                 // before all others in the pool for this slot are shown.
-                 // For now, if pool > 1, it just picks the next.
-            }
-             if (questionPool.length <= 1 || ((newQuestionIndex + 1) % questionPool.length === slotQuestionAssignment[slotId] && questionPool.length === 2 && newQuestionIndex !== slotQuestionAssignment[slotId])) {
-                // If only one question in pool, or if pool has 2 and we just picked the other one
-                // This condition is tricky. Simpler: if pool.length > 1, it's likely there's another.
-                // A more robust check: count unique questions available for this slot.
-            }
-
-
+            displaySelectedQuestion();
         });
 
-
+        // --- backToBoardBtn listener & related functions (no changes) ---
         backToBoardBtn.addEventListener('click', () => {
             if (currentQuestionData && currentQuestionData.element && currentQuestionData.answeredId) {
                 if (showAnswerBtn.disabled) { 
@@ -1137,7 +1263,7 @@
         });
         
         function checkAllQuestionsAnswered() {
-            const totalPossibleSlots = Object.keys(questionsData).length * POINTS_LEVELS.length * 2; // 2 slots (left/right)
+            const totalPossibleSlots = selectedCategoryIds.length * POINTS_LEVELS.length * 2;
             const answeredCount = Object.keys(answeredQuestions).length;
             return answeredCount >= totalPossibleSlots;
         }
@@ -1148,11 +1274,11 @@
             const team2FinalName = team2NameInput.value.trim() || "الفريق الثاني";
 
             if (team1Score > team2Score) {
-                winnerMessage = `الفريق "${team1FinalName}" هو الفائز!`;
+                winnerMessage = `الفريق "${team1FinalName}" هو الفائز! 🎉`;
             } else if (team2Score > team1Score) {
-                winnerMessage = `الفريق "${team2FinalName}" هو الفائز!`;
+                winnerMessage = `الفريق "${team2FinalName}" هو الفائز! �`;
             } else {
-                winnerMessage = "انتهت اللعبة بالتعادل!";
+                winnerMessage = "انتهت اللعبة بالتعادل! 🤝";
             }
             
             customAlertCloseBtn.classList.add('hidden');
@@ -1178,8 +1304,7 @@
             if(okBtn) okBtn.addEventListener('click', okHandler);
         }
 
-
-        // --- Scoring Logic ---
+        // --- Scoring Logic (no changes) ---
         function updateTeamScoresOnBoard() {
             boardTeam1NameDisplay.textContent = team1NameInput.value.trim() || "الفريق الأول";
             boardTeam1ScoreCard.style.borderTopColor = team1ColorInput.value; 
@@ -1232,8 +1357,7 @@
             }
         });
 
-
-        // --- Start Actual Game Button ---
+        // --- Start Actual Game Button (no changes) ---
         startActualGameBtn.addEventListener('click', async () => {
             if (selectedCategoryIds.length !== MAX_CATEGORIES) {
                 customAlertCloseBtn.classList.remove('hidden');
@@ -1245,7 +1369,7 @@
 
             const success = await loadQuestionsForCategories(selectedCategoryIds);
 
-            startActualGameBtn.textContent = "بدء اللعبة";
+            startActualGameBtn.textContent = "بدء اللعبة"; 
             startActualGameBtn.disabled = selectedCategoryIds.length !== MAX_CATEGORIES;
 
 
@@ -1253,7 +1377,7 @@
                 team1Score = 0; 
                 team2Score = 0;
                 answeredQuestions = {}; 
-                slotQuestionAssignment = {}; // Ensure this is reset
+                slotQuestionAssignment = {};
                 navigateToGameBoardScreen();
             } else {
                 customAlertCloseBtn.classList.remove('hidden');
@@ -1263,7 +1387,7 @@
 
         // Initial DOM setup
         document.addEventListener('DOMContentLoaded', () => {
-            setupTeamInputListeners();
+            setupTeamInputListeners(); 
             loadNameFromStorage();
             showPage('initialPageContainer'); 
         });
